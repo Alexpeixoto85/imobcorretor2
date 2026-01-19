@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -194,60 +193,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- Painel de Links --- */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .link-card {
-            background: var(--surface);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .link-card:hover, .link-card:active {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .link-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin: 0 auto 12px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-        
-        .link-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-        }
-        
-        .link-category {
-            font-size: 0.7rem;
-            color: var(--secondary);
-            background: var(--light);
-            padding: 2px 8px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
         /* --- Funil Personalizável --- */
         .funnel-config {
             background: var(--surface);
@@ -261,52 +206,57 @@
         .funnel-stages-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
             margin-top: 16px;
         }
         
         .funnel-stage-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
+            gap: 8px;
+            padding: 10px;
             background: var(--light);
             border-radius: var(--radius-sm);
             border-left: 4px solid var(--primary);
         }
         
         .stage-color-picker {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
             border: 2px solid var(--border);
             cursor: pointer;
+            flex-shrink: 0;
         }
         
         .stage-name-input {
             flex: 1;
-            padding: 8px 12px;
+            min-width: 0;
+            padding: 6px 10px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            max-width: 120px;
         }
         
         .stage-actions {
             display: flex;
-            gap: 6px;
+            gap: 4px;
+            flex-shrink: 0;
         }
         
         .stage-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.2s ease;
+            flex-shrink: 0;
         }
         
         .stage-btn:active {
@@ -375,13 +325,13 @@
         }
         
         .level-label {
-            min-width: 120px;
+            min-width: 80px;
             font-weight: 600;
             font-size: 0.85rem;
             color: var(--dark);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .level-icon {
@@ -750,7 +700,7 @@
             transform: scale(0.95);
         }
 
-        /* --- Modais --- */
+        /* --- Modals --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -882,24 +832,6 @@
             padding-right: 40px;
         }
 
-        /* Campos Monetários - NOVO */
-        .monetary-input {
-            position: relative;
-        }
-        
-        .monetary-input .form-control {
-            padding-left: 40px;
-        }
-        
-        .monetary-prefix {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 600;
-            color: var(--secondary);
-        }
-
         .btn-block {
             width: 100%;
             padding: 16px;
@@ -925,7 +857,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* --- Foto em Tela Cheia --- */
+        /* --- Foto em Tela Cheia (MELHORADO) --- */
         .photo-viewer {
             position: fixed;
             inset: 0;
@@ -1176,8 +1108,8 @@
                 height: 40px;
             }
             
-            .links-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .stage-name-input {
+                max-width: 100px;
             }
         }
 
@@ -1224,7 +1156,7 @@
             display: none;
         }
         
-        /* --- Accordion --- */
+        /* --- Accordion (Corrigido) --- */
         .accordion {
             margin-bottom: 12px;
             border: 1px solid var(--border);
@@ -1410,6 +1342,69 @@
             font-size: 0.9rem;
             color: var(--dark);
         }
+
+        /* --- Painel de Links --- */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .link-card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            text-align: center;
+        }
+        
+        .link-card:active {
+            transform: scale(0.98);
+        }
+        
+        .link-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0 auto 12px;
+        }
+        
+        .link-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+        
+        .link-url {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            word-break: break-all;
+        }
+        
+        /* --- Formatação monetária --- */
+        .currency-input {
+            text-align: right;
+        }
+        
+        /* --- Campos de configuração --- */
+        .settings-form .form-group {
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -1441,13 +1436,6 @@
             
             <div class="stats-grid" id="dashboard-stats">
                 <!-- Stats dinâmicas -->
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-link"></i> Links Importantes
-            </div>
-            <div id="links-grid" class="links-grid">
-                <!-- Links dinâmicos -->
             </div>
             
             <div class="section-title">
@@ -1559,6 +1547,20 @@
                 <canvas id="performance-chart"></canvas>
             </div>
         </div>
+
+        <!-- Links View -->
+        <div id="links-view" class="view">
+            <div class="section-title">
+                <i class="fas fa-link"></i> Links Importantes
+                <button class="btn-sm btn-primary" onclick="UI.showModal('links')">
+                    <i class="fas fa-plus"></i> Novo Link
+                </button>
+            </div>
+            
+            <div class="links-grid" id="links-grid">
+                <!-- Links dinâmicos -->
+            </div>
+        </div>
     </main>
 
     <!-- FAB Container -->
@@ -1593,9 +1595,9 @@
             <i class="fas fa-calendar-alt"></i>
             <span>Agenda</span>
         </a>
-        <a href="#" class="nav-item" data-target="relatorios-view" onclick="UI.switchTab(this)">
-            <i class="fas fa-chart-bar"></i>
-            <span>Relatórios</span>
+        <a href="#" class="nav-item" data-target="links-view" onclick="UI.switchTab(this)">
+            <i class="fas fa-link"></i>
+            <span>Links</span>
         </a>
     </nav>
 
@@ -1741,14 +1743,8 @@
                             <div class="form-group">
                                 <label class="form-label">Faixa de Valor (R$)</label>
                                 <div style="display: flex; gap: 12px;">
-                                    <div class="monetary-input" style="flex: 1;">
-                                        <span class="monetary-prefix">R$</span>
-                                        <input type="number" id="c-valor-min" class="form-control" placeholder="Mínimo" step="0.01" min="0">
-                                    </div>
-                                    <div class="monetary-input" style="flex: 1;">
-                                        <span class="monetary-prefix">R$</span>
-                                        <input type="number" id="c-valor-max" class="form-control" placeholder="Máximo" step="0.01" min="0">
-                                    </div>
+                                    <input type="text" id="c-valor-min" class="form-control currency-input" placeholder="Mínimo" oninput="App.formatCurrency(this)">
+                                    <input type="text" id="c-valor-max" class="form-control currency-input" placeholder="Máximo" oninput="App.formatCurrency(this)">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1830,10 +1826,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Valor (R$)</label>
-                                <div class="monetary-input">
-                                    <span class="monetary-prefix">R$</span>
-                                    <input type="number" id="i-valor" class="form-control" required min="0" step="0.01">
-                                </div>
+                                <input type="text" id="i-valor" class="form-control currency-input" required oninput="App.formatCurrency(this)">
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Data de Entrega/Disponibilidade</label>
@@ -1872,17 +1865,11 @@
                         <div class="accordion-content">
                             <div class="form-group">
                                 <label class="form-label">Valor do Condomínio (R$)</label>
-                                <div class="monetary-input">
-                                    <span class="monetary-prefix">R$</span>
-                                    <input type="number" id="i-condominio" class="form-control" min="0" step="0.01">
-                                </div>
+                                <input type="text" id="i-condominio" class="form-control currency-input" oninput="App.formatCurrency(this)">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">IPTU (R$)</label>
-                                <div class="monetary-input">
-                                    <span class="monetary-prefix">R$</span>
-                                    <input type="number" id="i-iptu" class="form-control" min="0" step="0.01">
-                                </div>
+                                <input type="text" id="i-iptu" class="form-control currency-input" oninput="App.formatCurrency(this)">
                             </div>
                         </div>
                     </div>
@@ -2060,23 +2047,23 @@
         </div>
     </div>
 
-    <!-- Modal de Link Importante -->
-    <div class="modal-overlay" id="modal-link">
+    <!-- Modal de Links -->
+    <div class="modal-overlay" id="modal-links">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title" id="modal-link-title">
-                    <i class="fas fa-link"></i> Novo Link Importante
+                <h3 class="modal-title" id="modal-links-title">
+                    <i class="fas fa-link"></i> Novo Link
                 </h3>
-                <button class="modal-close" onclick="UI.closeModal('link')">
+                <button class="modal-close" onclick="UI.closeModal('links')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-link" onsubmit="App.link.save(event)">
+                <form id="form-links" onsubmit="App.links.save(event)">
                     <input type="hidden" id="l-id">
                     <div class="form-group">
-                        <label class="form-label required">Título</label>
-                        <input type="text" id="l-titulo" class="form-control" required placeholder="Ex: Portal do CRECI">
+                        <label class="form-label required">Título do Link</label>
+                        <input type="text" id="l-titulo" class="form-control" required placeholder="Ex: Portal do Corretor">
                     </div>
                     <div class="form-group">
                         <label class="form-label required">URL</label>
@@ -2085,31 +2072,26 @@
                     <div class="form-group">
                         <label class="form-label">Categoria</label>
                         <select id="l-categoria" class="form-control">
-                            <option value="">Sem categoria</option>
-                            <option value="portal">Portal</option>
-                            <option value="ferramenta">Ferramenta</option>
-                            <option value="imobiliaria">Imobiliária</option>
-                            <option value="banco">Banco</option>
-                            <option value="governo">Governo</option>
-                            <option value="utilidade">Utilidade</option>
+                            <option value="">Geral</option>
+                            <option value="portal">Portal do Corretor</option>
+                            <option value="financeiro">Financeiro</option>
+                            <option value="documentos">Documentos</option>
+                            <option value="ferramentas">Ferramentas</option>
+                            <option value="sites">Sites de Imóveis</option>
+                            <option value="outros">Outros</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Ícone (Font Awesome)</label>
-                        <input type="text" id="l-icone" class="form-control" placeholder="fas fa-link" value="fas fa-link">
-                        <small style="color: var(--secondary); font-size: 0.8rem;">Use classes do Font Awesome como "fas fa-home", "fab fa-whatsapp", etc.</small>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label">Descrição (Opcional)</label>
-                        <textarea id="l-descricao" class="form-control" rows="3" placeholder="Descrição breve do link..."></textarea>
+                        <textarea id="l-descricao" class="form-control" rows="3" placeholder="Descrição do link..."></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('link')">
+                <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('links')">
                     Cancelar
                 </button>
-                <button type="submit" form="form-link" class="btn-block">
+                <button type="submit" form="form-links" class="btn-block">
                     Salvar Link
                 </button>
             </div>
@@ -2156,10 +2138,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Meta de Receita (R$)</label>
-                        <div class="monetary-input">
-                            <span class="monetary-prefix">R$</span>
-                            <input type="number" id="meta-receita" class="form-control" min="1" required>
-                        </div>
+                        <input type="text" id="meta-receita" class="form-control currency-input" required oninput="App.formatCurrency(this)">
                     </div>
                 </form>
             </div>
@@ -2174,7 +2153,7 @@
         </div>
     </div>
 
-    <!-- Photo Viewer -->
+    <!-- Photo Viewer (MELHORADO) -->
     <div class="photo-viewer" id="photo-viewer">
         <button class="photo-close" onclick="UI.closePhotoViewer()">
             <i class="fas fa-times"></i>
@@ -2204,55 +2183,63 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Nome do Corretor</label>
-                    <input type="text" id="s-nome" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">CRECI</label>
-                    <input type="text" id="s-creci" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Telefone para Contato</label>
-                    <input type="text" id="s-telefone" class="form-control" placeholder="(11) 99999-9999">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">E-mail</label>
-                    <input type="email" id="s-email" class="form-control" placeholder="seu@email.com">
-                </div>
-                
-                <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
-                    <i class="fas fa-database"></i> Backup e Restauração
-                </div>
-                
-                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-                    <button class="btn-block btn-secondary" onclick="App.backup.exportData()">
-                        <i class="fas fa-download"></i> Exportar Backup
+                <form id="form-settings" onsubmit="App.settings.save(event)">
+                    <div class="form-group">
+                        <label class="form-label required">Nome do Corretor</label>
+                        <input type="text" id="s-nome" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">CRECI</label>
+                        <input type="text" id="s-creci" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Telefone para Contato</label>
+                        <input type="text" id="s-telefone" class="form-control" placeholder="(11) 99999-9999" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">E-mail</label>
+                        <input type="email" id="s-email" class="form-control" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
+                        <i class="fas fa-database"></i> Backup e Restauração
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportData()">
+                            <i class="fas fa-download"></i> Exportar Backup
+                        </button>
+                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
+                            <i class="fas fa-home"></i> Backup Imóveis
+                        </button>
+                    </div>
+                    
+                    <div class="file-input-container">
+                        <label for="backup-file" class="file-input-label">
+                            <i class="fas fa-upload"></i> Importar Backup
+                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON</span>
+                        </label>
+                        <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importData(this)">
+                    </div>
+                    
+                    <div class="file-input-container" style="margin-top: 12px;">
+                        <label for="backup-imoveis-file" class="file-input-label">
+                            <i class="fas fa-home"></i> Importar Imóveis
+                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
+                        </label>
+                        <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
+                    </div>
+                    
+                    <div style="margin-top: 24px;">
+                        <button type="submit" class="btn-block">
+                            <i class="fas fa-save"></i> Salvar Configurações
+                        </button>
+                    </div>
+                    
+                    <button type="button" class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 12px;">
+                        <i class="fas fa-trash"></i> Limpar Todos os Dados
                     </button>
-                    <button class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
-                        <i class="fas fa-home"></i> Backup Imóveis
-                    </button>
-                </div>
-                
-                <div class="file-input-container">
-                    <label for="backup-file" class="file-input-label">
-                        <i class="fas fa-upload"></i> Importar Backup Universal
-                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Qualquer arquivo JSON</span>
-                    </label>
-                    <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importUniversalData(this)">
-                </div>
-                
-                <div class="file-input-container" style="margin-top: 12px;">
-                    <label for="backup-imoveis-file" class="file-input-label">
-                        <i class="fas fa-home"></i> Importar Imóveis
-                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
-                    </label>
-                    <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
-                </div>
-                
-                <button class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 24px;">
-                    <i class="fas fa-trash"></i> Limpar Todos os Dados
-                </button>
+                </form>
             </div>
         </div>
     </div>
@@ -2274,7 +2261,7 @@
         </div>
     </div>
 
-    <!-- Modal de Plantão Detalhado -->
+    <!-- Modal de Plantão Detalhado (Melhorado) -->
     <div class="modal-overlay" id="modal-plantao-detalhado">
         <div class="modal" style="max-width: 600px;">
             <div class="modal-header">
@@ -2337,23 +2324,18 @@
                 if (saved) {
                     const data = JSON.parse(saved);
                     this.data = data;
-                    if (!this.data.plantoes) this.data.plantoes = [];
-                    if (!this.data.links) this.data.links = [];
+                    if (!this.data.plantoes) {
+                        this.data.plantoes = [];
+                    }
+                    if (!this.data.links) {
+                        this.data.links = [];
+                    }
                 }
             },
             
             // Salvar dados no localStorage
             saveData: function() {
                 localStorage.setItem('imobimanager_pro', JSON.stringify(this.data));
-            },
-            
-            // Formatar valor monetário
-            formatarMoeda: function(valor) {
-                if (!valor && valor !== 0) return 'R$ 0,00';
-                return new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                }).format(valor);
             },
             
             // Verificar aniversários
@@ -2406,14 +2388,15 @@
             currentPhotoIndex: 0,
             currentPhotoImovelId: null,
             calendarDate: new Date(),
-            selectedClientesPlantao: [],
+            selectedClientesPlantao: [], // Array para armazenar clientes selecionados no plantão
             isPhotoZoomed: false,
+            photoStartX: 0,
+            photoStartY: 0,
             
             init: function() {
                 this.renderDashboard();
                 this.setupEventListeners();
                 this.setupAccordions();
-                this.renderLinks();
             },
             
             setupEventListeners: function() {
@@ -2422,7 +2405,7 @@
                     link.addEventListener('click', e => e.preventDefault());
                 });
                 
-                // Evento de teclado para navegação de fotos
+                // Adicionar evento de teclado para navegação de fotos
                 document.addEventListener('keydown', (e) => {
                     const photoViewer = document.getElementById('photo-viewer');
                     if (photoViewer.classList.contains('active')) {
@@ -2436,43 +2419,53 @@
                     }
                 });
                 
-                // Evento de swipe para fotos
+                // Adicionar evento de swipe para fotos (mobile) - MELHORADO
                 const photoViewer = document.getElementById('photo-viewer');
                 let touchStartX = 0;
                 let touchStartY = 0;
+                let touchEndX = 0;
+                let touchEndY = 0;
                 
                 photoViewer.addEventListener('touchstart', (e) => {
                     touchStartX = e.changedTouches[0].screenX;
                     touchStartY = e.changedTouches[0].screenY;
+                    this.photoStartX = touchStartX;
+                    this.photoStartY = touchStartY;
                 });
                 
                 photoViewer.addEventListener('touchend', (e) => {
-                    const touchEndX = e.changedTouches[0].screenX;
-                    const touchEndY = e.changedTouches[0].screenY;
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
                     
+                    // Calcular distância
                     const diffX = touchStartX - touchEndX;
                     const diffY = touchStartY - touchEndY;
                     
+                    // Verificar se é um swipe horizontal (mais horizontal que vertical)
                     if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
                         if (diffX > 50) {
+                            // Swipe para esquerda = próxima foto
                             this.nextPhoto();
                         } else if (diffX < -50) {
+                            // Swipe para direita = foto anterior
                             this.prevPhoto();
                         }
                     }
                     
+                    // Toque duplo para zoom
                     const now = new Date().getTime();
                     const lastTouch = this.lastTouch || 0;
                     const diffTime = now - lastTouch;
                     
                     if (diffTime < 300 && diffTime > 0) {
+                        // Toque duplo detectado
                         this.togglePhotoZoom();
                     }
                     
                     this.lastTouch = now;
                 });
                 
-                // Toque duplo para zoom
+                // Adicionar evento de toque duplo para zoom
                 const fullscreenPhoto = document.getElementById('fullscreen-photo');
                 fullscreenPhoto.addEventListener('dblclick', (e) => {
                     this.togglePhotoZoom();
@@ -2480,6 +2473,7 @@
             },
             
             setupAccordions: function() {
+                // Configurar todos os accordions para funcionar corretamente
                 document.querySelectorAll('.accordion').forEach(accordion => {
                     const header = accordion.querySelector('.accordion-header');
                     const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -2496,6 +2490,7 @@
                         }
                     }
                     
+                    // Corrigido: Remover evento duplicado e usar o correto
                     header.onclick = (e) => {
                         e.stopPropagation();
                         this.toggleAccordion(accordion.id);
@@ -2504,21 +2499,28 @@
             },
             
             switchTab: function(element) {
+                // Remover classe active de todas as tabs
                 document.querySelectorAll('.nav-item').forEach(tab => {
                     tab.classList.remove('active');
                 });
                 
+                // Remover classe active de todas as views
                 document.querySelectorAll('.view').forEach(view => {
                     view.classList.remove('active');
                 });
                 
+                // Adicionar classe active à tab clicada
                 element.classList.add('active');
                 
+                // Mostrar a view correspondente
                 const target = element.getAttribute('data-target');
                 document.getElementById(target).classList.add('active');
                 this.currentView = target;
                 
+                // Atualizar o conteúdo da view
                 this.updateView(target);
+                
+                // Atualizar FAB
                 this.updateFab();
             },
             
@@ -2542,6 +2544,9 @@
                     case 'relatorios-view':
                         Relatorios.render();
                         break;
+                    case 'links-view':
+                        this.renderLinks();
+                        break;
                 }
             },
             
@@ -2549,9 +2554,11 @@
                 const fab = document.getElementById('main-fab');
                 const submenu = document.getElementById('fab-submenu');
                 
+                // Fechar submenu se estiver aberto
                 submenu.classList.remove('active');
                 this.fabOpen = false;
                 
+                // Atualizar ações do FAB baseado na view atual
                 let html = '';
                 
                 switch(this.currentView) {
@@ -2562,9 +2569,6 @@
                             </button>
                             <button class="fab-sub-btn" onclick="UI.showModal('imovel', 'new')" title="Novo Imóvel">
                                 <i class="fas fa-home"></i>
-                            </button>
-                            <button class="fab-sub-btn" onclick="UI.showModal('link', 'new')" title="Novo Link">
-                                <i class="fas fa-link"></i>
                             </button>
                             <button class="fab-sub-btn" onclick="UI.showModal('metas')" title="Metas">
                                 <i class="fas fa-bullseye"></i>
@@ -2592,6 +2596,13 @@
                             </button>
                         `;
                         break;
+                    case 'links-view':
+                        html = `
+                            <button class="fab-sub-btn" onclick="UI.showModal('links', 'new')" title="Novo Link">
+                                <i class="fas fa-link"></i>
+                            </button>
+                        `;
+                        break;
                 }
                 
                 submenu.innerHTML = html;
@@ -2613,7 +2624,7 @@
                 const stats = Sistema.updateDashboard();
                 const birthdays = Sistema.checkBirthdays();
                 
-                // Stats
+                // Stats - Cards clicáveis (CORRIGIDO)
                 document.getElementById('dashboard-stats').innerHTML = `
                     <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'clientes-view\\']'))">
                         <div class="stat-icon" style="background: #dbeafe; color: #3b82f6;">
@@ -2699,34 +2710,6 @@
                 
                 // Visão geral do funil
                 Funnel.renderOverview();
-            },
-            
-            // Painel de Links
-            renderLinks: function() {
-                const grid = document.getElementById('links-grid');
-                const links = Sistema.data.links;
-                
-                if (links.length === 0) {
-                    grid.innerHTML = `
-                        <div class="empty-state" style="grid-column: 1 / -1;">
-                            <i class="fas fa-link"></i>
-                            <p>Nenhum link importante cadastrado</p>
-                            <button class="btn-block" onclick="UI.showModal('link', 'new')" style="margin-top: 20px;">
-                                <i class="fas fa-plus"></i> Adicionar Primeiro Link
-                            </button>
-                        </div>
-                    `;
-                } else {
-                    grid.innerHTML = links.map(link => `
-                        <a href="${link.url}" target="_blank" class="link-card">
-                            <div class="link-icon">
-                                <i class="${link.icone || 'fas fa-link'}"></i>
-                            </div>
-                            <div class="link-title">${link.titulo}</div>
-                            ${link.categoria ? `<div class="link-category">${link.categoria}</div>` : ''}
-                        </a>
-                    `).join('');
-                }
             },
             
             renderClientes: function(filter = '') {
@@ -2818,7 +2801,7 @@
                         <div class="list-card" onclick="App.imovel.showDetails('${imovel.id}')">
                             <div class="card-header">
                                 <div class="card-title">${imovel.nome}</div>
-                                <span class="tag tag-success">${Sistema.formatarMoeda(imovel.valor)}</span>
+                                <span class="tag tag-success">${App.formatCurrencyDisplay(imovel.valor)}</span>
                             </div>
                             ${imovel.fotos && imovel.fotos.length > 0 ? `
                                 <div class="imovel-photos">
@@ -2843,21 +2826,54 @@
                 }
             },
             
+            renderLinks: function() {
+                const links = Sistema.data.links;
+                const linksGrid = document.getElementById('links-grid');
+                
+                if (links.length === 0) {
+                    linksGrid.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-link"></i>
+                            <p>Nenhum link cadastrado</p>
+                            <button class="btn-block" onclick="UI.showModal('links', 'new')" style="margin-top: 20px;">
+                                <i class="fas fa-plus"></i> Adicionar Primeiro Link
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    linksGrid.innerHTML = links.map(link => `
+                        <a href="${link.url}" target="_blank" class="link-card">
+                            <div class="link-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div class="link-title">${link.titulo}</div>
+                            ${link.categoria ? `<div class="link-url">${link.categoria}</div>` : ''}
+                        </a>
+                    `).join('');
+                }
+            },
+            
             renderCalendar: function() {
                 const hoje = new Date();
                 const year = this.calendarDate.getFullYear();
                 const month = this.calendarDate.getMonth();
                 
+                // Nome do mês em português
                 const monthNames = [
                     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                     'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
                 ];
                 
+                // Primeiro dia do mês
                 const firstDay = new Date(year, month, 1);
+                // Último dia do mês
                 const lastDay = new Date(year, month + 1, 0);
+                // Dia da semana do primeiro dia (0 = Domingo, 1 = Segunda, etc.)
                 const firstDayWeekday = firstDay.getDay();
+                // Total de dias no mês
                 const totalDays = lastDay.getDate();
                 
+                // Construir calendário
                 let calendarHTML = `
                     <div class="calendar-header">
                         <div class="calendar-title">${monthNames[month]} ${year}</div>
@@ -2887,10 +2903,12 @@
                     <div class="calendar-days">
                 `;
                 
+                // Dias vazios antes do primeiro dia do mês
                 for (let i = 0; i < firstDayWeekday; i++) {
                     calendarHTML += `<div class="calendar-day other-month"></div>`;
                 }
                 
+                // Dias do mês
                 for (let day = 1; day <= totalDays; day++) {
                     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                     const events = Sistema.data.agenda.filter(a => a.data === dateStr);
@@ -2901,6 +2919,7 @@
                     if (isToday) classes.push('today');
                     if (hasEvent) classes.push('has-event');
                     
+                    // CORRIGIDO: Agora ao clicar em uma data, abre modal de agendamento
                     calendarHTML += `
                         <div class="${classes.join(' ')}" onclick="UI.selectDateAndOpenModal('${dateStr}')">
                             ${day}
@@ -2909,7 +2928,8 @@
                     `;
                 }
                 
-                const totalCells = 42;
+                // Dias vazios após o último dia do mês (para completar 6 semanas)
+                const totalCells = 42; // 6 semanas * 7 dias
                 const usedCells = firstDayWeekday + totalDays;
                 for (let i = usedCells; i < totalCells; i++) {
                     calendarHTML += `<div class="calendar-day other-month"></div>`;
@@ -2919,9 +2939,11 @@
                 
                 document.getElementById('calendar-container').innerHTML = calendarHTML;
                 
+                // Mostrar eventos do dia selecionado (hoje por padrão)
                 this.showDayEvents(hoje.toISOString().split('T')[0]);
             },
             
+            // NOVO MÉTODO: Seleciona data e abre modal
             selectDateAndOpenModal: function(dateStr) {
                 this.selectDate(dateStr);
                 this.showAgendaModalForDate(dateStr);
@@ -2983,15 +3005,18 @@
             },
             
             selectDate: function(dateStr) {
+                // Remover seleção anterior
                 document.querySelectorAll('.calendar-day.selected').forEach(day => {
                     day.classList.remove('selected');
                 });
                 
+                // Adicionar seleção ao dia clicado
                 const dayElement = document.querySelector(`.calendar-day[onclick*="${dateStr}"]`);
                 if (dayElement) {
                     dayElement.classList.add('selected');
                 }
                 
+                // Mostrar eventos do dia selecionado
                 this.showDayEvents(dateStr);
             },
             
@@ -3012,6 +3037,7 @@
             
             showAgendaModalForDate: function(dateStr) {
                 this.showModal('agenda-generico');
+                // Configurar data se fornecida
                 setTimeout(() => {
                     if (dateStr) {
                         const dateInput = document.getElementById('a-data');
@@ -3029,6 +3055,10 @@
             
             searchImoveis: function(term) {
                 this.renderImoveis(term);
+            },
+            
+            searchAgenda: function(term) {
+                this.renderAgenda(term);
             },
             
             // Modais
@@ -3050,6 +3080,7 @@
                             document.getElementById('modal-imovel-title').innerHTML = '<i class="fas fa-home"></i> Novo Imóvel';
                             this.resetImovelForm();
                             
+                            // Configurar data atual como padrão para data de entrega
                             const hoje = new Date().toISOString().split('T')[0];
                             document.getElementById('i-data-entrega').value = hoje;
                         } else if (action === 'edit' && id) {
@@ -3057,41 +3088,54 @@
                         }
                         break;
                         
-                    case 'link':
+                    case 'links':
                         if (action === 'new') {
-                            document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-link"></i> Novo Link';
+                            document.getElementById('modal-links-title').innerHTML = '<i class="fas fa-link"></i> Novo Link';
                             this.resetLinkForm();
                         } else if (action === 'edit' && id) {
-                            App.link.edit(id);
+                            App.links.edit(id);
                         }
                         break;
                         
                     case 'agenda-generico':
                         this.showAgendaModal();
                         break;
+                        
+                    case 'settings':
+                        // Preencher campos de configurações
+                        document.getElementById('s-nome').value = Sistema.data.settings.nome;
+                        document.getElementById('s-creci').value = Sistema.data.settings.creci;
+                        document.getElementById('s-telefone').value = Sistema.data.settings.telefone;
+                        document.getElementById('s-email').value = Sistema.data.settings.email;
+                        break;
                 }
                 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
+                // CORREÇÃO: Configurar accordions após mostrar o modal
                 setTimeout(() => {
                     this.setupAccordionsForModal(modal);
                 }, 10);
             },
             
+            // NOVO MÉTODO: Configurar accordions específicos para modais
             setupAccordionsForModal: function(modal) {
                 const accordions = modal.querySelectorAll('.accordion');
                 accordions.forEach(accordion => {
                     const header = accordion.querySelector('.accordion-header');
                     const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
                     
+                    // Remover evento anterior
                     header.onclick = null;
                     
+                    // Adicionar novo evento
                     header.onclick = (e) => {
                         e.stopPropagation();
                         this.toggleAccordion(accordion.id);
                     };
                     
+                    // Configurar estado inicial
                     if (accordion.classList.contains('active')) {
                         if (icon) {
                             icon.classList.remove('fa-chevron-down');
@@ -3131,6 +3175,7 @@
                 document.getElementById('c-estado').value = '';
                 document.getElementById('c-status').value = 'lead';
                 
+                // Resetar accordions
                 document.querySelectorAll('#modal-cliente .accordion').forEach(acc => {
                     acc.classList.remove('active');
                     const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -3145,6 +3190,7 @@
                     }
                 });
                 
+                // Primeiro accordion aberto por padrão
                 const firstAccordion = document.getElementById('cliente-dados-pessoais');
                 firstAccordion.classList.add('active');
                 const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
@@ -3185,9 +3231,11 @@
                 document.getElementById('i-estado').value = '';
                 document.getElementById('i-status').value = 'disponivel';
                 
+                // Limpar fotos
                 App.imovel.fotosTemporarias = [];
                 document.getElementById('imovel-photos-preview').innerHTML = '';
                 
+                // Resetar accordions
                 document.querySelectorAll('#modal-imovel .accordion').forEach(acc => {
                     acc.classList.remove('active');
                     const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -3202,6 +3250,7 @@
                     }
                 });
                 
+                // Primeiro accordion aberto por padrão
                 const firstAccordion = document.getElementById('imovel-basico');
                 firstAccordion.classList.add('active');
                 const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
@@ -3221,10 +3270,10 @@
                 document.getElementById('l-titulo').value = '';
                 document.getElementById('l-url').value = '';
                 document.getElementById('l-categoria').value = '';
-                document.getElementById('l-icone').value = 'fas fa-link';
                 document.getElementById('l-descricao').value = '';
             },
             
+            // NOVO: Modal de agendamento com multi-seleção para plantão
             showAgendaModal: function() {
                 const modalBody = document.getElementById('modal-agenda-body');
                 modalBody.innerHTML = `
@@ -3279,13 +3328,16 @@
                     </div>
                 `;
                 
+                // Inicializar campos
                 this.updateAgendaFields();
                 
+                // Configurar accordions
                 setTimeout(() => {
                     this.setupAccordionsForModal(document.getElementById('modal-agenda-generico'));
                 }, 10);
             },
             
+            // ATUALIZADO: Campos específicos para plantão com multi-seleção
             updateAgendaFields: function() {
                 const tipo = document.getElementById('a-tipo')?.value;
                 const fieldsDiv = document.getElementById('agenda-fields');
@@ -3315,6 +3367,7 @@
                         break;
                         
                     case 'plantao':
+                        // Limpar seleção anterior
                         this.selectedClientesPlantao = [];
                         
                         fieldsHTML = `
@@ -3383,6 +3436,7 @@
                 fieldsDiv.innerHTML = fieldsHTML;
             },
             
+            // NOVO: Toggle para selecionar/deselecionar clientes no plantão
             toggleClientePlantao: function(clienteId, isChecked) {
                 if (isChecked) {
                     if (!this.selectedClientesPlantao.includes(clienteId)) {
@@ -3392,6 +3446,7 @@
                     this.selectedClientesPlantao = this.selectedClientesPlantao.filter(id => id !== clienteId);
                 }
                 
+                // Atualizar contador se existir
                 const counter = document.getElementById('plantao-clientes-counter');
                 if (counter) {
                     counter.textContent = `${this.selectedClientesPlantao.length} cliente(s) selecionado(s)`;
@@ -3403,11 +3458,13 @@
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
                 
+                // Limpar seleção de clientes do plantão
                 if (type === 'agenda-generico') {
                     this.selectedClientesPlantao = [];
                 }
             },
             
+            // Accordion - CORREÇÃO PRINCIPAL
             toggleAccordion: function(id) {
                 const accordion = document.getElementById(id);
                 if (!accordion) return;
@@ -3416,6 +3473,7 @@
                 const content = accordion.querySelector('.accordion-content');
                 
                 if (accordion.classList.contains('active')) {
+                    // Fechar
                     accordion.classList.remove('active');
                     if (icon) {
                         icon.classList.remove('fa-chevron-up');
@@ -3426,6 +3484,7 @@
                         content.style.padding = '0';
                     }
                 } else {
+                    // Abrir
                     accordion.classList.add('active');
                     if (icon) {
                         icon.classList.remove('fa-chevron-down');
@@ -3438,7 +3497,7 @@
                 }
             },
             
-            // Visualizador de fotos
+            // Visualizador de fotos MELHORADO
             viewPhoto: function(imovelId, photoIndex) {
                 const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                 if (imovel && imovel.fotos && imovel.fotos[photoIndex]) {
@@ -3453,6 +3512,7 @@
                     img.src = imovel.fotos[photoIndex];
                     counter.textContent = `${photoIndex + 1}/${imovel.fotos.length}`;
                     
+                    // Resetar zoom
                     img.style.transform = 'scale(1)';
                     img.style.cursor = 'grab';
                     viewer.classList.remove('zoomed');
@@ -3462,6 +3522,7 @@
                 }
             },
             
+            // NOVO: Alternar zoom da foto
             togglePhotoZoom: function() {
                 const img = document.getElementById('fullscreen-photo');
                 const viewer = document.getElementById('photo-viewer');
@@ -3510,6 +3571,7 @@
                 img.src = imovel.fotos[this.currentPhotoIndex];
                 counter.textContent = `${this.currentPhotoIndex + 1}/${imovel.fotos.length}`;
                 
+                // Resetar zoom ao mudar de foto
                 this.isPhotoZoomed = false;
                 img.style.transform = 'scale(1)';
                 img.style.cursor = 'grab';
@@ -3526,12 +3588,7 @@
             
             // Configurações
             showSettings: function() {
-                document.getElementById('s-nome').value = Sistema.data.settings.nome;
-                document.getElementById('s-creci').value = Sistema.data.settings.creci;
-                document.getElementById('s-telefone').value = Sistema.data.settings.telefone || '';
-                document.getElementById('s-email').value = Sistema.data.settings.email || '';
-                document.getElementById('modal-settings').classList.add('active');
-                document.body.style.overflow = 'hidden';
+                this.showModal('settings');
             },
             
             // Toast
@@ -3548,10 +3605,12 @@
                 }, 3000);
             },
             
+            // Modal de Plantão Detalhado (MELHORADO)
             showPlantaoDetalhadoModal: function(plantaoId) {
                 const modal = document.getElementById('modal-plantao-detalhado');
                 const modalBody = document.getElementById('plantao-detalhado-body');
                 
+                // Buscar dados do plantão
                 const plantao = Sistema.data.plantoes.find(p => p.id === plantaoId) || {
                     id: plantaoId,
                     clientesAtendidos: [],
@@ -3560,6 +3619,8 @@
                 };
                 
                 const agenda = Sistema.data.agenda.find(a => a.id === plantaoId);
+                
+                // MELHORIA: Seleção múltipla de clientes
                 const clientesSelecionados = plantao.clientesAtendidos || [];
                 
                 modalBody.innerHTML = `
@@ -3701,7 +3762,7 @@
                         <input type="color" class="stage-color-picker" value="${stage.color}" 
                                onchange="Funnel.updateStageColor('${stage.id}', this.value)">
                         <input type="text" class="stage-name-input" value="${stage.name}"
-                               onchange="Funnel.updateStageName('${stage.id}', this.value)">
+                               onchange="Funnel.updateStageName('${stage.id}', this.value)" maxlength="15">
                         <div class="stage-actions">
                             <button class="stage-btn stage-btn-move" onclick="Funnel.moveStageUp('${stage.id}')" ${stage.order === 1 ? 'disabled' : ''}>
                                 <i class="fas fa-arrow-up"></i>
@@ -3802,6 +3863,7 @@
                 const diaAtual = hoje.getDate();
                 const diasNoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
                 
+                // Cálculo de progresso
                 const progressoLeads = Sistema.data.clientes.filter(c => c.status === 'lead' || c.status === 'prospect').length;
                 const progressoVendas = Sistema.data.clientes.filter(c => c.status === 'fechado').length;
                 const progressoReceita = Sistema.data.clientes
@@ -3849,7 +3911,7 @@
                             <i class="fas fa-money-bill-wave" style="color: #8b5cf6;"></i> Receita
                         </div>
                         <div class="meta-value">
-                            <span>${Sistema.formatarMoeda(progressoReceita)} / ${Sistema.formatarMoeda(metas.receita)}</span>
+                            <span>${App.formatCurrencyDisplay(progressoReceita)} / ${App.formatCurrencyDisplay(metas.receita)}</span>
                         </div>
                     </div>
                     <div class="meta-progress">
@@ -3864,7 +3926,9 @@
             
             renderOverview: function() {
                 const container = document.getElementById('funnel-overview');
+                const metas = Sistema.data.funnel.metas;
                 
+                // Resumo do funil
                 const resumo = {
                     leads: Sistema.data.clientes.filter(c => c.status === 'lead' || c.status === 'prospect').length,
                     visitas: Sistema.data.clientes.filter(c => c.status === 'visita').length,
@@ -3886,6 +3950,7 @@
                 `;
             },
             
+            // Métodos de manipulação
             addStage: function() {
                 const stages = Sistema.data.funnel.stages;
                 const newId = 'stage_' + Date.now();
@@ -3916,6 +3981,7 @@
                 
                 Sistema.data.funnel.stages = Sistema.data.funnel.stages.filter(s => s.id !== stageId);
                 
+                // Reordenar
                 Sistema.data.funnel.stages.forEach((stage, index) => {
                     stage.order = index + 1;
                 });
@@ -3948,10 +4014,12 @@
                 const index = stages.findIndex(s => s.id === stageId);
                 
                 if (index > 0) {
+                    // Trocar ordens
                     const tempOrder = stages[index].order;
                     stages[index].order = stages[index - 1].order;
                     stages[index - 1].order = tempOrder;
                     
+                    // Ordenar array
                     stages.sort((a, b) => a.order - b.order);
                     Sistema.saveData();
                     this.render();
@@ -3963,10 +4031,12 @@
                 const index = stages.findIndex(s => s.id === stageId);
                 
                 if (index < stages.length - 1) {
+                    // Trocar ordens
                     const tempOrder = stages[index].order;
                     stages[index].order = stages[index + 1].order;
                     stages[index + 1].order = tempOrder;
                     
+                    // Ordenar array
                     stages.sort((a, b) => a.order - b.order);
                     Sistema.saveData();
                     this.render();
@@ -3982,7 +4052,7 @@
                 Sistema.data.funnel.metas = {
                     leads: parseInt(document.getElementById('meta-leads').value) || 0,
                     vendas: parseInt(document.getElementById('meta-vendas').value) || 0,
-                    receita: parseFloat(document.getElementById('meta-receita').value) || 0
+                    receita: App.parseCurrency(document.getElementById('meta-receita').value) || 0
                 };
                 
                 Sistema.saveData();
@@ -3994,6 +4064,40 @@
 
         // --- APLICAÇÃO PRINCIPAL ---
         const App = {
+            // Formatação monetária
+            formatCurrency: function(input) {
+                // Remove tudo que não é número
+                let value = input.value.replace(/\D/g, '');
+                
+                // Converte para número
+                let number = parseFloat(value) / 100;
+                
+                // Formata como moeda brasileira
+                if (!isNaN(number)) {
+                    input.value = number.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                } else {
+                    input.value = '';
+                }
+            },
+            
+            parseCurrency: function(value) {
+                // Remove pontos e substitui vírgula por ponto
+                let cleaned = value.replace(/\./g, '').replace(',', '.');
+                return parseFloat(cleaned) || 0;
+            },
+            
+            formatCurrencyDisplay: function(value) {
+                return value.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            },
+            
             cliente: {
                 save: function(event) {
                     event.preventDefault();
@@ -4013,8 +4117,8 @@
                     const estado = document.getElementById('c-estado').value;
                     const cep = document.getElementById('c-cep').value;
                     const tipoInteresse = document.getElementById('c-tipo-interesse').value;
-                    const valorMin = parseFloat(document.getElementById('c-valor-min').value) || null;
-                    const valorMax = parseFloat(document.getElementById('c-valor-max').value) || null;
+                    const valorMin = App.parseCurrency(document.getElementById('c-valor-min').value) || null;
+                    const valorMax = App.parseCurrency(document.getElementById('c-valor-max').value) || null;
                     const bairrosInteresse = document.getElementById('c-bairros-interesse').value;
                     const fonte = document.getElementById('c-fonte').value;
                     const status = document.getElementById('c-status').value;
@@ -4031,8 +4135,8 @@
                         endereco: { logradouro, numero, complemento, bairro, cidade, estado, cep },
                         interesses: {
                             tipo: tipoInteresse,
-                            valorMin: valorMin,
-                            valorMax: valorMax,
+                            valorMin,
+                            valorMax,
                             bairros: bairrosInteresse ? bairrosInteresse.split(',').map(b => b.trim()) : []
                         },
                         fonte,
@@ -4041,6 +4145,7 @@
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
                     
+                    // Verificar se é edição ou novo
                     const index = Sistema.data.clientes.findIndex(c => c.id === id);
                     if (index >= 0) {
                         Sistema.data.clientes[index] = cliente;
@@ -4059,6 +4164,7 @@
                     const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                     if (!cliente) return;
                     
+                    // Preencher formulário
                     document.getElementById('c-id').value = cliente.id;
                     document.getElementById('c-nome').value = cliente.nome;
                     document.getElementById('c-cpf').value = cliente.cpf || '';
@@ -4079,8 +4185,8 @@
                     
                     if (cliente.interesses) {
                         document.getElementById('c-tipo-interesse').value = cliente.interesses.tipo || '';
-                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin || '';
-                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax || '';
+                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : '';
+                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : '';
                         document.getElementById('c-bairros-interesse').value = cliente.interesses.bairros ? cliente.interesses.bairros.join(', ') : '';
                     }
                     
@@ -4096,8 +4202,10 @@
                     const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                     if (!cliente) return;
                     
+                    // Obter etapa do funil
                     const stage = Sistema.data.funnel.stages.find(s => s.id === cliente.status) || { name: 'Não definido', color: '#64748b' };
                     
+                    // Modal de detalhes completo
                     const modalBody = `
                         <div style="padding: 20px;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
@@ -4192,9 +4300,9 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Faixa de Valor</div>
                                             <div style="font-weight: 600;">
-                                                ${cliente.interesses.valorMin ? Sistema.formatarMoeda(cliente.interesses.valorMin) : ''} 
+                                                ${cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : ''} 
                                                 ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''}
-                                                ${cliente.interesses.valorMax ? Sistema.formatarMoeda(cliente.interesses.valorMax) : ''}
+                                                ${cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : ''}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4255,6 +4363,7 @@
                         </div>
                     `;
                     
+                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -4276,6 +4385,7 @@
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
                     
+                    // Configurar accordions do modal
                     setTimeout(() => {
                         const accordions = tempModal.querySelectorAll('.accordion');
                         accordions.forEach(accordion => {
@@ -4316,9 +4426,11 @@
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF();
                     
+                    // Configurações
                     const settings = Sistema.data.settings;
                     const hoje = new Date().toLocaleDateString('pt-BR');
                     
+                    // Cabeçalho
                     doc.setFontSize(16);
                     doc.text('FICHA DO CLIENTE', 105, 20, { align: 'center' });
                     
@@ -4326,6 +4438,7 @@
                     doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
                     doc.text(`Data: ${hoje}`, 20, 36);
                     
+                    // Dados do cliente
                     let y = 50;
                     
                     doc.setFontSize(12);
@@ -4360,6 +4473,7 @@
                         y += 7;
                     }
                     
+                    // Endereço
                     if (cliente.endereco && cliente.endereco.logradouro) {
                         y += 5;
                         doc.setFontSize(12);
@@ -4388,6 +4502,7 @@
                         }
                     }
                     
+                    // Interesses
                     if (cliente.interesses) {
                         y += 5;
                         doc.setFontSize(12);
@@ -4404,7 +4519,7 @@
                         }
                         
                         if (cliente.interesses.valorMin || cliente.interesses.valorMax) {
-                            const valorStr = `${cliente.interesses.valorMin ? Sistema.formatarMoeda(cliente.interesses.valorMin) : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? Sistema.formatarMoeda(cliente.interesses.valorMax) : ''}`;
+                            const valorStr = `${cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : ''}`;
                             doc.text(`Faixa de Valor: ${valorStr}`, 20, y);
                             y += 7;
                         }
@@ -4415,6 +4530,7 @@
                         }
                     }
                     
+                    // Outras informações
                     y += 5;
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
@@ -4451,6 +4567,7 @@
                         });
                     }
                     
+                    // Salvar PDF
                     doc.save(`Ficha_Cliente_${cliente.nome.replace(/\s/g, '_')}_${hoje.replace(/\//g, '-')}.pdf`);
                     UI.showToast('Ficha do cliente gerada em PDF');
                 }
@@ -4466,10 +4583,10 @@
                     const nome = document.getElementById('i-nome').value;
                     const tipo = document.getElementById('i-tipo').value;
                     const finalidade = document.getElementById('i-finalidade').value;
-                    const valor = parseFloat(document.getElementById('i-valor').value) || 0;
+                    const valor = App.parseCurrency(document.getElementById('i-valor').value) || 0;
                     const dataEntrega = document.getElementById('i-data-entrega').value;
-                    const condominio = parseFloat(document.getElementById('i-condominio').value) || null;
-                    const iptu = parseFloat(document.getElementById('i-iptu').value) || null;
+                    const condominio = App.parseCurrency(document.getElementById('i-condominio').value) || null;
+                    const iptu = App.parseCurrency(document.getElementById('i-iptu').value) || null;
                     const logradouro = document.getElementById('i-logradouro').value;
                     const numero = document.getElementById('i-numero').value;
                     const complemento = document.getElementById('i-complemento').value;
@@ -4512,6 +4629,7 @@
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
                     
+                    // Verificar se é edição ou novo
                     const index = Sistema.data.imoveis.findIndex(i => i.id === id);
                     if (index >= 0) {
                         Sistema.data.imoveis[index] = imovel;
@@ -4525,6 +4643,7 @@
                     UI.renderImoveis();
                     UI.renderDashboard();
                     
+                    // Limpar fotos temporárias
                     this.fotosTemporarias = [];
                 },
                 
@@ -4532,14 +4651,15 @@
                     const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                     if (!imovel) return;
                     
+                    // Preencher formulário
                     document.getElementById('i-id').value = imovel.id;
                     document.getElementById('i-nome').value = imovel.nome;
                     document.getElementById('i-tipo').value = imovel.tipo;
                     document.getElementById('i-finalidade').value = imovel.finalidade;
-                    document.getElementById('i-valor').value = imovel.valor;
+                    document.getElementById('i-valor').value = App.formatCurrencyDisplay(imovel.valor);
                     document.getElementById('i-data-entrega').value = imovel.dataEntrega || new Date().toISOString().split('T')[0];
-                    document.getElementById('i-condominio').value = imovel.condominio || '';
-                    document.getElementById('i-iptu').value = imovel.iptu || '';
+                    document.getElementById('i-condominio').value = imovel.condominio ? App.formatCurrencyDisplay(imovel.condominio) : '';
+                    document.getElementById('i-iptu').value = imovel.iptu ? App.formatCurrencyDisplay(imovel.iptu) : '';
                     
                     if (imovel.endereco) {
                         document.getElementById('i-logradouro').value = imovel.endereco.logradouro;
@@ -4564,6 +4684,7 @@
                     document.getElementById('i-status').value = imovel.status;
                     document.getElementById('i-observacoes').value = imovel.observacoes || '';
                     
+                    // Carregar fotos
                     this.fotosTemporarias = imovel.fotos || [];
                     this.renderFotosPreview();
                     
@@ -4606,6 +4727,7 @@
                     const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                     if (!imovel) return;
                     
+                    // Modal de detalhes completo
                     const modalBody = `
                         <div style="padding: 20px;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
@@ -4632,14 +4754,14 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Valor</div>
                                             <div style="font-weight: 600; font-size: 1.2rem; color: var(--primary);">
-                                                ${Sistema.formatarMoeda(imovel.valor)}
+                                                ${App.formatCurrencyDisplay(imovel.valor)}
                                             </div>
                                         </div>
                                         ${imovel.condominio ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Condomínio</div>
                                             <div style="font-weight: 600;">
-                                                ${Sistema.formatarMoeda(imovel.condominio)}
+                                                ${App.formatCurrencyDisplay(imovel.condominio)}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4647,7 +4769,7 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">IPTU</div>
                                             <div style="font-weight: 600;">
-                                                ${Sistema.formatarMoeda(imovel.iptu)}
+                                                ${App.formatCurrencyDisplay(imovel.iptu)}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4786,6 +4908,7 @@
                         </div>
                     `;
                     
+                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -4807,6 +4930,7 @@
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
                     
+                    // Configurar accordions do modal
                     setTimeout(() => {
                         const accordions = tempModal.querySelectorAll('.accordion');
                         accordions.forEach(accordion => {
@@ -4847,6 +4971,7 @@
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF();
                     
+                    // Configurações
                     const settings = Sistema.data.settings;
                     const hoje = new Date().toLocaleDateString('pt-BR');
                     
@@ -4858,9 +4983,9 @@
                     doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
                     doc.text(`Data: ${hoje}`, 20, 36);
                     
+                    // Dados do imóvel
                     let y = 50;
                     
-                    // Dados básicos
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
                     doc.text('DADOS DO IMÓVEL', 20, y);
@@ -4876,7 +5001,7 @@
                     y += 7;
                     doc.text(`Status: ${imovel.status}`, 20, y);
                     y += 7;
-                    doc.text(`Valor: ${Sistema.formatarMoeda(imovel.valor)}`, 20, y);
+                    doc.text(`Valor: ${App.formatCurrencyDisplay(imovel.valor)}`, 20, y);
                     y += 7;
                     
                     if (imovel.dataEntrega) {
@@ -4885,12 +5010,12 @@
                     }
                     
                     if (imovel.condominio) {
-                        doc.text(`Condomínio: ${Sistema.formatarMoeda(imovel.condominio)}`, 20, y);
+                        doc.text(`Condomínio: ${App.formatCurrencyDisplay(imovel.condominio)}`, 20, y);
                         y += 7;
                     }
                     
                     if (imovel.iptu) {
-                        doc.text(`IPTU: ${Sistema.formatarMoeda(imovel.iptu)}`, 20, y);
+                        doc.text(`IPTU: ${App.formatCurrencyDisplay(imovel.iptu)}`, 20, y);
                         y += 7;
                     }
                     
@@ -4970,57 +5095,61 @@
                         }
                     }
                     
-                    // FOTOS EM GRID 2x2 - MELHORIA
+                    // FOTOS - ORGANIZADAS DE 2 EM 2 LADO A LADO
                     if (imovel.fotos && imovel.fotos.length > 0) {
                         y += 10;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
                         doc.text('FOTOS DO IMÓVEL', 20, y);
-                        y += 15;
+                        y += 10;
                         
-                        // Adicionar fotos em grid 2x2
-                        const fotoWidth = 80;
-                        const fotoHeight = 60;
-                        const margin = 10;
-                        const startX = 20;
+                        doc.setFontSize(8);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(`Total: ${imovel.fotos.length} fotos`, 20, y);
+                        y += 7;
                         
-                        for (let i = 0; i < imovel.fotos.length; i++) {
-                            const row = Math.floor(i / 2);
-                            const col = i % 2;
-                            const x = startX + (col * (fotoWidth + margin));
-                            const currentY = y + (row * (fotoHeight + margin));
-                            
-                            // Verificar se precisa de nova página
-                            if (currentY + fotoHeight > 280) {
+                        // Calcular dimensões para as fotos
+                        const pageWidth = 170; // Largura útil da página
+                        const photoWidth = (pageWidth - 10) / 2; // 2 fotos por linha com 10px de espaço
+                        const photoHeight = 40; // Altura fixa para as fotos
+                        
+                        // Adicionar fotos de 2 em 2
+                        for (let i = 0; i < imovel.fotos.length; i += 2) {
+                            if (y > 250) {
                                 doc.addPage();
                                 y = 20;
                             }
                             
-                            // Adicionar imagem
+                            // Primeira foto da linha
                             try {
-                                doc.addImage(imovel.fotos[i], 'JPEG', x, currentY, fotoWidth, fotoHeight);
-                            } catch (error) {
-                                // Se não conseguir carregar a imagem, adicionar um retângulo
-                                doc.setFillColor(240, 240, 240);
-                                doc.rect(x, currentY, fotoWidth, fotoHeight, 'F');
-                                doc.setFontSize(8);
-                                doc.text(`Foto ${i + 1}`, x + 5, currentY + 30);
+                                doc.addImage(imovel.fotos[i], 'JPEG', 20, y, photoWidth, photoHeight);
+                                doc.text(`Foto ${i + 1}`, 20, y + photoHeight + 5);
+                            } catch (e) {
+                                doc.text(`Foto ${i + 1} (erro ao carregar)`, 20, y + photoHeight/2);
                             }
                             
-                            // Atualizar Y se for a última foto da linha
-                            if (col === 1) {
-                                y = currentY + fotoHeight + margin;
+                            // Segunda foto da linha (se existir)
+                            if (i + 1 < imovel.fotos.length) {
+                                try {
+                                    doc.addImage(imovel.fotos[i + 1], 'JPEG', 20 + photoWidth + 10, y, photoWidth, photoHeight);
+                                    doc.text(`Foto ${i + 2}`, 20 + photoWidth + 10, y + photoHeight + 5);
+                                } catch (e) {
+                                    doc.text(`Foto ${i + 2} (erro ao carregar)`, 20 + photoWidth + 10, y + photoHeight/2);
+                                }
                             }
+                            
+                            y += photoHeight + 15; // Espaço entre linhas de fotos
                         }
-                        
-                        // Ajustar Y para o final das fotos
-                        const totalRows = Math.ceil(imovel.fotos.length / 2);
-                        y = y + (totalRows * (fotoHeight + margin));
                     }
                     
                     // Observações
                     if (imovel.observacoes) {
-                        y += 10;
+                        if (y > 250) {
+                            doc.addPage();
+                            y = 20;
+                        }
+                        
+                        y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
                         doc.text('OBSERVAÇÕES', 20, y);
@@ -5043,8 +5172,7 @@
                 }
             },
             
-            // Sistema de Links
-            link: {
+            links: {
                 save: function(event) {
                     event.preventDefault();
                     
@@ -5052,7 +5180,6 @@
                     const titulo = document.getElementById('l-titulo').value;
                     const url = document.getElementById('l-url').value;
                     const categoria = document.getElementById('l-categoria').value;
-                    const icone = document.getElementById('l-icone').value || 'fas fa-link';
                     const descricao = document.getElementById('l-descricao').value;
                     
                     const link = {
@@ -5060,11 +5187,11 @@
                         titulo,
                         url,
                         categoria,
-                        icone,
                         descricao,
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
                     
+                    // Verificar se é edição ou novo
                     const index = Sistema.data.links.findIndex(l => l.id === id);
                     if (index >= 0) {
                         Sistema.data.links[index] = link;
@@ -5073,7 +5200,7 @@
                     }
                     
                     Sistema.saveData();
-                    UI.closeModal('link');
+                    UI.closeModal('links');
                     UI.showToast('Link salvo com sucesso');
                     UI.renderLinks();
                 },
@@ -5086,23 +5213,23 @@
                     document.getElementById('l-titulo').value = link.titulo;
                     document.getElementById('l-url').value = link.url;
                     document.getElementById('l-categoria').value = link.categoria || '';
-                    document.getElementById('l-icone').value = link.icone || 'fas fa-link';
                     document.getElementById('l-descricao').value = link.descricao || '';
                     
-                    document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-link"></i> Editar Link';
-                    UI.showModal('link', 'edit');
+                    document.getElementById('modal-links-title').innerHTML = '<i class="fas fa-edit"></i> Editar Link';
+                    UI.showModal('links', 'edit');
                 },
                 
-                remove: function(linkId) {
-                    if (confirm('Excluir este link?')) {
+                delete: function(linkId) {
+                    if (confirm('Tem certeza que deseja excluir este link?')) {
                         Sistema.data.links = Sistema.data.links.filter(l => l.id !== linkId);
                         Sistema.saveData();
-                        UI.showToast('Link removido');
+                        UI.showToast('Link excluído com sucesso');
                         UI.renderLinks();
                     }
                 }
             },
             
+            // ATUALIZADO: Agenda com suporte a multi-seleção de clientes para plantão
             agenda: {
                 save: function(event) {
                     event.preventDefault();
@@ -5114,6 +5241,7 @@
                     const local = document.getElementById('a-local').value;
                     const observacoes = document.getElementById('a-observacoes').value;
                     
+                    // Campos específicos
                     let camposEspecificos = {};
                     let clientesSelecionados = [];
                     
@@ -5132,8 +5260,10 @@
                                 periodo: document.getElementById('a-periodo').value
                             };
                             
+                            // Usar clientes selecionados da UI
                             clientesSelecionados = UI.selectedClientesPlantao;
                             
+                            // Criar registro de plantão detalhado
                             const plantao = {
                                 id: id,
                                 clientesAtendidos: clientesSelecionados,
@@ -5149,14 +5279,23 @@
                             }
                             break;
                             
-                        default:
+                        case 'assinatura':
+                        case 'proposta':
+                        case 'reuniao':
+                        case 'negociacao':
+                        case 'captacao':
+                        case 'vistoria':
+                        case 'entrega':
+                        case 'followup':
+                        case 'outro':
                             camposEspecificos = {
-                                clienteId: document.getElementById('a-cliente')?.value
+                                clienteId: document.getElementById('a-cliente').value
                             };
-                            clientesSelecionados = [document.getElementById('a-cliente')?.value];
+                            clientesSelecionados = [document.getElementById('a-cliente').value];
                             break;
                     }
                     
+                    // Para plantão, não temos um cliente específico, então usamos o primeiro selecionado ou null
                     const clienteIdPlantao = tipo === 'plantao' && clientesSelecionados.length > 0 ? clientesSelecionados[0] : null;
                     
                     const agenda = {
@@ -5180,6 +5319,7 @@
                     UI.showDayEvents(data);
                     UI.renderDashboard();
                     
+                    // Limpar seleção de clientes
                     UI.selectedClientesPlantao = [];
                 },
                 
@@ -5212,6 +5352,7 @@
                     const cliente = agenda.clienteId ? Sistema.data.clientes.find(c => c.id === agenda.clienteId) : null;
                     const imovel = agenda.imovelId ? Sistema.data.imoveis.find(i => i.id === agenda.imovelId) : null;
                     
+                    // Para plantão, mostrar todos os clientes selecionados
                     let clientesInfo = '';
                     if (agenda.tipo === 'plantao' && agenda.clientesSelecionados && agenda.clientesSelecionados.length > 0) {
                         clientesInfo = agenda.clientesSelecionados.map(clienteId => {
@@ -5220,6 +5361,7 @@
                         }).join(', ');
                     }
                     
+                    // Modal de detalhes
                     let detalhes = '';
                     let botoesEspeciais = '';
                     
@@ -5318,6 +5460,7 @@
                         </div>
                     `;
                     
+                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -5342,6 +5485,7 @@
             },
             
             plantao: {
+                // MELHORIA: Seleção múltipla de clientes
                 toggleClienteAtendido: function(plantaoId, clienteId, isChecked) {
                     let plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
                     if (!plantao) {
@@ -5359,6 +5503,7 @@
                             plantao.clientesAtendidos.push(clienteId);
                             Sistema.saveData();
                             
+                            // Atualizar visualização
                             const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                             const lista = document.getElementById('clientes-atendidos-list');
                             lista.innerHTML += `
@@ -5397,11 +5542,13 @@
                         plantao.clientesAtendidos = plantao.clientesAtendidos.filter(id => id !== clienteId);
                         Sistema.saveData();
                         
+                        // Desmarcar checkbox
                         const checkbox = document.getElementById(`cliente-${clienteId}`);
                         if (checkbox) {
                             checkbox.checked = false;
                         }
                         
+                        // Remover da visualização
                         const lista = document.getElementById('clientes-atendidos-list');
                         const item = lista.querySelector(`[onclick*="${clienteId}"]`)?.parentElement?.parentElement;
                         if (item) {
@@ -5445,6 +5592,7 @@
                     Sistema.saveData();
                     UI.showToast('Tratativa adicionada');
                     
+                    // Atualizar lista
                     const lista = document.getElementById('tratativas-list');
                     const cliente = clienteId ? Sistema.data.clientes.find(c => c.id === clienteId) : null;
                     lista.innerHTML += `
@@ -5465,6 +5613,7 @@
                         </div>
                     `;
                     
+                    // Limpar campos
                     document.getElementById('nova-tratativa-cliente').value = '';
                     document.getElementById('nova-tratativa-tipo').value = '';
                     document.getElementById('nova-tratativa-descricao').value = '';
@@ -5477,6 +5626,7 @@
                         Sistema.saveData();
                         UI.showToast('Tratativa removida');
                         
+                        // Recarregar modal
                         UI.showPlantaoDetalhadoModal(plantaoId);
                     }
                 },
@@ -5519,6 +5669,7 @@
                     
                     const numero = cliente.telefone.replace(/\D/g, '');
                     
+                    // Verificar se o número tem DDD (11 dígitos para celular)
                     if (numero.length < 10 || numero.length > 11) {
                         UI.showToast('Número de telefone inválido', 'error');
                         return;
@@ -5539,11 +5690,12 @@
                     
                     const settings = Sistema.data.settings;
                     
+                    // Construir mensagem com detalhes do imóvel
                     let mensagem = `🏠 *${imovel.nome}*\n\n`;
-                    mensagem += `💰 *Valor:* ${Sistema.formatarMoeda(imovel.valor)}\n`;
+                    mensagem += `💰 *Valor:* ${App.formatCurrencyDisplay(imovel.valor)}\n`;
                     
                     if (imovel.condominio) {
-                        mensagem += `🏢 *Condomínio:* ${Sistema.formatarMoeda(imovel.condominio)}\n`;
+                        mensagem += `🏢 *Condomínio:* ${App.formatCurrencyDisplay(imovel.condominio)}\n`;
                     }
                     
                     if (imovel.endereco) {
@@ -5589,6 +5741,7 @@
                     
                     const numero = cliente.telefone.replace(/\D/g, '');
                     
+                    // Verificar se o número tem DDD (11 dígitos para celular)
                     if (numero.length < 10 || numero.length > 11) {
                         UI.showToast('Número de telefone inválido', 'error');
                         return;
@@ -5599,6 +5752,23 @@
                     
                     const url = `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
                     window.open(url, '_blank');
+                }
+            },
+            
+            settings: {
+                save: function(event) {
+                    event.preventDefault();
+                    
+                    Sistema.data.settings = {
+                        nome: document.getElementById('s-nome').value,
+                        creci: document.getElementById('s-creci').value,
+                        telefone: document.getElementById('s-telefone').value,
+                        email: document.getElementById('s-email').value
+                    };
+                    
+                    Sistema.saveData();
+                    UI.closeModal('settings');
+                    UI.showToast('Configurações salvas com sucesso');
                 }
             },
             
@@ -5644,22 +5814,46 @@
                     UI.showToast('Backup de imóveis exportado com sucesso');
                 },
                 
-                // IMPORTADOR UNIVERSAL MELHORADO
-                importUniversalData: function(input) {
+                importData: function(input) {
                     const file = input.files[0];
                     if (!file) return;
                     
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         try {
-                            const importedData = JSON.parse(e.target.result);
+                            const data = JSON.parse(e.target.result);
                             
-                            if (confirm('Importar backup universal substituirá todos os dados atuais. Continuar?')) {
-                                // Função para extrair dados de qualquer estrutura JSON
-                                const extractedData = App.backup.extractDataFromAnyJSON(importedData);
+                            // Processar qualquer estrutura JSON
+                            const processedData = this.processImportData(data);
+                            
+                            if (confirm('Importar backup substituirá todos os dados atuais. Continuar?')) {
+                                // Mesclar dados mantendo configurações existentes se não forem fornecidas
+                                if (processedData.settings) {
+                                    Sistema.data.settings = {
+                                        ...Sistema.data.settings,
+                                        ...processedData.settings
+                                    };
+                                }
                                 
-                                // Mesclar dados extraídos com estrutura atual
-                                App.backup.mergeData(extractedData);
+                                // Substituir arrays apenas se existirem no backup
+                                if (processedData.clientes) {
+                                    Sistema.data.clientes = processedData.clientes;
+                                }
+                                if (processedData.imoveis) {
+                                    Sistema.data.imoveis = processedData.imoveis;
+                                }
+                                if (processedData.agenda) {
+                                    Sistema.data.agenda = processedData.agenda;
+                                }
+                                if (processedData.plantoes) {
+                                    Sistema.data.plantoes = processedData.plantoes;
+                                }
+                                if (processedData.links) {
+                                    Sistema.data.links = processedData.links;
+                                }
+                                if (processedData.funnel) {
+                                    Sistema.data.funnel = processedData.funnel;
+                                }
                                 
                                 Sistema.saveData();
                                 location.reload();
@@ -5667,169 +5861,66 @@
                         } catch (error) {
                             UI.showToast('Erro ao importar backup: ' + error.message, 'error');
                         }
-                    };
+                    }.bind(this);
                     reader.readAsText(file);
                     
+                    // Limpar input
                     input.value = '';
                 },
                 
-                // EXTRAÇÃO INTELIGENTE DE DADOS
-                extractDataFromAnyJSON: function(jsonData) {
-                    const extracted = {
-                        clientes: [],
-                        imoveis: [],
-                        agenda: [],
-                        plantoes: [],
-                        links: [],
-                        funnel: Sistema.data.funnel,
-                        settings: Sistema.data.settings
-                    };
+                processImportData: function(data) {
+                    // Esta função processa qualquer estrutura JSON e extrai os dados
+                    const processed = {};
                     
-                    // Função recursiva para buscar dados
-                    function searchData(obj, path = '') {
-                        if (!obj || typeof obj !== 'object') return;
-                        
-                        // Verificar se é array
-                        if (Array.isArray(obj)) {
-                            obj.forEach((item, index) => {
-                                searchData(item, `${path}[${index}]`);
-                            });
-                            return;
+                    // Verificar diferentes estruturas possíveis
+                    if (Array.isArray(data)) {
+                        // Se for um array, assumir que são imóveis
+                        processed.imoveis = data;
+                    } else if (typeof data === 'object') {
+                        // Verificar por propriedades comuns
+                        if (data.imoveis && Array.isArray(data.imoveis)) {
+                            processed.imoveis = data.imoveis;
+                        }
+                        if (data.clientes && Array.isArray(data.clientes)) {
+                            processed.clientes = data.clientes;
+                        }
+                        if (data.agenda && Array.isArray(data.agenda)) {
+                            processed.agenda = data.agenda;
+                        }
+                        if (data.plantoes && Array.isArray(data.plantoes)) {
+                            processed.plantoes = data.plantoes;
+                        }
+                        if (data.links && Array.isArray(data.links)) {
+                            processed.links = data.links;
+                        }
+                        if (data.funnel && typeof data.funnel === 'object') {
+                            processed.funnel = data.funnel;
+                        }
+                        if (data.settings && typeof data.settings === 'object') {
+                            processed.settings = data.settings;
                         }
                         
-                        // Verificar padrões comuns
-                        if (obj.nome && (obj.telefone || obj.email)) {
-                            // Possível cliente
-                            if (!extracted.clientes.some(c => c.id === obj.id || c.nome === obj.nome)) {
-                                extracted.clientes.push({
-                                    id: obj.id || `cliente_${Date.now()}_${extracted.clientes.length}`,
-                                    nome: obj.nome,
-                                    telefone: obj.telefone || obj.celular || obj.phone || '',
-                                    email: obj.email || obj.mail || '',
-                                    cpf: obj.cpf || obj.documento || '',
-                                    nascimento: obj.nascimento || obj.dataNascimento || obj.birthday || '',
-                                    endereco: {
-                                        logradouro: obj.logradouro || obj.endereco || obj.address || '',
-                                        numero: obj.numero || obj.number || '',
-                                        complemento: obj.complemento || '',
-                                        bairro: obj.bairro || obj.bairro || obj.neighborhood || '',
-                                        cidade: obj.cidade || obj.city || '',
-                                        estado: obj.estado || obj.state || obj.uf || '',
-                                        cep: obj.cep || obj.zip || ''
-                                    },
-                                    status: obj.status || 'lead',
-                                    dataCadastro: obj.dataCadastro || new Date().toISOString().split('T')[0]
-                                });
+                        // Se não encontrou estruturas conhecidas, tentar encontrar arrays com nomes diferentes
+                        if (!processed.imoveis && !processed.clientes) {
+                            for (const key in data) {
+                                if (Array.isArray(data[key])) {
+                                    // Tentar identificar pelo conteúdo
+                                    const firstItem = data[key][0];
+                                    if (firstItem) {
+                                        if (firstItem.nome && firstItem.valor !== undefined) {
+                                            processed.imoveis = data[key];
+                                        } else if (firstItem.nome && firstItem.telefone) {
+                                            processed.clientes = data[key];
+                                        } else if (firstItem.titulo && firstItem.url) {
+                                            processed.links = data[key];
+                                        }
+                                    }
+                                }
                             }
                         }
-                        
-                        if (obj.valor && (obj.nome || obj.descricao)) {
-                            // Possível imóvel
-                            if (!extracted.imoveis.some(i => i.id === obj.id || i.nome === obj.nome)) {
-                                extracted.imoveis.push({
-                                    id: obj.id || `imovel_${Date.now()}_${extracted.imoveis.length}`,
-                                    nome: obj.nome || obj.descricao || 'Imóvel',
-                                    valor: parseFloat(obj.valor) || 0,
-                                    tipo: obj.tipo || 'casa',
-                                    finalidade: obj.finalidade || 'venda',
-                                    status: obj.status || 'disponivel',
-                                    endereco: {
-                                        logradouro: obj.logradouro || obj.endereco || '',
-                                        numero: obj.numero || '',
-                                        bairro: obj.bairro || '',
-                                        cidade: obj.cidade || '',
-                                        estado: obj.estado || '',
-                                        cep: obj.cep || ''
-                                    },
-                                    caracteristicas: {
-                                        areaTotal: obj.areaTotal || obj.area || null,
-                                        quartos: obj.quartos || obj.quartos || null,
-                                        banheiros: obj.banheiros || obj.banheiro || null,
-                                        vagas: obj.vagas || obj.garagem || null
-                                    },
-                                    dataCadastro: obj.dataCadastro || new Date().toISOString().split('T')[0]
-                                });
-                            }
-                        }
-                        
-                        if (obj.data && obj.horario) {
-                            // Possível agenda
-                            if (!extracted.agenda.some(a => a.id === obj.id)) {
-                                extracted.agenda.push({
-                                    id: obj.id || `agenda_${Date.now()}_${extracted.agenda.length}`,
-                                    tipo: obj.tipo || 'outro',
-                                    data: obj.data,
-                                    horario: obj.horario,
-                                    local: obj.local || obj.endereco || '',
-                                    status: obj.status || 'agendado',
-                                    clienteId: obj.clienteId || null
-                                });
-                            }
-                        }
-                        
-                        if (obj.url && obj.titulo) {
-                            // Possível link
-                            if (!extracted.links.some(l => l.id === obj.id || l.url === obj.url)) {
-                                extracted.links.push({
-                                    id: obj.id || `link_${Date.now()}_${extracted.links.length}`,
-                                    titulo: obj.titulo || obj.title || 'Link',
-                                    url: obj.url,
-                                    categoria: obj.categoria || obj.category || '',
-                                    icone: obj.icone || obj.icon || 'fas fa-link',
-                                    dataCadastro: obj.dataCadastro || new Date().toISOString().split('T')[0]
-                                });
-                            }
-                        }
-                        
-                        // Buscar recursivamente
-                        Object.keys(obj).forEach(key => {
-                            if (typeof obj[key] === 'object') {
-                                searchData(obj[key], `${path}.${key}`);
-                            }
-                        });
                     }
                     
-                    // Iniciar busca
-                    searchData(jsonData);
-                    
-                    return extracted;
-                },
-                
-                // MESCLAR DADOS
-                mergeData: function(extractedData) {
-                    // Mesclar clientes
-                    if (extractedData.clientes && extractedData.clientes.length > 0) {
-                        Sistema.data.clientes = [...Sistema.data.clientes, ...extractedData.clientes];
-                    }
-                    
-                    // Mesclar imóveis
-                    if (extractedData.imoveis && extractedData.imoveis.length > 0) {
-                        Sistema.data.imoveis = [...Sistema.data.imoveis, ...extractedData.imoveis];
-                    }
-                    
-                    // Mesclar agenda
-                    if (extractedData.agenda && extractedData.agenda.length > 0) {
-                        Sistema.data.agenda = [...Sistema.data.agenda, ...extractedData.agenda];
-                    }
-                    
-                    // Mesclar links
-                    if (extractedData.links && extractedData.links.length > 0) {
-                        Sistema.data.links = [...Sistema.data.links, ...extractedData.links];
-                    }
-                    
-                    // Mesclar plantões
-                    if (extractedData.plantoes && extractedData.plantoes.length > 0) {
-                        Sistema.data.plantoes = [...Sistema.data.plantoes, ...extractedData.plantoes];
-                    }
-                    
-                    // Preservar funnel e settings existentes
-                    if (extractedData.funnel) {
-                        Sistema.data.funnel = { ...Sistema.data.funnel, ...extractedData.funnel };
-                    }
-                    
-                    if (extractedData.settings) {
-                        Sistema.data.settings = { ...Sistema.data.settings, ...extractedData.settings };
-                    }
+                    return processed;
                 },
                 
                 importImoveis: function(input) {
@@ -5841,23 +5932,27 @@
                         try {
                             const data = JSON.parse(e.target.result);
                             
-                            if (!data.imoveis) {
-                                throw new Error('Arquivo de backup de imóveis inválido');
-                            }
+                            // Processar dados
+                            const processedData = this.processImportData(data);
                             
-                            if (confirm('Importar backup de imóveis substituirá os imóveis atuais. Continuar?')) {
-                                Sistema.data.imoveis = data.imoveis;
-                                Sistema.saveData();
-                                UI.showToast('Imóveis importados com sucesso');
-                                UI.renderImoveis();
-                                UI.renderDashboard();
+                            if (processedData.imoveis) {
+                                if (confirm('Importar backup de imóveis substituirá os imóveis atuais. Continuar?')) {
+                                    Sistema.data.imoveis = processedData.imoveis;
+                                    Sistema.saveData();
+                                    UI.showToast('Imóveis importados com sucesso');
+                                    UI.renderImoveis();
+                                    UI.renderDashboard();
+                                }
+                            } else {
+                                UI.showToast('Nenhum dado de imóveis encontrado no arquivo', 'error');
                             }
                         } catch (error) {
                             UI.showToast('Erro ao importar backup de imóveis: ' + error.message, 'error');
                         }
-                    };
+                    }.bind(this);
                     reader.readAsText(file);
                     
+                    // Limpar input
                     input.value = '';
                 },
                 
@@ -5942,6 +6037,7 @@
                 const ctx = document.getElementById('performance-chart').getContext('2d');
                 const metas = Sistema.data.funnel.metas;
                 
+                // Dados dos últimos 6 meses
                 const hoje = new Date();
                 const meses = [];
                 const vendasPorMes = [];
@@ -5951,6 +6047,7 @@
                     const mesFormatado = mes.toLocaleDateString('pt-BR', { month: 'short' });
                     meses.push(mesFormatado);
                     
+                    // Calcular vendas do mês
                     const vendas = Sistema.data.clientes.filter(c => {
                         if (c.status !== 'fechado' || !c.dataFechamento) return false;
                         
@@ -5993,6 +6090,7 @@
                 });
             },
             
+            // Métodos de geração de relatórios
             gerarRelatorioVendas: function() {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
@@ -6001,6 +6099,7 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE VENDAS', 105, 20, { align: 'center' });
                 
@@ -6009,17 +6108,19 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
+                // Vendas do mês
                 const vendas = Sistema.data.clientes.filter(c => c.status === 'fechado');
                 let y = 60;
                 
                 if (vendas.length === 0) {
                     doc.text('Nenhuma venda registrada neste período.', 20, y);
                 } else {
+                    // Tabela de vendas
                     const tableData = vendas.map((venda, index) => [
                         index + 1,
                         venda.nome,
                         venda.telefone,
-                        venda.valorVenda ? Sistema.formatarMoeda(venda.valorVenda) : '-',
+                        venda.valorVenda ? App.formatCurrencyDisplay(venda.valorVenda) : '-',
                         venda.dataFechamento || '-'
                     ]);
                     
@@ -6033,15 +6134,17 @@
                     
                     y = doc.lastAutoTable.finalY + 10;
                     
+                    // Totais
                     const totalVendas = vendas.length;
                     const totalReceita = vendas.reduce((acc, v) => acc + (v.valorVenda || 0), 0);
                     
                     doc.setFont(undefined, 'bold');
                     doc.text(`Total de Vendas: ${totalVendas}`, 20, y);
                     y += 7;
-                    doc.text(`Receita Total: ${Sistema.formatarMoeda(totalReceita)}`, 20, y);
+                    doc.text(`Receita Total: ${App.formatCurrencyDisplay(totalReceita)}`, 20, y);
                 }
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Vendas_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de vendas gerado em PDF');
             },
@@ -6053,6 +6156,7 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE CLIENTES', 105, 20, { align: 'center' });
                 
@@ -6061,6 +6165,7 @@
                 doc.text(`Data: ${hoje}`, 20, 36);
                 doc.text(`Total de Clientes: ${Sistema.data.clientes.length}`, 20, 42);
                 
+                // Tabela de clientes
                 const tableData = Sistema.data.clientes.map((cliente, index) => [
                     index + 1,
                     cliente.nome,
@@ -6077,6 +6182,7 @@
                     headStyles: { fillColor: [59, 130, 246] }
                 });
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Clientes_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório de clientes gerado em PDF');
             },
@@ -6088,6 +6194,7 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE IMÓVEIS', 105, 20, { align: 'center' });
                 
@@ -6096,10 +6203,11 @@
                 doc.text(`Data: ${hoje}`, 20, 36);
                 doc.text(`Total de Imóveis: ${Sistema.data.imoveis.length}`, 20, 42);
                 
+                // Tabela de imóveis
                 const tableData = Sistema.data.imoveis.map((imovel, index) => [
                     index + 1,
                     imovel.nome,
-                    Sistema.formatarMoeda(imovel.valor),
+                    App.formatCurrencyDisplay(imovel.valor),
                     imovel.status,
                     imovel.dataCadastro || '-'
                 ]);
@@ -6112,6 +6220,7 @@
                     headStyles: { fillColor: [59, 130, 246] }
                 });
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Imoveis_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório de imóveis gerado em PDF');
             },
@@ -6124,6 +6233,7 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE AGENDA', 105, 20, { align: 'center' });
                 
@@ -6132,6 +6242,7 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
+                // Agendamentos do mês
                 const mes = hoje.getMonth();
                 const ano = hoje.getFullYear();
                 const agendaMes = Sistema.data.agenda.filter(a => {
@@ -6144,6 +6255,7 @@
                 if (agendaMes.length === 0) {
                     doc.text('Nenhum agendamento neste período.', 20, y);
                 } else {
+                    // Tabela de agendamentos
                     const tableData = agendaMes.map((agenda, index) => {
                         const cliente = Sistema.data.clientes.find(c => c.id === agenda.clienteId);
                         return [
@@ -6166,6 +6278,7 @@
                     
                     y = doc.lastAutoTable.finalY + 10;
                     
+                    // Estatísticas
                     const stats = {
                         total: agendaMes.length,
                         confirmados: agendaMes.filter(a => a.status === 'confirmado').length,
@@ -6179,6 +6292,7 @@
                     doc.text(`Confirmados: ${stats.confirmados} | Pendentes: ${stats.pendentes} | Cancelados: ${stats.cancelados}`, 20, y);
                 }
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Agenda_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de agenda gerado em PDF');
             },
@@ -6190,6 +6304,7 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DO FUNIL', 105, 20, { align: 'center' });
                 
@@ -6197,6 +6312,7 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
                 doc.text(`Data: ${hoje}`, 20, 36);
                 
+                // Estatísticas do funil
                 const stages = Sistema.data.funnel.stages;
                 const totalClientes = Sistema.data.clientes.length;
                 
@@ -6217,6 +6333,7 @@
                     y += 15;
                 });
                 
+                // Análise de conversão
                 y += 10;
                 doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
@@ -6236,6 +6353,7 @@
                 doc.setFont(undefined, 'bold');
                 doc.text(`Taxa de Conversão: ${taxaConversao}%`, 20, y);
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Funil_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório do funil gerado em PDF');
             },
@@ -6248,6 +6366,7 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE METAS', 105, 20, { align: 'center' });
                 
@@ -6256,6 +6375,7 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
+                // Metas vs Realizado
                 const metas = Sistema.data.funnel.metas;
                 const stats = Sistema.updateDashboard();
                 
@@ -6266,11 +6386,12 @@
                 doc.text('METAS MENSAS', 20, y);
                 y += 10;
                 
+                // Tabela de metas
                 const tableData = [
                     ['Leads', metas.leads, stats.leadsAtivos, ((stats.leadsAtivos / metas.leads) * 100).toFixed(1) + '%'],
                     ['Vendas', metas.vendas, stats.vendasMes, ((stats.vendasMes / metas.vendas) * 100).toFixed(1) + '%'],
-                    ['Receita', Sistema.formatarMoeda(metas.receita), 
-                     Sistema.formatarMoeda(stats.receitaMes), 
+                    ['Receita', App.formatCurrencyDisplay(metas.receita), 
+                     App.formatCurrencyDisplay(stats.receitaMes), 
                      ((stats.receitaMes / metas.receita) * 100).toFixed(1) + '%']
                 ];
                 
@@ -6299,6 +6420,7 @@
                 
                 y = doc.lastAutoTable.finalY + 15;
                 
+                // Análise
                 doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
                 doc.text('ANÁLISE DE DESEMPENHO', 20, y);
@@ -6323,6 +6445,7 @@
                     doc.text('Reveja sua estratégia e intensifique a prospecção.', 20, y);
                 }
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Metas_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de metas gerado em PDF');
             },
@@ -6335,6 +6458,7 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
+                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE PLANTÃO DETALHADO', 105, 20, { align: 'center' });
                 
@@ -6343,6 +6467,7 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
+                // Plantões do mês
                 const mes = hoje.getMonth();
                 const ano = hoje.getFullYear();
                 const plantoesAgenda = Sistema.data.agenda.filter(a => {
@@ -6356,6 +6481,7 @@
                 if (plantoesAgenda.length === 0) {
                     doc.text('Nenhum plantão registrado neste período.', 20, y);
                 } else {
+                    // Para cada plantão, mostrar detalhes
                     plantoesAgenda.forEach((plantaoAgenda, index) => {
                         const plantaoDetalhes = Sistema.data.plantoes.find(p => p.id === plantaoAgenda.id);
                         
@@ -6370,6 +6496,7 @@
                         y += 7;
                         
                         if (plantaoDetalhes) {
+                            // Clientes atendidos
                             if (plantaoDetalhes.clientesAtendidos.length > 0) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6386,6 +6513,7 @@
                                 });
                             }
                             
+                            // Tratativas
                             if (plantaoDetalhes.tratativas.length > 0) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6409,6 +6537,7 @@
                                 });
                             }
                             
+                            // Observações
                             if (plantaoDetalhes.observacoes) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6427,9 +6556,10 @@
                             y += 7;
                         }
                         
-                        y += 10;
+                        y += 10; // Espaço entre plantões
                     });
                     
+                    // Estatísticas
                     const stats = {
                         total: plantoesAgenda.length,
                         comDetalhes: plantoesAgenda.filter(p => Sistema.data.plantoes.find(pd => pd.id === p.id)).length,
@@ -6462,11 +6592,13 @@
                     doc.text(`Média de Clientes por Plantão: ${(stats.clientesAtendidos / stats.comDetalhes).toFixed(1)}`, 20, y);
                 }
                 
+                // Salvar PDF
                 doc.save(`Relatorio_Plantao_Detalhado_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de plantão detalhado gerado em PDF');
             },
             
             gerarFichaClientePrompt: function() {
+                // Mostrar modal para selecionar cliente
                 const modal = document.getElementById('modal-select-pdf');
                 const title = document.getElementById('pdf-modal-title');
                 const list = document.getElementById('pdf-select-list');
@@ -6489,6 +6621,7 @@
             },
             
             gerarFichaImovelPrompt: function() {
+                // Mostrar modal para selecionar imóvel
                 const modal = document.getElementById('modal-select-pdf');
                 const title = document.getElementById('pdf-modal-title');
                 const list = document.getElementById('pdf-select-list');
@@ -6501,7 +6634,7 @@
                     list.innerHTML = Sistema.data.imoveis.map(imovel => `
                         <div class="list-card" style="margin-bottom: 8px;" onclick="App.imovel.generatePDF('${imovel.id}'); UI.closeModal('select-pdf')">
                             <div class="card-title">${imovel.nome}</div>
-                            <div class="card-subtitle">${Sistema.formatarMoeda(imovel.valor)}</div>
+                            <div class="card-subtitle">${App.formatCurrencyDisplay(imovel.valor)}</div>
                         </div>
                     `).join('');
                 }
@@ -6515,6 +6648,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             Sistema.init();
             
+            // Configurar evento de fechar modais
             document.querySelectorAll('.modal-overlay').forEach(modal => {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) {
@@ -6524,11 +6658,28 @@
                 });
             });
             
+            // Configurar evento de fechar photo viewer
             document.getElementById('photo-viewer').addEventListener('click', function(e) {
                 if (e.target === this) {
                     UI.closePhotoViewer();
                 }
             });
+            
+            // Adicionar navegação para Links
+            const nav = document.querySelector('.bottom-nav');
+            const linksTab = document.createElement('a');
+            linksTab.href = '#';
+            linksTab.className = 'nav-item';
+            linksTab.setAttribute('data-target', 'links-view');
+            linksTab.setAttribute('onclick', 'UI.switchTab(this)');
+            linksTab.innerHTML = `
+                <i class="fas fa-link"></i>
+                <span>Links</span>
+            `;
+            
+            // Adicionar antes do último item (Relatórios)
+            const lastItem = nav.querySelector('.nav-item:last-child');
+            nav.insertBefore(linksTab, lastItem);
         });
     </script>
 </body>
