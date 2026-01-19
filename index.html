@@ -758,6 +758,11 @@
             color: var(--dark);
         }
         
+        .form-label.required::after {
+            content: " *";
+            color: var(--danger);
+        }
+        
         .form-control {
             width: 100%;
             padding: 14px 16px;
@@ -1438,7 +1443,7 @@
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Nome Completo *</label>
+                                <label class="form-label required">Nome Completo</label>
                                 <input type="text" id="c-nome" class="form-control" required>
                             </div>
                             <div class="form-group">
@@ -1463,7 +1468,7 @@
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Telefone Principal (WhatsApp) *</label>
+                                <label class="form-label required">Telefone Principal (WhatsApp)</label>
                                 <input type="tel" id="c-telefone" class="form-control" required placeholder="(11) 99999-9999">
                             </div>
                             <div class="form-group">
@@ -1475,7 +1480,7 @@
                     
                     <div class="accordion" id="cliente-endereco">
                         <div class="accordion-header" onclick="UI.toggleAccordion('cliente-endereco')">
-                            <span><i class="fas fa-map-marker-alt"></i> Endereço</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Endereço (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
@@ -1541,7 +1546,7 @@
                     
                     <div class="accordion" id="cliente-interesses">
                         <div class="accordion-header" onclick="UI.toggleAccordion('cliente-interesses')">
-                            <span><i class="fas fa-home"></i> Interesses</span>
+                            <span><i class="fas fa-home"></i> Interesses (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
@@ -1567,19 +1572,12 @@
                                 <label class="form-label">Bairros de Interesse</label>
                                 <textarea id="c-bairros-interesse" class="form-control" placeholder="Digite os bairros separados por vírgula"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Imóveis de Interesse</label>
-                                <select id="c-imoveis-interesse" class="form-control" multiple style="height: 120px;">
-                                    <!-- Carregado dinamicamente -->
-                                </select>
-                                <small style="color: var(--secondary); font-size: 0.8rem;">Segure Ctrl (Cmd no Mac) para selecionar múltiplos</small>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="accordion" id="cliente-outros">
                         <div class="accordion-header" onclick="UI.toggleAccordion('cliente-outros')">
-                            <span><i class="fas fa-sticky-note"></i> Outras Informações</span>
+                            <span><i class="fas fa-sticky-note"></i> Outras Informações (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
@@ -1598,8 +1596,9 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Status</label>
-                                <select id="c-status" class="form-control" required>
-                                    <!-- Carregado dinamicamente das etapas do funil -->
+                                <select id="c-status" class="form-control">
+                                    <option value="lead">Lead</option>
+                                    <!-- Outros status serão carregados dinamicamente -->
                                 </select>
                             </div>
                             <div class="form-group">
@@ -1643,12 +1642,20 @@
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Nome/Descrição *</label>
+                                <label class="form-label required">Nome/Descrição</label>
                                 <input type="text" id="i-nome" class="form-control" required placeholder="Ex: Apartamento 3 quartos Centro">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Tipo *</label>
-                                <select id="i-tipo" class="form-control" required>
+                                <label class="form-label required">Valor (R$)</label>
+                                <input type="number" id="i-valor" class="form-control" required min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Data de Entrega/Disponibilidade</label>
+                                <input type="date" id="i-data-entrega" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tipo (Opcional)</label>
+                                <select id="i-tipo" class="form-control">
                                     <option value="">Selecione...</option>
                                     <option value="casa">Casa</option>
                                     <option value="apartamento">Apartamento</option>
@@ -1660,8 +1667,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Finalidade *</label>
-                                <select id="i-finalidade" class="form-control" required>
+                                <label class="form-label">Finalidade (Opcional)</label>
+                                <select id="i-finalidade" class="form-control">
                                     <option value="">Selecione...</option>
                                     <option value="venda">Venda</option>
                                     <option value="aluguel">Aluguel</option>
@@ -1673,14 +1680,10 @@
                     
                     <div class="accordion" id="imovel-valor">
                         <div class="accordion-header" onclick="UI.toggleAccordion('imovel-valor')">
-                            <span><i class="fas fa-dollar-sign"></i> Valores</span>
+                            <span><i class="fas fa-dollar-sign"></i> Valores (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
-                            <div class="form-group">
-                                <label class="form-label">Valor (R$) *</label>
-                                <input type="number" id="i-valor" class="form-control" required min="0" step="0.01">
-                            </div>
                             <div class="form-group">
                                 <label class="form-label">Valor do Condomínio (R$)</label>
                                 <input type="number" id="i-condominio" class="form-control" min="0" step="0.01">
@@ -1694,33 +1697,33 @@
                     
                     <div class="accordion" id="imovel-endereco">
                         <div class="accordion-header" onclick="UI.toggleAccordion('imovel-endereco')">
-                            <span><i class="fas fa-map-marker-alt"></i> Endereço</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Endereço (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Logradouro *</label>
-                                <input type="text" id="i-logradouro" class="form-control" required placeholder="Rua, Avenida, etc.">
+                                <label class="form-label">Logradouro</label>
+                                <input type="text" id="i-logradouro" class="form-control" placeholder="Rua, Avenida, etc.">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Número *</label>
-                                <input type="text" id="i-numero" class="form-control" required>
+                                <label class="form-label">Número</label>
+                                <input type="text" id="i-numero" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Complemento</label>
                                 <input type="text" id="i-complemento" class="form-control" placeholder="Apto, Bloco, etc.">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Bairro *</label>
-                                <input type="text" id="i-bairro" class="form-control" required>
+                                <label class="form-label">Bairro</label>
+                                <input type="text" id="i-bairro" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Cidade *</label>
-                                <input type="text" id="i-cidade" class="form-control" required>
+                                <label class="form-label">Cidade</label>
+                                <input type="text" id="i-cidade" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Estado *</label>
-                                <select id="i-estado" class="form-control" required>
+                                <label class="form-label">Estado</label>
+                                <select id="i-estado" class="form-control">
                                     <option value="">Selecione...</option>
                                     <option value="AC">Acre</option>
                                     <option value="AL">Alagoas</option>
@@ -1752,15 +1755,15 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">CEP *</label>
-                                <input type="text" id="i-cep" class="form-control" required placeholder="00000-000">
+                                <label class="form-label">CEP</label>
+                                <input type="text" id="i-cep" class="form-control" placeholder="00000-000">
                             </div>
                         </div>
                     </div>
                     
                     <div class="accordion" id="imovel-caracteristicas">
                         <div class="accordion-header" onclick="UI.toggleAccordion('imovel-caracteristicas')">
-                            <span><i class="fas fa-clipboard-list"></i> Características</span>
+                            <span><i class="fas fa-clipboard-list"></i> Características (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
@@ -1803,35 +1806,6 @@
                                     <option value="parcial">Parcialmente</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Características Especiais</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-piscina" value="piscina">
-                                        <span>Piscina</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-churrasqueira" value="churrasqueira">
-                                        <span>Churrasqueira</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-academia" value="academia">
-                                        <span>Academia</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-playground" value="playground">
-                                        <span>Playground</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-portaria" value="portaria">
-                                        <span>Portaria 24h</span>
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 4px;">
-                                        <input type="checkbox" id="i-elevador" value="elevador">
-                                        <span>Elevador</span>
-                                    </label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
@@ -1842,7 +1816,7 @@
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Fotos do Imóvel</label>
+                                <label class="form-label required">Fotos do Imóvel</label>
                                 <div class="imovel-photos" id="imovel-photos-preview">
                                     <!-- Fotos prévias -->
                                 </div>
@@ -1861,13 +1835,13 @@
                     
                     <div class="accordion" id="imovel-outros">
                         <div class="accordion-header" onclick="UI.toggleAccordion('imovel-outros')">
-                            <span><i class="fas fa-sticky-note"></i> Outras Informações</span>
+                            <span><i class="fas fa-sticky-note"></i> Outras Informações (Opcional)</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content">
                             <div class="form-group">
-                                <label class="form-label">Status *</label>
-                                <select id="i-status" class="form-control" required>
+                                <label class="form-label">Status</label>
+                                <select id="i-status" class="form-control">
                                     <option value="disponivel">Disponível</option>
                                     <option value="reservado">Reservado</option>
                                     <option value="vendido">Vendido</option>
@@ -2048,6 +2022,23 @@
         </div>
     </div>
 
+    <!-- Modal de Plantão Detalhado (Melhorado) -->
+    <div class="modal-overlay" id="modal-plantao-detalhado">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-clipboard-list"></i> Detalhes do Plantão
+                </h3>
+                <button class="modal-close" onclick="UI.closeModal('plantao-detalhado')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="plantao-detalhado-body">
+                <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- SISTEMA PRINCIPAL ---
         const Sistema = {
@@ -2056,6 +2047,7 @@
                 clientes: [],
                 imoveis: [],
                 agenda: [],
+                plantoes: [],
                 funnel: {
                     stages: [
                         { id: 'lead', name: 'Lead', color: '#3b82f6', order: 1, icon: 'fas fa-user' },
@@ -2090,7 +2082,11 @@
             loadData: function() {
                 const saved = localStorage.getItem('imobimanager_pro');
                 if (saved) {
-                    this.data = JSON.parse(saved);
+                    const data = JSON.parse(saved);
+                    this.data = data;
+                    if (!this.data.plantoes) {
+                        this.data.plantoes = [];
+                    }
                 }
             },
             
@@ -2205,11 +2201,18 @@
                             icon.classList.remove('fa-chevron-down');
                             icon.classList.add('fa-chevron-up');
                         }
+                        const content = accordion.querySelector('.accordion-content');
+                        if (content) {
+                            content.style.maxHeight = '1000px';
+                            content.style.padding = '16px';
+                        }
                     }
                     
-                    header.addEventListener('click', () => {
+                    // Corrigido: Remover evento duplicado e usar o correto
+                    header.onclick = (e) => {
+                        e.stopPropagation();
                         this.toggleAccordion(accordion.id);
-                    });
+                    };
                 });
             },
             
@@ -2292,9 +2295,6 @@
                             <button class="fab-sub-btn" onclick="UI.showModal('cliente', 'new')" title="Novo Cliente">
                                 <i class="fas fa-user-plus"></i>
                             </button>
-                            <button class="fab-sub-btn" onclick="UI.showAgendaModalForDate(null)" title="Novo Agendamento">
-                                <i class="fas fa-calendar-plus"></i>
-                            </button>
                         `;
                         break;
                     case 'imoveis-view':
@@ -2332,30 +2332,30 @@
                 const stats = Sistema.updateDashboard();
                 const birthdays = Sistema.checkBirthdays();
                 
-                // Stats - Cards clicáveis
+                // Stats - Cards clicáveis (CORRIGIDO)
                 document.getElementById('dashboard-stats').innerHTML = `
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\"clientes-view\"]'))">
+                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'clientes-view\\']'))">
                         <div class="stat-icon" style="background: #dbeafe; color: #3b82f6;">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="stat-value">${stats.totalClientes}</div>
                         <div class="stat-label">Clientes</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\"imoveis-view\"]'))">
+                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'imoveis-view\\']'))">
                         <div class="stat-icon" style="background: #f3e8ff; color: #8b5cf6;">
                             <i class="fas fa-building"></i>
                         </div>
                         <div class="stat-value">${stats.totalImoveis}</div>
                         <div class="stat-label">Imóveis</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\"funil-view\"]'))">
+                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'funil-view\\']'))">
                         <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <div class="stat-value">${stats.vendasMes}</div>
                         <div class="stat-label">Vendas/Mês</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\"agenda-view\"]'))">
+                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'agenda-view\\']'))">
                         <div class="stat-icon" style="background: #fef3c7; color: #d97706;">
                             <i class="fas fa-calendar-day"></i>
                         </div>
@@ -2464,11 +2464,6 @@
                                 <div class="card-subtitle">
                                     <i class="fas fa-phone"></i> ${cliente.telefone}
                                 </div>
-                                ${cliente.imoveisInteresse && cliente.imoveisInteresse.length > 0 ? `
-                                    <div class="card-subtitle">
-                                        <i class="fas fa-home"></i> ${cliente.imoveisInteresse.length} imóvel(es) de interesse
-                                    </div>
-                                ` : ''}
                                 <div class="action-row">
                                     <button class="btn-sm btn-primary" onclick="event.stopPropagation(); App.cliente.edit('${cliente.id}')">
                                         <i class="fas fa-edit"></i> Editar
@@ -2605,8 +2600,9 @@
                     if (isToday) classes.push('today');
                     if (hasEvent) classes.push('has-event');
                     
+                    // CORRIGIDO: Agora ao clicar em uma data, abre modal de agendamento
                     calendarHTML += `
-                        <div class="${classes.join(' ')}" onclick="UI.selectDate('${dateStr}')">
+                        <div class="${classes.join(' ')}" onclick="UI.selectDateAndOpenModal('${dateStr}')">
                             ${day}
                             ${hasEvent ? `<div style="position: absolute; bottom: 2px; width: 4px; height: 4px; background: var(--primary); border-radius: 50%;"></div>` : ''}
                         </div>
@@ -2626,6 +2622,12 @@
                 
                 // Mostrar eventos do dia selecionado (hoje por padrão)
                 this.showDayEvents(hoje.toISOString().split('T')[0]);
+            },
+            
+            // NOVO MÉTODO: Seleciona data e abre modal
+            selectDateAndOpenModal: function(dateStr) {
+                this.selectDate(dateStr);
+                this.showAgendaModalForDate(dateStr);
             },
             
             showDayEvents: function(dateStr) {
@@ -2749,25 +2751,6 @@
                         if (action === 'new') {
                             document.getElementById('modal-cliente-title').innerHTML = '<i class="fas fa-user-plus"></i> Novo Cliente';
                             this.resetClienteForm();
-                            
-                            // Carregar status do funil
-                            const statusSelect = document.getElementById('c-status');
-                            statusSelect.innerHTML = '';
-                            Sistema.data.funnel.stages.forEach(stage => {
-                                statusSelect.innerHTML += `<option value="${stage.id}">${stage.name}</option>`;
-                            });
-                            
-                            // Carregar imóveis para o select
-                            const imoveisSelect = document.getElementById('c-imoveis-interesse');
-                            imoveisSelect.innerHTML = '<option value="">Selecione imóveis...</option>';
-                            Sistema.data.imoveis.forEach(imovel => {
-                                imoveisSelect.innerHTML += `<option value="${imovel.id}">${imovel.nome}</option>`;
-                            });
-                            
-                            // Configurar accordions
-                            setTimeout(() => {
-                                this.setupAccordions();
-                            }, 100);
                         } else if (action === 'edit' && id) {
                             App.cliente.edit(id);
                         }
@@ -2778,10 +2761,9 @@
                             document.getElementById('modal-imovel-title').innerHTML = '<i class="fas fa-home"></i> Novo Imóvel';
                             this.resetImovelForm();
                             
-                            // Configurar accordions
-                            setTimeout(() => {
-                                this.setupAccordions();
-                            }, 100);
+                            // Configurar data atual como padrão para data de entrega
+                            const hoje = new Date().toISOString().split('T')[0];
+                            document.getElementById('i-data-entrega').value = hoje;
                         } else if (action === 'edit' && id) {
                             App.imovel.edit(id);
                         }
@@ -2794,6 +2776,42 @@
                 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                
+                // CORREÇÃO: Configurar accordions após mostrar o modal
+                setTimeout(() => {
+                    this.setupAccordionsForModal(modal);
+                }, 10);
+            },
+            
+            // NOVO MÉTODO: Configurar accordions específicos para modais
+            setupAccordionsForModal: function(modal) {
+                const accordions = modal.querySelectorAll('.accordion');
+                accordions.forEach(accordion => {
+                    const header = accordion.querySelector('.accordion-header');
+                    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    
+                    // Remover evento anterior
+                    header.onclick = null;
+                    
+                    // Adicionar novo evento
+                    header.onclick = (e) => {
+                        e.stopPropagation();
+                        this.toggleAccordion(accordion.id);
+                    };
+                    
+                    // Configurar estado inicial
+                    if (accordion.classList.contains('active')) {
+                        if (icon) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
+                        const content = accordion.querySelector('.accordion-content');
+                        if (content) {
+                            content.style.maxHeight = '1000px';
+                            content.style.padding = '16px';
+                        }
+                    }
+                });
             },
             
             resetClienteForm: function() {
@@ -2819,19 +2837,36 @@
                 });
                 
                 document.getElementById('c-estado').value = '';
-                
-                // Limpar seleção múltipla de imóveis
-                const imoveisSelect = document.getElementById('c-imoveis-interesse');
-                Array.from(imoveisSelect.options).forEach(option => {
-                    option.selected = false;
-                });
+                document.getElementById('c-status').value = 'lead';
                 
                 // Resetar accordions
-                document.querySelectorAll('.accordion').forEach(acc => {
+                document.querySelectorAll('#modal-cliente .accordion').forEach(acc => {
                     acc.classList.remove('active');
+                    const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                    const content = acc.querySelector('.accordion-content');
+                    if (content) {
+                        content.style.maxHeight = '0';
+                        content.style.padding = '0';
+                    }
                 });
+                
                 // Primeiro accordion aberto por padrão
-                document.getElementById('cliente-dados-pessoais').classList.add('active');
+                const firstAccordion = document.getElementById('cliente-dados-pessoais');
+                firstAccordion.classList.add('active');
+                const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
+                if (firstIcon) {
+                    firstIcon.classList.remove('fa-chevron-down');
+                    firstIcon.classList.add('fa-chevron-up');
+                }
+                const firstContent = firstAccordion.querySelector('.accordion-content');
+                if (firstContent) {
+                    firstContent.style.maxHeight = '1000px';
+                    firstContent.style.padding = '16px';
+                }
             },
             
             resetImovelForm: function() {
@@ -2841,7 +2876,7 @@
                     'i-complemento', 'i-bairro', 'i-cidade', 'i-cep',
                     'i-area-total', 'i-area-construida', 'i-quartos',
                     'i-suites', 'i-banheiros', 'i-vagas', 'i-mobiliado',
-                    'i-status', 'i-observacoes'
+                    'i-status', 'i-observacoes', 'i-data-entrega'
                 ];
                 
                 fields.forEach(field => {
@@ -2858,17 +2893,40 @@
                 });
                 
                 document.getElementById('i-estado').value = '';
+                document.getElementById('i-status').value = 'disponivel';
                 
                 // Limpar fotos
                 App.imovel.fotosTemporarias = [];
                 document.getElementById('imovel-photos-preview').innerHTML = '';
                 
                 // Resetar accordions
-                document.querySelectorAll('.accordion').forEach(acc => {
+                document.querySelectorAll('#modal-imovel .accordion').forEach(acc => {
                     acc.classList.remove('active');
+                    const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                    const content = acc.querySelector('.accordion-content');
+                    if (content) {
+                        content.style.maxHeight = '0';
+                        content.style.padding = '0';
+                    }
                 });
+                
                 // Primeiro accordion aberto por padrão
-                document.getElementById('imovel-basico').classList.add('active');
+                const firstAccordion = document.getElementById('imovel-basico');
+                firstAccordion.classList.add('active');
+                const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
+                if (firstIcon) {
+                    firstIcon.classList.remove('fa-chevron-down');
+                    firstIcon.classList.add('fa-chevron-up');
+                }
+                const firstContent = firstAccordion.querySelector('.accordion-content');
+                if (firstContent) {
+                    firstContent.style.maxHeight = '1000px';
+                    firstContent.style.padding = '16px';
+                }
             },
             
             showAgendaModal: function() {
@@ -2877,7 +2935,7 @@
                     <form id="form-agenda" onsubmit="App.agenda.save(event)">
                         <input type="hidden" id="a-id">
                         <div class="form-group">
-                            <label class="form-label">Tipo de Agendamento *</label>
+                            <label class="form-label required">Tipo de Agendamento</label>
                             <select id="a-tipo" class="form-control" required onchange="UI.updateAgendaFields()">
                                 <option value="">Selecione...</option>
                                 <option value="visita">Visita ao Imóvel</option>
@@ -2894,7 +2952,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Cliente *</label>
+                            <label class="form-label required">Cliente</label>
                             <select id="a-cliente" class="form-control" required>
                                 <option value="">Selecione...</option>
                                 ${Sistema.data.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('')}
@@ -2904,35 +2962,16 @@
                             <!-- Campos específicos serão carregados aqui -->
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Data *</label>
+                            <label class="form-label required">Data</label>
                             <input type="date" id="a-data" class="form-control" required value="${new Date().toISOString().split('T')[0]}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Horário *</label>
+                            <label class="form-label required">Horário</label>
                             <input type="time" id="a-horario" class="form-control" required value="14:00">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Local *</label>
+                            <label class="form-label required">Local</label>
                             <input type="text" id="a-local" class="form-control" required placeholder="Endereço ou local do agendamento">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Duração (minutos)</label>
-                            <select id="a-duracao" class="form-control">
-                                <option value="30">30 minutos</option>
-                                <option value="60" selected>60 minutos</option>
-                                <option value="90">90 minutos</option>
-                                <option value="120">120 minutos</option>
-                                <option value="180">180 minutos</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Prioridade</label>
-                            <select id="a-prioridade" class="form-control">
-                                <option value="baixa">Baixa</option>
-                                <option value="media" selected>Média</option>
-                                <option value="alta">Alta</option>
-                                <option value="urgente">Urgente</option>
-                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Observações</label>
@@ -2951,6 +2990,11 @@
                 
                 // Inicializar campos
                 this.updateAgendaFields();
+                
+                // Configurar accordions
+                setTimeout(() => {
+                    this.setupAccordionsForModal(document.getElementById('modal-agenda-generico'));
+                }, 10);
             },
             
             updateAgendaFields: function() {
@@ -2965,70 +3009,11 @@
                     case 'visita':
                         fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label">Imóvel para Visita *</label>
+                                <label class="form-label required">Imóvel para Visita</label>
                                 <select id="a-imovel" class="form-control" required>
                                     <option value="">Selecione...</option>
                                     ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Visita</label>
-                                <select id="a-tipo-visita" class="form-control">
-                                    <option value="primeira">Primeira Visita</option>
-                                    <option value="retorno">Visita de Retorno</option>
-                                    <option value="familia">Visita com Família</option>
-                                </select>
-                            </div>
-                        `;
-                        break;
-                        
-                    case 'reuniao':
-                        fieldsHTML = `
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Reunião *</label>
-                                <select id="a-tipo-reuniao" class="form-control" required>
-                                    <option value="">Selecione...</option>
-                                    <option value="comercial">Comercial</option>
-                                    <option value="negociacao">Negociação</option>
-                                    <option value="apresentacao">Apresentação</option>
-                                    <option value="feedback">Feedback</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Assunto *</label>
-                                <input type="text" id="a-assunto" class="form-control" required placeholder="Assunto da reunião...">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Participantes Adicionais</label>
-                                <textarea id="a-participantes" class="form-control" placeholder="Nomes dos participantes..."></textarea>
-                            </div>
-                        `;
-                        break;
-                        
-                    case 'assinatura':
-                        fieldsHTML = `
-                            <div class="form-group">
-                                <label class="form-label">Imóvel *</label>
-                                <select id="a-imovel-assinatura" class="form-control" required>
-                                    <option value="">Selecione...</option>
-                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Valor do Contrato (R$)</label>
-                                <input type="number" id="a-valor" class="form-control" placeholder="R$">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Contrato</label>
-                                <select id="a-tipo-contrato" class="form-control">
-                                    <option value="compra">Compra e Venda</option>
-                                    <option value="aluguel">Locação</option>
-                                    <option value="permuta">Permuta</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Documentos Necessários</label>
-                                <textarea id="a-documentos" class="form-control" placeholder="Lista de documentos..."></textarea>
                             </div>
                         `;
                         break;
@@ -3036,11 +3021,11 @@
                     case 'plantao':
                         fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label">Empreendimento *</label>
+                                <label class="form-label required">Empreendimento</label>
                                 <input type="text" id="a-empreendimento" class="form-control" required placeholder="Nome do empreendimento...">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Período *</label>
+                                <label class="form-label required">Período</label>
                                 <select id="a-periodo" class="form-control" required>
                                     <option value="">Selecione...</option>
                                     <option value="manha">Manhã (08:00 - 12:00)</option>
@@ -3049,28 +3034,17 @@
                                     <option value="integral">Integral (08:00 - 18:00)</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Atividades Previstas</label>
-                                <textarea id="a-atividades" class="form-control" placeholder="Atividades a serem realizadas..."></textarea>
-                            </div>
                         `;
                         break;
                         
-                    case 'followup':
+                    case 'assinatura':
                         fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label">Motivo do Follow-up *</label>
-                                <select id="a-motivo-followup" class="form-control" required>
+                                <label class="form-label required">Imóvel</label>
+                                <select id="a-imovel-assinatura" class="form-control" required>
                                     <option value="">Selecione...</option>
-                                    <option value="posvisita">Pós-visita</option>
-                                    <option value="proposta">Acompanhamento de Proposta</option>
-                                    <option value="duvidas">Tirar Dúvidas</option>
-                                    <option value="retomar">Retomar Contato</option>
+                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Assunto</label>
-                                <input type="text" id="a-assunto-followup" class="form-control" placeholder="Assunto do follow-up...">
                             </div>
                         `;
                         break;
@@ -3078,87 +3052,11 @@
                     case 'proposta':
                         fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label">Imóvel *</label>
+                                <label class="form-label required">Imóvel</label>
                                 <select id="a-imovel-proposta" class="form-control" required>
                                     <option value="">Selecione...</option>
                                     ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Valor da Proposta (R$)</label>
-                                <input type="number" id="a-valor-proposta" class="form-control" required placeholder="R$">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Condições Especiais</label>
-                                <textarea id="a-condicoes" class="form-control" placeholder="Condições da proposta..."></textarea>
-                            </div>
-                        `;
-                        break;
-                        
-                    case 'captacao':
-                        fieldsHTML = `
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Captação</label>
-                                <select id="a-tipo-captacao" class="form-control">
-                                    <option value="exclusiva">Exclusiva</option>
-                                    <option value="compartilhada">Compartilhada</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Valor Estimado (R$)</label>
-                                <input type="number" id="a-valor-captacao" class="form-control" placeholder="R$">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Observações do Imóvel</label>
-                                <textarea id="a-obs-captacao" class="form-control" placeholder="Detalhes do imóvel a ser captado..."></textarea>
-                            </div>
-                        `;
-                        break;
-                        
-                    case 'vistoria':
-                        fieldsHTML = `
-                            <div class="form-group">
-                                <label class="form-label">Imóvel *</label>
-                                <select id="a-imovel-vistoria" class="form-control" required>
-                                    <option value="">Selecione...</option>
-                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Vistoria</label>
-                                <select id="a-tipo-vistoria" class="form-control">
-                                    <option value="entrada">Entrada</option>
-                                    <option value="saida">Saída</option>
-                                    <option value="periodica">Periódica</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Itens a Verificar</label>
-                                <textarea id="a-itens-vistoria" class="form-control" placeholder="Itens para verificação..."></textarea>
-                            </div>
-                        `;
-                        break;
-                        
-                    case 'entrega':
-                        fieldsHTML = `
-                            <div class="form-group">
-                                <label class="form-label">Imóvel *</label>
-                                <select id="a-imovel-entrega" class="form-control" required>
-                                    <option value="">Selecione...</option>
-                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Tipo de Entrega</label>
-                                <select id="a-tipo-entrega" class="form-control">
-                                    <option value="chaves">Entrega de Chaves</option>
-                                    <option value="documentos">Entrega de Documentos</option>
-                                    <option value="imovel">Entrega do Imóvel</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Documentos para Entrega</label>
-                                <textarea id="a-documentos-entrega" class="form-control" placeholder="Documentos a serem entregues..."></textarea>
                             </div>
                         `;
                         break;
@@ -3173,20 +3071,35 @@
                 document.body.style.overflow = 'auto';
             },
             
-            // Accordion
+            // Accordion - CORREÇÃO PRINCIPAL
             toggleAccordion: function(id) {
                 const accordion = document.getElementById(id);
+                if (!accordion) return;
+                
                 const icon = accordion.querySelector('.accordion-header .fa-chevron-down, .accordion-header .fa-chevron-up');
+                const content = accordion.querySelector('.accordion-content');
                 
-                accordion.classList.toggle('active');
-                
-                if (icon) {
-                    if (accordion.classList.contains('active')) {
-                        icon.classList.remove('fa-chevron-down');
-                        icon.classList.add('fa-chevron-up');
-                    } else {
+                if (accordion.classList.contains('active')) {
+                    // Fechar
+                    accordion.classList.remove('active');
+                    if (icon) {
                         icon.classList.remove('fa-chevron-up');
                         icon.classList.add('fa-chevron-down');
+                    }
+                    if (content) {
+                        content.style.maxHeight = '0';
+                        content.style.padding = '0';
+                    }
+                } else {
+                    // Abrir
+                    accordion.classList.add('active');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                    if (content) {
+                        content.style.maxHeight = '1000px';
+                        content.style.padding = '16px';
                     }
                 }
             },
@@ -3271,6 +3184,145 @@
                 setTimeout(() => {
                     toast.classList.remove('show');
                 }, 3000);
+            },
+            
+            // Modal de Plantão Detalhado (MELHORADO)
+            showPlantaoDetalhadoModal: function(plantaoId) {
+                const modal = document.getElementById('modal-plantao-detalhado');
+                const modalBody = document.getElementById('plantao-detalhado-body');
+                
+                // Buscar dados do plantão
+                const plantao = Sistema.data.plantoes.find(p => p.id === plantaoId) || {
+                    id: plantaoId,
+                    clientesAtendidos: [],
+                    tratativas: [],
+                    observacoes: ''
+                };
+                
+                const agenda = Sistema.data.agenda.find(a => a.id === plantaoId);
+                
+                // MELHORIA: Seleção múltipla de clientes
+                const clientesSelecionados = plantao.clientesAtendidos || [];
+                
+                modalBody.innerHTML = `
+                    <form id="form-plantao-detalhado" onsubmit="App.plantao.saveDetalhes('${plantaoId}', event)">
+                        <div class="form-group">
+                            <label class="form-label">Data do Plantão</label>
+                            <input type="text" class="form-control" value="${agenda ? agenda.data : ''}" readonly>
+                        </div>
+                        
+                        ${agenda ? `
+                        <div class="form-group">
+                            <label class="form-label">Empreendimento</label>
+                            <input type="text" class="form-control" value="${agenda.empreendimento || ''}" readonly>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="form-group">
+                            <label class="form-label">Clientes Atendidos</label>
+                            <div id="clientes-atendidos-list">
+                                ${clientesSelecionados.map(clienteId => {
+                                    const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
+                                    return cliente ? `
+                                        <div class="list-card" style="margin-bottom: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div class="card-title">${cliente.nome}</div>
+                                                <div class="card-subtitle">${cliente.telefone}</div>
+                                            </div>
+                                            <button type="button" class="btn-sm btn-danger" onclick="App.plantao.removerClienteAtendido('${plantaoId}', '${clienteId}')">
+                                                <i class="fas fa-times"></i> Remover
+                                            </button>
+                                        </div>
+                                    ` : '';
+                                }).join('')}
+                            </div>
+                            <div class="form-group" style="margin-top: 12px;">
+                                <label class="form-label">Selecionar Clientes Atendidos</label>
+                                <div style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 8px;">
+                                    ${Sistema.data.clientes.map(c => `
+                                        <div style="display: flex; align-items: center; padding: 8px; border-bottom: 1px solid var(--light);">
+                                            <input type="checkbox" 
+                                                   id="cliente-${c.id}" 
+                                                   value="${c.id}" 
+                                                   ${clientesSelecionados.includes(c.id) ? 'checked' : ''}
+                                                   onchange="App.plantao.toggleClienteAtendido('${plantaoId}', '${c.id}', this.checked)"
+                                                   style="margin-right: 8px;">
+                                            <label for="cliente-${c.id}" style="flex: 1; cursor: pointer;">
+                                                <div style="font-weight: 600;">${c.nome}</div>
+                                                <div style="font-size: 0.8rem; color: var(--secondary);">${c.telefone}</div>
+                                            </label>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tratativas Realizadas</label>
+                            <div id="tratativas-list">
+                                ${plantao.tratativas.map((tratativa, index) => `
+                                    <div class="list-card" style="margin-bottom: 8px; padding: 12px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600;">${tratativa.tipo}</div>
+                                                <div style="font-size: 0.8rem; color: var(--secondary);">
+                                                    ${tratativa.clienteId ? (Sistema.data.clientes.find(c => c.id === tratativa.clienteId)?.nome || 'Cliente') : 'Geral'}
+                                                    ${tratativa.data ? ` - ${new Date(tratativa.data).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}` : ''}
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn-sm btn-danger" onclick="App.plantao.removerTratativa('${plantaoId}', ${index})">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <div style="margin-top: 8px; font-size: 0.9rem;">${tratativa.descricao}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="form-group" style="margin-top: 12px;">
+                                <label class="form-label">Nova Tratativa</label>
+                                <div style="display: grid; gap: 8px;">
+                                    <select id="nova-tratativa-cliente" class="form-control">
+                                        <option value="">Cliente (opcional)</option>
+                                        ${Sistema.data.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('')}
+                                    </select>
+                                    <select id="nova-tratativa-tipo" class="form-control">
+                                        <option value="">Tipo de Tratativa</option>
+                                        <option value="visita">Visita</option>
+                                        <option value="proposta">Proposta</option>
+                                        <option value="negociacao">Negociação</option>
+                                        <option value="duvida">Tirar Dúvida</option>
+                                        <option value="informacao">Informação</option>
+                                        <option value="agendamento">Agendamento</option>
+                                        <option value="followup">Follow-up</option>
+                                        <option value="objetacao">Objetação</option>
+                                        <option value="fechamento">Fechamento</option>
+                                    </select>
+                                    <textarea id="nova-tratativa-descricao" class="form-control" placeholder="Descrição detalhada da tratativa..." rows="3"></textarea>
+                                    <button type="button" class="btn-block btn-secondary" onclick="App.plantao.adicionarTratativa('${plantaoId}')">
+                                        <i class="fas fa-plus"></i> Adicionar Tratativa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Observações Gerais do Plantão</label>
+                            <textarea id="plantao-observacoes" class="form-control" rows="4" placeholder="Observações gerais sobre o plantão...">${plantao.observacoes || ''}</textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 12px; margin-top: 20px;">
+                            <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('plantao-detalhado')">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn-block">
+                                Salvar Detalhes
+                            </button>
+                        </div>
+                    </form>
+                `;
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
         };
 
@@ -3355,26 +3407,33 @@
                         </button>
                     `;
                     
-                    UI.renderClientes();
                     const clientesFiltrados = Sistema.data.clientes.filter(c => c.status === stageId);
-                    document.getElementById('clientes-list').innerHTML = clientesFiltrados.map(cliente => `
-                        <div class="list-card" onclick="App.cliente.showDetails('${cliente.id}')">
-                            <div class="card-header">
-                                <div class="card-title">${cliente.nome}</div>
+                    if (clientesFiltrados.length === 0) {
+                        document.getElementById('clientes-list').innerHTML = `
+                            <div class="empty-state">
+                                <p>Nenhum cliente nesta etapa</p>
                             </div>
-                            <div class="card-subtitle">
-                                <i class="fas fa-phone"></i> ${cliente.telefone}
+                        `;
+                    } else {
+                        document.getElementById('clientes-list').innerHTML = clientesFiltrados.map(cliente => `
+                            <div class="list-card" onclick="App.cliente.showDetails('${cliente.id}')">
+                                <div class="card-header">
+                                    <div class="card-title">${cliente.nome}</div>
+                                </div>
+                                <div class="card-subtitle">
+                                    <i class="fas fa-phone"></i> ${cliente.telefone}
+                                </div>
+                                <div class="action-row">
+                                    <button class="btn-sm btn-primary" onclick="event.stopPropagation(); App.cliente.edit('${cliente.id}')">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </button>
+                                    <button class="btn-sm btn-success" onclick="event.stopPropagation(); App.whatsapp.openConversa('${cliente.id}')">
+                                        <i class="fab fa-whatsapp"></i> Zap
+                                    </button>
+                                </div>
                             </div>
-                            <div class="action-row">
-                                <button class="btn-sm btn-primary" onclick="event.stopPropagation(); App.cliente.edit('${cliente.id}')">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button>
-                                <button class="btn-sm btn-success" onclick="event.stopPropagation(); App.whatsapp.openConversa('${cliente.id}')">
-                                    <i class="fab fa-whatsapp"></i> Zap
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
+                        `).join('');
+                    }
                 }, 100);
             },
             
@@ -3612,10 +3671,6 @@
                     const status = document.getElementById('c-status').value;
                     const observacoes = document.getElementById('c-observacoes').value;
                     
-                    // Obter imóveis selecionados
-                    const select = document.getElementById('c-imoveis-interesse');
-                    const imoveisInteresse = Array.from(select.selectedOptions).map(option => option.value);
-                    
                     const cliente = {
                         id,
                         nome,
@@ -3629,11 +3684,10 @@
                             tipo: tipoInteresse,
                             valorMin: parseFloat(valorMin) || null,
                             valorMax: parseFloat(valorMax) || null,
-                            bairros: bairrosInteresse ? bairrosInteresse.split(',').map(b => b.trim()) : [],
-                            imoveis: imoveisInteresse
+                            bairros: bairrosInteresse ? bairrosInteresse.split(',').map(b => b.trim()) : []
                         },
                         fonte,
-                        status,
+                        status: status || 'lead',
                         observacoes,
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
@@ -3684,24 +3738,8 @@
                     }
                     
                     document.getElementById('c-fonte').value = cliente.fonte || '';
+                    document.getElementById('c-status').value = cliente.status || 'lead';
                     document.getElementById('c-observacoes').value = cliente.observacoes || '';
-                    
-                    // Carregar status do funil
-                    const statusSelect = document.getElementById('c-status');
-                    statusSelect.innerHTML = '';
-                    Sistema.data.funnel.stages.forEach(stage => {
-                        const selected = cliente.status === stage.id ? 'selected' : '';
-                        statusSelect.innerHTML += `<option value="${stage.id}" ${selected}>${stage.name}</option>`;
-                    });
-                    
-                    // Carregar imóveis para o select
-                    const imoveisSelect = document.getElementById('c-imoveis-interesse');
-                    imoveisSelect.innerHTML = '<option value="">Selecione imóveis...</option>';
-                    Sistema.data.imoveis.forEach(imovel => {
-                        const selected = cliente.interesses && cliente.interesses.imoveis && 
-                                       cliente.interesses.imoveis.includes(imovel.id) ? 'selected' : '';
-                        imoveisSelect.innerHTML += `<option value="${imovel.id}" ${selected}>${imovel.nome}</option>`;
-                    });
                     
                     document.getElementById('modal-cliente-title').innerHTML = '<i class="fas fa-user-edit"></i> Editar Cliente';
                     UI.showModal('cliente', 'edit');
@@ -3791,7 +3829,7 @@
                             </div>
                             ` : ''}
                             
-                            ${cliente.interesses && (cliente.interesses.imoveis.length > 0 || cliente.interesses.tipo || cliente.interesses.bairros.length > 0) ? `
+                            ${cliente.interesses && (cliente.interesses.tipo || cliente.interesses.bairros.length > 0) ? `
                             <div class="accordion" style="margin-bottom: 12px;">
                                 <div class="accordion-header" onclick="UI.toggleAccordion('cliente-detalhes-interesses')">
                                     <span><i class="fas fa-home"></i> Interesses</span>
@@ -3819,22 +3857,6 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Bairros de Interesse</div>
                                             <div>${cliente.interesses.bairros.join(', ')}</div>
-                                        </div>
-                                        ` : ''}
-                                        ${cliente.interesses.imoveis && cliente.interesses.imoveis.length > 0 ? `
-                                        <div>
-                                            <div style="font-size: 0.8rem; color: var(--secondary);">Imóveis de Interesse</div>
-                                            <div style="margin-top: 8px;">
-                                                ${cliente.interesses.imoveis.map(imovelId => {
-                                                    const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
-                                                    return imovel ? `
-                                                        <div style="padding: 8px; background: var(--light); border-radius: 8px; margin-bottom: 8px;">
-                                                            <div style="font-weight: 600;">${imovel.nome}</div>
-                                                            <div style="font-size: 0.8rem; color: var(--secondary);">${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
-                                                        </div>
-                                                    ` : '';
-                                                }).join('')}
-                                            </div>
                                         </div>
                                         ` : ''}
                                     </div>
@@ -3918,7 +3940,7 @@
                             const header = accordion.querySelector('.accordion-header');
                             const content = accordion.querySelector('.accordion-content');
                             
-                            header.addEventListener('click', () => {
+                            header.onclick = () => {
                                 accordion.classList.toggle('active');
                                 const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
                                 if (icon) {
@@ -3930,7 +3952,16 @@
                                         icon.classList.add('fa-chevron-down');
                                     }
                                 }
-                            });
+                                if (content) {
+                                    if (accordion.classList.contains('active')) {
+                                        content.style.maxHeight = '1000px';
+                                        content.style.padding = '16px';
+                                    } else {
+                                        content.style.maxHeight = '0';
+                                        content.style.padding = '0';
+                                    }
+                                }
+                            };
                         });
                     }, 10);
                 },
@@ -4044,25 +4075,6 @@
                             doc.text(`Bairros: ${cliente.interesses.bairros.join(', ')}`, 20, y);
                             y += 7;
                         }
-                        
-                        // Imóveis de interesse
-                        if (cliente.interesses.imoveis && cliente.interesses.imoveis.length > 0) {
-                            y += 5;
-                            doc.setFont(undefined, 'bold');
-                            doc.text('IMÓVEIS DE INTERESSE:', 20, y);
-                            y += 7;
-                            doc.setFont(undefined, 'normal');
-                            
-                            cliente.interesses.imoveis.forEach((imovelId, index) => {
-                                const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
-                                if (imovel && y < 270) {
-                                    doc.text(`${index + 1}. ${imovel.nome}`, 25, y);
-                                    y += 7;
-                                    doc.text(`   Valor: ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 25, y);
-                                    y += 7;
-                                }
-                            });
-                        }
                     }
                     
                     // Outras informações
@@ -4119,6 +4131,7 @@
                     const tipo = document.getElementById('i-tipo').value;
                     const finalidade = document.getElementById('i-finalidade').value;
                     const valor = parseFloat(document.getElementById('i-valor').value) || 0;
+                    const dataEntrega = document.getElementById('i-data-entrega').value;
                     const condominio = parseFloat(document.getElementById('i-condominio').value) || null;
                     const iptu = parseFloat(document.getElementById('i-iptu').value) || null;
                     const logradouro = document.getElementById('i-logradouro').value;
@@ -4138,21 +4151,13 @@
                     const status = document.getElementById('i-status').value;
                     const observacoes = document.getElementById('i-observacoes').value;
                     
-                    // Características especiais
-                    const caracteristicas = [];
-                    if (document.getElementById('i-piscina').checked) caracteristicas.push('piscina');
-                    if (document.getElementById('i-churrasqueira').checked) caracteristicas.push('churrasqueira');
-                    if (document.getElementById('i-academia').checked) caracteristicas.push('academia');
-                    if (document.getElementById('i-playground').checked) caracteristicas.push('playground');
-                    if (document.getElementById('i-portaria').checked) caracteristicas.push('portaria');
-                    if (document.getElementById('i-elevador').checked) caracteristicas.push('elevador');
-                    
                     const imovel = {
                         id,
                         nome,
-                        tipo,
-                        finalidade,
+                        tipo: tipo || 'casa',
+                        finalidade: finalidade || 'venda',
                         valor,
+                        dataEntrega,
                         condominio,
                         iptu,
                         endereco: { logradouro, numero, complemento, bairro, cidade, estado, cep },
@@ -4163,11 +4168,10 @@
                             suites,
                             banheiros,
                             vagas,
-                            mobiliado,
-                            especiais: caracteristicas
+                            mobiliado
                         },
                         fotos: this.fotosTemporarias,
-                        status,
+                        status: status || 'disponivel',
                         observacoes,
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
@@ -4200,6 +4204,7 @@
                     document.getElementById('i-tipo').value = imovel.tipo;
                     document.getElementById('i-finalidade').value = imovel.finalidade;
                     document.getElementById('i-valor').value = imovel.valor;
+                    document.getElementById('i-data-entrega').value = imovel.dataEntrega || new Date().toISOString().split('T')[0];
                     document.getElementById('i-condominio').value = imovel.condominio || '';
                     document.getElementById('i-iptu').value = imovel.iptu || '';
                     
@@ -4221,15 +4226,6 @@
                         document.getElementById('i-banheiros').value = imovel.caracteristicas.banheiros || '';
                         document.getElementById('i-vagas').value = imovel.caracteristicas.vagas || '';
                         document.getElementById('i-mobiliado').value = imovel.caracteristicas.mobiliado || '';
-                        
-                        if (imovel.caracteristicas.especiais) {
-                            document.getElementById('i-piscina').checked = imovel.caracteristicas.especiais.includes('piscina');
-                            document.getElementById('i-churrasqueira').checked = imovel.caracteristicas.especiais.includes('churrasqueira');
-                            document.getElementById('i-academia').checked = imovel.caracteristicas.especiais.includes('academia');
-                            document.getElementById('i-playground').checked = imovel.caracteristicas.especiais.includes('playground');
-                            document.getElementById('i-portaria').checked = imovel.caracteristicas.especiais.includes('portaria');
-                            document.getElementById('i-elevador').checked = imovel.caracteristicas.especiais.includes('elevador');
-                        }
                     }
                     
                     document.getElementById('i-status').value = imovel.status;
@@ -4324,10 +4320,17 @@
                                             </div>
                                         </div>
                                         ` : ''}
+                                        ${imovel.dataEntrega ? `
+                                        <div>
+                                            <div style="font-size: 0.8rem; color: var(--secondary);">Data de Entrega</div>
+                                            <div style="font-weight: 600;">${imovel.dataEntrega}</div>
+                                        </div>
+                                        ` : ''}
                                     </div>
                                 </div>
                             </div>
                             
+                            ${imovel.endereco && imovel.endereco.logradouro ? `
                             <div class="accordion" style="margin-bottom: 12px;">
                                 <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-endereco')">
                                     <span><i class="fas fa-map-marker-alt"></i> Endereço</span>
@@ -4343,7 +4346,9 @@
                                     </div>
                                 </div>
                             </div>
+                            ` : ''}
                             
+                            ${imovel.caracteristicas && (imovel.caracteristicas.areaTotal || imovel.caracteristicas.quartos) ? `
                             <div class="accordion" style="margin-bottom: 12px;">
                                 <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-caracteristicas')">
                                     <span><i class="fas fa-clipboard-list"></i> Características</span>
@@ -4394,19 +4399,9 @@
                                         </div>
                                         ` : ''}
                                     </div>
-                                    
-                                    ${imovel.caracteristicas.especiais && imovel.caracteristicas.especiais.length > 0 ? `
-                                    <div style="margin-top: 16px; padding: 0 16px 16px;">
-                                        <div style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 8px;">Características Especiais</div>
-                                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                                            ${imovel.caracteristicas.especiais.map(caracteristica => `
-                                                <span class="badge" style="background: #e0f2fe; color: #0c4a6e;">${caracteristica}</span>
-                                            `).join('')}
-                                        </div>
-                                    </div>
-                                    ` : ''}
                                 </div>
                             </div>
+                            ` : ''}
                             
                             ${imovel.fotos && imovel.fotos.length > 0 ? `
                             <div class="accordion" style="margin-bottom: 12px;">
@@ -4490,7 +4485,7 @@
                             const header = accordion.querySelector('.accordion-header');
                             const content = accordion.querySelector('.accordion-content');
                             
-                            header.addEventListener('click', () => {
+                            header.onclick = () => {
                                 accordion.classList.toggle('active');
                                 const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
                                 if (icon) {
@@ -4502,7 +4497,16 @@
                                         icon.classList.add('fa-chevron-down');
                                     }
                                 }
-                            });
+                                if (content) {
+                                    if (accordion.classList.contains('active')) {
+                                        content.style.maxHeight = '1000px';
+                                        content.style.padding = '16px';
+                                    } else {
+                                        content.style.maxHeight = '0';
+                                        content.style.padding = '0';
+                                    }
+                                }
+                            };
                         });
                     }, 10);
                 },
@@ -4547,6 +4551,11 @@
                     doc.text(`Valor: ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                     y += 7;
                     
+                    if (imovel.dataEntrega) {
+                        doc.text(`Data de Entrega: ${imovel.dataEntrega}`, 20, y);
+                        y += 7;
+                    }
+                    
                     if (imovel.condominio) {
                         doc.text(`Condomínio: ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                         y += 7;
@@ -4561,102 +4570,76 @@
                     y += 7;
                     
                     // Endereço
-                    y += 5;
-                    doc.setFontSize(12);
-                    doc.setFont(undefined, 'bold');
-                    doc.text('ENDEREÇO', 20, y);
-                    y += 10;
-                    
-                    doc.setFontSize(10);
-                    doc.setFont(undefined, 'normal');
-                    doc.text(`${imovel.endereco.logradouro}, ${imovel.endereco.numero}`, 20, y);
-                    y += 7;
-                    
-                    if (imovel.endereco.complemento) {
-                        doc.text(`Complemento: ${imovel.endereco.complemento}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    doc.text(`Bairro: ${imovel.endereco.bairro}`, 20, y);
-                    y += 7;
-                    doc.text(`Cidade: ${imovel.endereco.cidade} - ${imovel.endereco.estado}`, 20, y);
-                    y += 7;
-                    doc.text(`CEP: ${imovel.endereco.cep}`, 20, y);
-                    y += 7;
-                    
-                    // Características
-                    y += 5;
-                    doc.setFontSize(12);
-                    doc.setFont(undefined, 'bold');
-                    doc.text('CARACTERÍSTICAS', 20, y);
-                    y += 10;
-                    
-                    doc.setFontSize(10);
-                    doc.setFont(undefined, 'normal');
-                    
-                    if (imovel.caracteristicas.areaTotal) {
-                        doc.text(`Área Total: ${imovel.caracteristicas.areaTotal} m²`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.areaConstruida) {
-                        doc.text(`Área Construída: ${imovel.caracteristicas.areaConstruida} m²`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.quartos) {
-                        doc.text(`Quartos: ${imovel.caracteristicas.quartos}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.suites) {
-                        doc.text(`Suítes: ${imovel.caracteristicas.suites}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.banheiros) {
-                        doc.text(`Banheiros: ${imovel.caracteristicas.banheiros}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.vagas) {
-                        doc.text(`Vagas: ${imovel.caracteristicas.vagas}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.mobiliado) {
-                        doc.text(`Mobiliado: ${imovel.caracteristicas.mobiliado}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    if (imovel.caracteristicas.especiais && imovel.caracteristicas.especiais.length > 0) {
-                        doc.text(`Características Especiais: ${imovel.caracteristicas.especiais.join(', ')}`, 20, y);
-                        y += 7;
-                    }
-                    
-                    // Clientes interessados
-                    const clientesInteressados = Sistema.data.clientes.filter(c => 
-                        c.interesses && c.interesses.imoveis && c.interesses.imoveis.includes(imovel.id)
-                    );
-                    
-                    if (clientesInteressados.length > 0) {
+                    if (imovel.endereco && imovel.endereco.logradouro) {
                         y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
-                        doc.text('CLIENTES INTERESSADOS', 20, y);
+                        doc.text('ENDEREÇO', 20, y);
+                        y += 10;
+                        
+                        doc.setFontSize(10);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(`${imovel.endereco.logradouro}, ${imovel.endereco.numero}`, 20, y);
+                        y += 7;
+                        
+                        if (imovel.endereco.complemento) {
+                            doc.text(`Complemento: ${imovel.endereco.complemento}`, 20, y);
+                            y += 7;
+                        }
+                        
+                        doc.text(`Bairro: ${imovel.endereco.bairro}`, 20, y);
+                        y += 7;
+                        doc.text(`Cidade: ${imovel.endereco.cidade} - ${imovel.endereco.estado}`, 20, y);
+                        y += 7;
+                        doc.text(`CEP: ${imovel.endereco.cep}`, 20, y);
+                        y += 7;
+                    }
+                    
+                    // Características
+                    if (imovel.caracteristicas) {
+                        y += 5;
+                        doc.setFontSize(12);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('CARACTERÍSTICAS', 20, y);
                         y += 10;
                         
                         doc.setFontSize(10);
                         doc.setFont(undefined, 'normal');
                         
-                        clientesInteressados.forEach((cliente, index) => {
-                            if (y < 270) {
-                                doc.text(`${index + 1}. ${cliente.nome}`, 25, y);
-                                y += 7;
-                                doc.text(`   Telefone: ${cliente.telefone}`, 25, y);
-                                y += 7;
-                            }
-                        });
+                        if (imovel.caracteristicas.areaTotal) {
+                            doc.text(`Área Total: ${imovel.caracteristicas.areaTotal} m²`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.areaConstruida) {
+                            doc.text(`Área Construída: ${imovel.caracteristicas.areaConstruida} m²`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.quartos) {
+                            doc.text(`Quartos: ${imovel.caracteristicas.quartos}`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.suites) {
+                            doc.text(`Suítes: ${imovel.caracteristicas.suites}`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.banheiros) {
+                            doc.text(`Banheiros: ${imovel.caracteristicas.banheiros}`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.vagas) {
+                            doc.text(`Vagas: ${imovel.caracteristicas.vagas}`, 20, y);
+                            y += 7;
+                        }
+                        
+                        if (imovel.caracteristicas.mobiliado) {
+                            doc.text(`Mobiliado: ${imovel.caracteristicas.mobiliado}`, 20, y);
+                            y += 7;
+                        }
                     }
                     
                     // Observações
@@ -4694,8 +4677,6 @@
                     const data = document.getElementById('a-data').value;
                     const horario = document.getElementById('a-horario').value;
                     const local = document.getElementById('a-local').value;
-                    const duracao = document.getElementById('a-duracao').value;
-                    const prioridade = document.getElementById('a-prioridade').value;
                     const observacoes = document.getElementById('a-observacoes').value;
                     
                     // Campos específicos
@@ -4703,64 +4684,38 @@
                     switch(tipo) {
                         case 'visita':
                             camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel').value,
-                                tipoVisita: document.getElementById('a-tipo-visita').value
-                            };
-                            break;
-                        case 'reuniao':
-                            camposEspecificos = {
-                                tipoReuniao: document.getElementById('a-tipo-reuniao').value,
-                                assunto: document.getElementById('a-assunto').value,
-                                participantes: document.getElementById('a-participantes').value
-                            };
-                            break;
-                        case 'assinatura':
-                            camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-assinatura').value,
-                                valor: document.getElementById('a-valor').value,
-                                tipoContrato: document.getElementById('a-tipo-contrato').value,
-                                documentos: document.getElementById('a-documentos').value
+                                imovelId: document.getElementById('a-imovel').value
                             };
                             break;
                         case 'plantao':
                             camposEspecificos = {
                                 empreendimento: document.getElementById('a-empreendimento').value,
-                                periodo: document.getElementById('a-periodo').value,
-                                atividades: document.getElementById('a-atividades').value
+                                periodo: document.getElementById('a-periodo').value
                             };
+                            
+                            // Criar registro de plantão detalhado
+                            const plantao = {
+                                id: id,
+                                clientesAtendidos: [],
+                                tratativas: [],
+                                observacoes: ''
+                            };
+                            
+                            const existingIndex = Sistema.data.plantoes.findIndex(p => p.id === id);
+                            if (existingIndex >= 0) {
+                                Sistema.data.plantoes[existingIndex] = plantao;
+                            } else {
+                                Sistema.data.plantoes.push(plantao);
+                            }
                             break;
-                        case 'followup':
+                        case 'assinatura':
                             camposEspecificos = {
-                                motivo: document.getElementById('a-motivo-followup').value,
-                                assunto: document.getElementById('a-assunto-followup').value
+                                imovelId: document.getElementById('a-imovel-assinatura').value
                             };
                             break;
                         case 'proposta':
                             camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-proposta').value,
-                                valorProposta: document.getElementById('a-valor-proposta').value,
-                                condicoes: document.getElementById('a-condicoes').value
-                            };
-                            break;
-                        case 'captacao':
-                            camposEspecificos = {
-                                tipoCaptacao: document.getElementById('a-tipo-captacao').value,
-                                valorEstimado: document.getElementById('a-valor-captacao').value,
-                                observacoesCaptacao: document.getElementById('a-obs-captacao').value
-                            };
-                            break;
-                        case 'vistoria':
-                            camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-vistoria').value,
-                                tipoVistoria: document.getElementById('a-tipo-vistoria').value,
-                                itensVistoria: document.getElementById('a-itens-vistoria').value
-                            };
-                            break;
-                        case 'entrega':
-                            camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-entrega').value,
-                                tipoEntrega: document.getElementById('a-tipo-entrega').value,
-                                documentosEntrega: document.getElementById('a-documentos-entrega').value
+                                imovelId: document.getElementById('a-imovel-proposta').value
                             };
                             break;
                     }
@@ -4772,8 +4727,6 @@
                         data,
                         horario,
                         local,
-                        duracao,
-                        prioridade,
                         observacoes,
                         ...camposEspecificos,
                         status: 'agendado'
@@ -4819,6 +4772,7 @@
                     
                     // Modal de detalhes
                     let detalhes = '';
+                    let botoesEspeciais = '';
                     
                     switch(agenda.tipo) {
                         case 'visita':
@@ -4827,58 +4781,6 @@
                                     <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
                                     <div style="font-weight: 600;">${imovel ? imovel.nome : 'Não informado'}</div>
                                 </div>
-                                ${agenda.tipoVisita ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Visita</div>
-                                    <div style="font-weight: 600;">${agenda.tipoVisita}</div>
-                                </div>
-                                ` : ''}
-                            `;
-                            break;
-                        case 'reuniao':
-                            detalhes = `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Reunião</div>
-                                    <div style="font-weight: 600;">${agenda.tipoReuniao || 'Comercial'}</div>
-                                </div>
-                                ${agenda.assunto ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Assunto</div>
-                                    <div>${agenda.assunto}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.participantes ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Participantes</div>
-                                    <div>${agenda.participantes}</div>
-                                </div>
-                                ` : ''}
-                            `;
-                            break;
-                        case 'assinatura':
-                            detalhes = `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
-                                    <div style="font-weight: 600;">${imovel ? imovel.nome : 'Não informado'}</div>
-                                </div>
-                                ${agenda.valor ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Valor do Contrato</div>
-                                    <div style="font-weight: 600;">${agenda.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.tipoContrato ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Contrato</div>
-                                    <div style="font-weight: 600;">${agenda.tipoContrato}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.documentos ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Documentos</div>
-                                    <div>${agenda.documentos}</div>
-                                </div>
-                                ` : ''}
                             `;
                             break;
                         case 'plantao':
@@ -4895,56 +4797,13 @@
                                     <div style="font-weight: 600;">${agenda.periodo}</div>
                                 </div>
                                 ` : ''}
-                                ${agenda.atividades ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Atividades</div>
-                                    <div>${agenda.atividades}</div>
-                                </div>
-                                ` : ''}
                             `;
-                            break;
-                        case 'vistoria':
-                            detalhes = `
-                                ${imovel ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
-                                    <div style="font-weight: 600;">${imovel.nome}</div>
+                            botoesEspeciais = `
+                                <div style="margin-top: 16px;">
+                                    <button class="btn-block" onclick="UI.showPlantaoDetalhadoModal('${agendaId}')">
+                                        <i class="fas fa-clipboard-list"></i> Detalhes do Plantão
+                                    </button>
                                 </div>
-                                ` : ''}
-                                ${agenda.tipoVistoria ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Vistoria</div>
-                                    <div style="font-weight: 600;">${agenda.tipoVistoria}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.itensVistoria ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Itens a Verificar</div>
-                                    <div>${agenda.itensVistoria}</div>
-                                </div>
-                                ` : ''}
-                            `;
-                            break;
-                        case 'entrega':
-                            detalhes = `
-                                ${imovel ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
-                                    <div style="font-weight: 600;">${imovel.nome}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.tipoEntrega ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Entrega</div>
-                                    <div style="font-weight: 600;">${agenda.tipoEntrega}</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.documentosEntrega ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Documentos para Entrega</div>
-                                    <div>${agenda.documentosEntrega}</div>
-                                </div>
-                                ` : ''}
                             `;
                             break;
                     }
@@ -4963,22 +4822,6 @@
                                     <div style="font-size: 0.8rem; color: var(--secondary);">Local</div>
                                     <div style="font-weight: 600;">${agenda.local}</div>
                                 </div>
-                                ${agenda.duracao ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Duração</div>
-                                    <div style="font-weight: 600;">${agenda.duracao} minutos</div>
-                                </div>
-                                ` : ''}
-                                ${agenda.prioridade ? `
-                                <div>
-                                    <div style="font-size: 0.8rem; color: var(--secondary);">Prioridade</div>
-                                    <div style="font-weight: 600;">
-                                        <span class="badge ${agenda.prioridade === 'alta' ? 'badge-danger' : agenda.prioridade === 'media' ? 'badge-warning' : 'badge-primary'}">
-                                            ${agenda.prioridade}
-                                        </span>
-                                    </div>
-                                </div>
-                                ` : ''}
                                 ${detalhes}
                                 ${agenda.observacoes ? `
                                 <div>
@@ -4995,6 +4838,7 @@
                                     </div>
                                 </div>
                             </div>
+                            ${botoesEspeciais}
                             <div style="display: flex; gap: 12px; margin-top: 24px;">
                                 <button class="btn-block" onclick="App.agenda.confirmar('${agenda.id}')" ${agenda.status === 'confirmado' ? 'disabled' : ''}>
                                     <i class="fas fa-check"></i> Confirmar
@@ -5027,6 +4871,181 @@
                     
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
+                }
+            },
+            
+            plantao: {
+                // MELHORIA: Seleção múltipla de clientes
+                toggleClienteAtendido: function(plantaoId, clienteId, isChecked) {
+                    let plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
+                    if (!plantao) {
+                        plantao = {
+                            id: plantaoId,
+                            clientesAtendidos: [],
+                            tratativas: [],
+                            observacoes: ''
+                        };
+                        Sistema.data.plantoes.push(plantao);
+                    }
+                    
+                    if (isChecked) {
+                        if (!plantao.clientesAtendidos.includes(clienteId)) {
+                            plantao.clientesAtendidos.push(clienteId);
+                            Sistema.saveData();
+                            
+                            // Atualizar visualização
+                            const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
+                            const lista = document.getElementById('clientes-atendidos-list');
+                            lista.innerHTML += `
+                                <div class="list-card" style="margin-bottom: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div class="card-title">${cliente.nome}</div>
+                                        <div class="card-subtitle">${cliente.telefone}</div>
+                                    </div>
+                                    <button type="button" class="btn-sm btn-danger" onclick="App.plantao.removerClienteAtendido('${plantaoId}', '${clienteId}')">
+                                        <i class="fas fa-times"></i> Remover
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        this.removerClienteAtendido(plantaoId, clienteId);
+                    }
+                },
+                
+                adicionarClienteAtendido: function(plantaoId) {
+                    const select = document.getElementById('novo-cliente-atendido');
+                    const clienteId = select.value;
+                    
+                    if (!clienteId) {
+                        UI.showToast('Selecione um cliente', 'error');
+                        return;
+                    }
+                    
+                    this.toggleClienteAtendido(plantaoId, clienteId, true);
+                    select.value = '';
+                },
+                
+                removerClienteAtendido: function(plantaoId, clienteId) {
+                    const plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
+                    if (plantao) {
+                        plantao.clientesAtendidos = plantao.clientesAtendidos.filter(id => id !== clienteId);
+                        Sistema.saveData();
+                        
+                        // Desmarcar checkbox
+                        const checkbox = document.getElementById(`cliente-${clienteId}`);
+                        if (checkbox) {
+                            checkbox.checked = false;
+                        }
+                        
+                        // Remover da visualização
+                        const lista = document.getElementById('clientes-atendidos-list');
+                        const item = lista.querySelector(`[onclick*="${clienteId}"]`)?.parentElement?.parentElement;
+                        if (item) {
+                            item.remove();
+                        }
+                        
+                        UI.showToast('Cliente removido do plantão');
+                    }
+                },
+                
+                adicionarTratativa: function(plantaoId) {
+                    const clienteId = document.getElementById('nova-tratativa-cliente').value;
+                    const tipo = document.getElementById('nova-tratativa-tipo').value;
+                    const descricao = document.getElementById('nova-tratativa-descricao').value;
+                    
+                    if (!tipo || !descricao) {
+                        UI.showToast('Preencha tipo e descrição da tratativa', 'error');
+                        return;
+                    }
+                    
+                    let plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
+                    if (!plantao) {
+                        plantao = {
+                            id: plantaoId,
+                            clientesAtendidos: [],
+                            tratativas: [],
+                            observacoes: ''
+                        };
+                        Sistema.data.plantoes.push(plantao);
+                    }
+                    
+                    const tratativa = {
+                        id: 'tratativa_' + Date.now(),
+                        clienteId: clienteId || null,
+                        tipo,
+                        descricao,
+                        data: new Date().toISOString()
+                    };
+                    
+                    plantao.tratativas.push(tratativa);
+                    Sistema.saveData();
+                    UI.showToast('Tratativa adicionada');
+                    
+                    // Atualizar lista
+                    const lista = document.getElementById('tratativas-list');
+                    const cliente = clienteId ? Sistema.data.clientes.find(c => c.id === clienteId) : null;
+                    lista.innerHTML += `
+                        <div class="list-card" style="margin-bottom: 8px; padding: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: 600;">${tipo}</div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">
+                                        ${cliente ? cliente.nome : 'Geral'}
+                                        - ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-sm btn-danger" onclick="App.plantao.removerTratativa('${plantaoId}', ${plantao.tratativas.length - 1})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div style="margin-top: 8px; font-size: 0.9rem;">${descricao}</div>
+                        </div>
+                    `;
+                    
+                    // Limpar campos
+                    document.getElementById('nova-tratativa-cliente').value = '';
+                    document.getElementById('nova-tratativa-tipo').value = '';
+                    document.getElementById('nova-tratativa-descricao').value = '';
+                },
+                
+                removerTratativa: function(plantaoId, index) {
+                    const plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
+                    if (plantao && plantao.tratativas[index]) {
+                        plantao.tratativas.splice(index, 1);
+                        Sistema.saveData();
+                        UI.showToast('Tratativa removida');
+                        
+                        // Recarregar modal
+                        UI.showPlantaoDetalhadoModal(plantaoId);
+                    }
+                },
+                
+                saveDetalhes: function(plantaoId, event) {
+                    event.preventDefault();
+                    
+                    let plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
+                    if (!plantao) {
+                        plantao = {
+                            id: plantaoId,
+                            clientesAtendidos: [],
+                            tratativas: [],
+                            observacoes: ''
+                        };
+                    }
+                    
+                    plantao.observacoes = document.getElementById('plantao-observacoes').value;
+                    
+                    const existingIndex = Sistema.data.plantoes.findIndex(p => p.id === plantaoId);
+                    if (existingIndex >= 0) {
+                        Sistema.data.plantoes[existingIndex] = plantao;
+                    } else {
+                        Sistema.data.plantoes.push(plantao);
+                    }
+                    
+                    Sistema.saveData();
+                    UI.closeModal('plantao-detalhado');
+                    UI.showToast('Detalhes do plantão salvos com sucesso');
                 }
             },
             
@@ -5293,6 +5312,14 @@
                         </div>
                         <div class="report-title">Relatório de Metas</div>
                         <div class="report-desc">Desempenho vs Metas</div>
+                    </div>
+                    
+                    <div class="report-card" onclick="Relatorios.gerarRelatorioPlantaoDetalhado()">
+                        <div class="report-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="report-title">Relatório de Plantão</div>
+                        <div class="report-desc">Detalhado com clientes atendidos</div>
                     </div>
                 `;
             },
@@ -5714,6 +5741,153 @@
                 UI.showToast('Relatório de metas gerado em PDF');
             },
             
+            gerarRelatorioPlantaoDetalhado: function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                const settings = Sistema.data.settings;
+                const hoje = new Date();
+                const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+                
+                // Cabeçalho
+                doc.setFontSize(18);
+                doc.text('RELATÓRIO DE PLANTÃO DETALHADO', 105, 20, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.text(`Período: ${mesAtual}`, 20, 30);
+                doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
+                doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
+                
+                // Plantões do mês
+                const mes = hoje.getMonth();
+                const ano = hoje.getFullYear();
+                const plantoesAgenda = Sistema.data.agenda.filter(a => {
+                    if (a.tipo !== 'plantao') return false;
+                    const data = new Date(a.data);
+                    return data.getMonth() === mes && data.getFullYear() === ano;
+                });
+                
+                let y = 60;
+                
+                if (plantoesAgenda.length === 0) {
+                    doc.text('Nenhum plantão registrado neste período.', 20, y);
+                } else {
+                    // Para cada plantão, mostrar detalhes
+                    plantoesAgenda.forEach((plantaoAgenda, index) => {
+                        const plantaoDetalhes = Sistema.data.plantoes.find(p => p.id === plantaoAgenda.id);
+                        
+                        doc.setFontSize(12);
+                        doc.setFont(undefined, 'bold');
+                        doc.text(`Plantão ${index + 1}: ${plantaoAgenda.empreendimento || 'Sem nome'}`, 20, y);
+                        y += 7;
+                        
+                        doc.setFontSize(10);
+                        doc.setFont(undefined, 'normal');
+                        doc.text(`Data: ${plantaoAgenda.data} | Horário: ${plantaoAgenda.horario} | Período: ${plantaoAgenda.periodo || 'Não informado'}`, 20, y);
+                        y += 7;
+                        
+                        if (plantaoDetalhes) {
+                            // Clientes atendidos
+                            if (plantaoDetalhes.clientesAtendidos.length > 0) {
+                                y += 5;
+                                doc.setFont(undefined, 'bold');
+                                doc.text('Clientes Atendidos:', 20, y);
+                                y += 7;
+                                
+                                plantaoDetalhes.clientesAtendidos.forEach(clienteId => {
+                                    const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
+                                    if (cliente) {
+                                        doc.setFont(undefined, 'normal');
+                                        doc.text(`• ${cliente.nome} - ${cliente.telefone}`, 25, y);
+                                        y += 7;
+                                    }
+                                });
+                            }
+                            
+                            // Tratativas
+                            if (plantaoDetalhes.tratativas.length > 0) {
+                                y += 5;
+                                doc.setFont(undefined, 'bold');
+                                doc.text('Tratativas Realizadas:', 20, y);
+                                y += 7;
+                                
+                                plantaoDetalhes.tratativas.forEach(tratativa => {
+                                    const cliente = tratativa.clienteId ? Sistema.data.clientes.find(c => c.id === tratativa.clienteId) : null;
+                                    doc.setFont(undefined, 'normal');
+                                    doc.text(`• ${tratativa.tipo}: ${tratativa.descricao}`, 25, y);
+                                    y += 7;
+                                    if (cliente) {
+                                        doc.text(`  Cliente: ${cliente.nome}`, 30, y);
+                                        y += 7;
+                                    }
+                                    if (tratativa.data) {
+                                        const data = new Date(tratativa.data);
+                                        doc.text(`  Horário: ${data.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}`, 30, y);
+                                        y += 7;
+                                    }
+                                });
+                            }
+                            
+                            // Observações
+                            if (plantaoDetalhes.observacoes) {
+                                y += 5;
+                                doc.setFont(undefined, 'bold');
+                                doc.text('Observações:', 20, y);
+                                y += 7;
+                                
+                                doc.setFont(undefined, 'normal');
+                                const observacoesLines = doc.splitTextToSize(plantaoDetalhes.observacoes, 170);
+                                observacoesLines.forEach(line => {
+                                    doc.text(line, 25, y);
+                                    y += 7;
+                                });
+                            }
+                        } else {
+                            doc.text('Nenhum detalhe registrado para este plantão.', 25, y);
+                            y += 7;
+                        }
+                        
+                        y += 10; // Espaço entre plantões
+                    });
+                    
+                    // Estatísticas
+                    const stats = {
+                        total: plantoesAgenda.length,
+                        comDetalhes: plantoesAgenda.filter(p => Sistema.data.plantoes.find(pd => pd.id === p.id)).length,
+                        clientesAtendidos: plantoesAgenda.reduce((acc, p) => {
+                            const detalhes = Sistema.data.plantoes.find(pd => pd.id === p.id);
+                            return acc + (detalhes ? detalhes.clientesAtendidos.length : 0);
+                        }, 0),
+                        tratativas: plantoesAgenda.reduce((acc, p) => {
+                            const detalhes = Sistema.data.plantoes.find(pd => pd.id === p.id);
+                            return acc + (detalhes ? detalhes.tratativas.length : 0);
+                        }, 0)
+                    };
+                    
+                    y += 10;
+                    doc.setFontSize(12);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('ESTATÍSTICAS GERAIS', 20, y);
+                    y += 10;
+                    
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'normal');
+                    doc.text(`Total de Plantões: ${stats.total}`, 20, y);
+                    y += 7;
+                    doc.text(`Plantões com Detalhes: ${stats.comDetalhes}`, 20, y);
+                    y += 7;
+                    doc.text(`Total de Clientes Atendidos: ${stats.clientesAtendidos}`, 20, y);
+                    y += 7;
+                    doc.text(`Total de Tratativas: ${stats.tratativas}`, 20, y);
+                    y += 7;
+                    doc.text(`Média de Clientes por Plantão: ${(stats.clientesAtendidos / stats.comDetalhes).toFixed(1)}`, 20, y);
+                }
+                
+                // Salvar PDF
+                doc.save(`Relatorio_Plantao_Detalhado_${hoje.toISOString().split('T')[0]}.pdf`);
+                UI.showToast('Relatório de plantão detalhado gerado em PDF');
+            },
+            
             gerarFichaClientePrompt: function() {
                 // Mostrar modal para selecionar cliente
                 const modal = document.getElementById('modal-select-pdf');
@@ -5781,25 +5955,6 @@
                     UI.closePhotoViewer();
                 }
             });
-            
-            // Configurar accordions nos modais
-            setTimeout(() => {
-                document.querySelectorAll('.accordion').forEach(accordion => {
-                    const header = accordion.querySelector('.accordion-header');
-                    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
-                    
-                    if (accordion.classList.contains('active')) {
-                        if (icon) {
-                            icon.classList.remove('fa-chevron-down');
-                            icon.classList.add('fa-chevron-up');
-                        }
-                    }
-                    
-                    header.addEventListener('click', () => {
-                        UI.toggleAccordion(accordion.id);
-                    });
-                });
-            }, 100);
         });
     </script>
 </body>
