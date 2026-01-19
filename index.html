@@ -111,11 +111,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
         
         .icon-btn:active { 
-            background: rgba(255, 255, 255, 0.3); 
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0.95);
         }
 
         /* --- Main Content --- */
@@ -157,7 +158,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
             border: 1px solid var(--border);
             cursor: pointer;
         }
@@ -250,6 +251,11 @@
             justify-content: center;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .stage-btn:active {
+            transform: scale(0.95);
         }
         
         .stage-btn-remove {
@@ -275,11 +281,12 @@
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .add-stage-btn:active {
             background: var(--border);
+            transform: scale(0.98);
         }
 
         /* --- Funnel Visualization --- */
@@ -472,7 +479,7 @@
             margin-bottom: 12px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
             cursor: pointer;
         }
         
@@ -515,6 +522,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: all 0.2s ease;
         }
         
         .tag-primary { background: #dbeafe; color: var(--primary); }
@@ -544,18 +552,38 @@
             justify-content: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .btn-sm:active {
             transform: scale(0.95);
         }
         
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: var(--light); color: var(--secondary); }
-        .btn-success { background: var(--success); color: white; }
-        .btn-warning { background: var(--warning); color: white; }
-        .btn-danger { background: var(--danger); color: white; }
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; 
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+        .btn-secondary { 
+            background: var(--light); 
+            color: var(--secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-success { 
+            background: var(--success); 
+            color: white;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+        }
+        .btn-warning { 
+            background: var(--warning); 
+            color: white;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+        }
+        .btn-danger { 
+            background: var(--danger); 
+            color: white;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+        }
 
         /* --- Bottom Navigation --- */
         .bottom-nav {
@@ -623,7 +651,7 @@
             box-shadow: var(--shadow-lg);
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .fab:active {
@@ -660,7 +688,7 @@
             box-shadow: var(--shadow-md);
             border: none;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .fab-sub-btn:active {
@@ -732,6 +760,11 @@
             justify-content: center;
             font-size: 1.1rem;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .modal-close:active {
+            transform: scale(0.95);
         }
 
         .modal-body {
@@ -804,7 +837,8 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
         }
         
         .btn-block:active {
@@ -814,9 +848,11 @@
         .btn-block-secondary {
             background: var(--light);
             color: var(--secondary);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* --- Foto em Tela Cheia --- */
+        /* --- Foto em Tela Cheia (MELHORADO) --- */
         .photo-viewer {
             position: fixed;
             inset: 0;
@@ -826,6 +862,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            touch-action: pan-y pinch-zoom;
         }
         
         .photo-viewer.active {
@@ -838,6 +875,12 @@
             max-height: 70vh;
             border-radius: 8px;
             object-fit: contain;
+            transition: transform 0.3s ease;
+            cursor: grab;
+        }
+        
+        .photo-viewer img:active {
+            cursor: grabbing;
         }
         
         .photo-nav {
@@ -859,11 +902,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
         
-        .photo-nav-btn:hover {
+        .photo-nav-btn:active {
             background: rgba(255,255,255,0.3);
+            transform: scale(0.95);
         }
         
         .photo-close {
@@ -881,6 +925,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 2001;
+        }
+        
+        .photo-close:active {
+            background: rgba(255,255,255,0.2);
+            transform: scale(0.95);
         }
         
         .photo-counter {
@@ -892,6 +943,24 @@
             background: rgba(0,0,0,0.5);
             padding: 8px 16px;
             border-radius: 20px;
+            z-index: 2001;
+        }
+        
+        .photo-zoom-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.8rem;
+            background: rgba(0,0,0,0.5);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: none;
+        }
+        
+        .photo-viewer.zoomed .photo-zoom-info {
+            display: block;
         }
 
         /* --- Imóveis com Fotos --- */
@@ -908,7 +977,7 @@
             object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
         }
         
         .imovel-photo:active {
@@ -945,7 +1014,7 @@
             border: 1px solid var(--border);
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .report-card:active {
@@ -1028,6 +1097,11 @@
             .nav-item span {
                 font-size: 0.65rem;
             }
+            
+            .photo-nav-btn {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         /* --- Loading Spinner --- */
@@ -1061,11 +1135,12 @@
             color: var(--secondary);
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         
         .file-input-label:active {
             background: var(--border);
+            transform: scale(0.98);
         }
         
         .file-input {
@@ -1088,6 +1163,11 @@
             align-items: center;
             cursor: pointer;
             user-select: none;
+            transition: background 0.2s;
+        }
+        
+        .accordion-header:active {
+            background: #e2e8f0;
         }
         
         .accordion-content {
@@ -1110,6 +1190,7 @@
             border-radius: 12px;
             font-size: 0.7rem;
             font-weight: 700;
+            transition: all 0.2s ease;
         }
         
         .badge-primary {
@@ -1161,6 +1242,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-nav-btn:active {
+            background: var(--border);
+            transform: scale(0.95);
         }
         
         .calendar-weekdays {
@@ -1187,12 +1274,13 @@
             border-radius: 8px;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             position: relative;
         }
         
         .calendar-day:active {
             background: var(--light);
+            transform: scale(0.95);
         }
         
         .calendar-day.today {
@@ -1227,6 +1315,11 @@
             border-radius: 8px;
             margin-bottom: 8px;
             border-left: 4px solid var(--primary);
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-event-item:active {
+            transform: scale(0.98);
         }
         
         .calendar-event-time {
@@ -1868,7 +1961,7 @@
         </div>
     </div>
 
-    <!-- Modal de Agendamento (Genérico) -->
+    <!-- Modal de Agendamento Genérico (ATUALIZADO para Plantão) -->
     <div class="modal-overlay" id="modal-agenda-generico">
         <div class="modal">
             <div class="modal-header">
@@ -1923,12 +2016,13 @@
         </div>
     </div>
 
-    <!-- Photo Viewer -->
+    <!-- Photo Viewer (MELHORADO) -->
     <div class="photo-viewer" id="photo-viewer">
         <button class="photo-close" onclick="UI.closePhotoViewer()">
             <i class="fas fa-times"></i>
         </button>
         <div class="photo-counter" id="photo-counter">1/1</div>
+        <div class="photo-zoom-info">Toque duas vezes para zoom</div>
         <img id="fullscreen-photo" src="" alt="">
         <div class="photo-nav">
             <button class="photo-nav-btn" onclick="UI.prevPhoto()">
@@ -2145,6 +2239,10 @@
             currentPhotoIndex: 0,
             currentPhotoImovelId: null,
             calendarDate: new Date(),
+            selectedClientesPlantao: [], // Array para armazenar clientes selecionados no plantão
+            isPhotoZoomed: false,
+            photoStartX: 0,
+            photoStartY: 0,
             
             init: function() {
                 this.renderDashboard();
@@ -2172,21 +2270,56 @@
                     }
                 });
                 
-                // Adicionar evento de swipe para fotos (mobile)
+                // Adicionar evento de swipe para fotos (mobile) - MELHORADO
+                const photoViewer = document.getElementById('photo-viewer');
                 let touchStartX = 0;
+                let touchStartY = 0;
                 let touchEndX = 0;
+                let touchEndY = 0;
                 
-                document.getElementById('photo-viewer').addEventListener('touchstart', (e) => {
+                photoViewer.addEventListener('touchstart', (e) => {
                     touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                    this.photoStartX = touchStartX;
+                    this.photoStartY = touchStartY;
                 });
                 
-                document.getElementById('photo-viewer').addEventListener('touchend', (e) => {
+                photoViewer.addEventListener('touchend', (e) => {
                     touchEndX = e.changedTouches[0].screenX;
-                    if (touchStartX - touchEndX > 50) {
-                        this.nextPhoto();
-                    } else if (touchEndX - touchStartX > 50) {
-                        this.prevPhoto();
+                    touchEndY = e.changedTouches[0].screenY;
+                    
+                    // Calcular distância
+                    const diffX = touchStartX - touchEndX;
+                    const diffY = touchStartY - touchEndY;
+                    
+                    // Verificar se é um swipe horizontal (mais horizontal que vertical)
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
+                        if (diffX > 50) {
+                            // Swipe para esquerda = próxima foto
+                            this.nextPhoto();
+                        } else if (diffX < -50) {
+                            // Swipe para direita = foto anterior
+                            this.prevPhoto();
+                        }
                     }
+                    
+                    // Toque duplo para zoom
+                    const now = new Date().getTime();
+                    const lastTouch = this.lastTouch || 0;
+                    const diffTime = now - lastTouch;
+                    
+                    if (diffTime < 300 && diffTime > 0) {
+                        // Toque duplo detectado
+                        this.togglePhotoZoom();
+                    }
+                    
+                    this.lastTouch = now;
+                });
+                
+                // Adicionar evento de toque duplo para zoom
+                const fullscreenPhoto = document.getElementById('fullscreen-photo');
+                fullscreenPhoto.addEventListener('dblclick', (e) => {
+                    this.togglePhotoZoom();
                 });
             },
             
@@ -2929,6 +3062,7 @@
                 }
             },
             
+            // NOVO: Modal de agendamento com multi-seleção para plantão
             showAgendaModal: function() {
                 const modalBody = document.getElementById('modal-agenda-body');
                 modalBody.innerHTML = `
@@ -2951,16 +3085,11 @@
                                 <option value="outro">Outro</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label required">Cliente</label>
-                            <select id="a-cliente" class="form-control" required>
-                                <option value="">Selecione...</option>
-                                ${Sistema.data.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('')}
-                            </select>
-                        </div>
+                        
                         <div id="agenda-fields">
                             <!-- Campos específicos serão carregados aqui -->
                         </div>
+                        
                         <div class="form-group">
                             <label class="form-label required">Data</label>
                             <input type="date" id="a-data" class="form-control" required value="${new Date().toISOString().split('T')[0]}">
@@ -2997,6 +3126,7 @@
                 }, 10);
             },
             
+            // ATUALIZADO: Campos específicos para plantão com multi-seleção
             updateAgendaFields: function() {
                 const tipo = document.getElementById('a-tipo')?.value;
                 const fieldsDiv = document.getElementById('agenda-fields');
@@ -3009,6 +3139,13 @@
                     case 'visita':
                         fieldsHTML = `
                             <div class="form-group">
+                                <label class="form-label required">Cliente</label>
+                                <select id="a-cliente" class="form-control" required>
+                                    <option value="">Selecione...</option>
+                                    ${Sistema.data.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label class="form-label required">Imóvel para Visita</label>
                                 <select id="a-imovel" class="form-control" required>
                                     <option value="">Selecione...</option>
@@ -3019,6 +3156,9 @@
                         break;
                         
                     case 'plantao':
+                        // Limpar seleção anterior
+                        this.selectedClientesPlantao = [];
+                        
                         fieldsHTML = `
                             <div class="form-group">
                                 <label class="form-label required">Empreendimento</label>
@@ -3034,28 +3174,48 @@
                                     <option value="integral">Integral (08:00 - 18:00)</option>
                                 </select>
                             </div>
-                        `;
-                        break;
-                        
-                    case 'assinatura':
-                        fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label required">Imóvel</label>
-                                <select id="a-imovel-assinatura" class="form-control" required>
-                                    <option value="">Selecione...</option>
-                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
-                                </select>
+                                <label class="form-label">Clientes para Atendimento (Opcional)</label>
+                                <div style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-top: 8px;">
+                                    ${Sistema.data.clientes.length > 0 ? 
+                                        Sistema.data.clientes.map(c => `
+                                            <div style="display: flex; align-items: center; padding: 8px; border-bottom: 1px solid var(--light);">
+                                                <input type="checkbox" 
+                                                       id="plantao-cliente-${c.id}" 
+                                                       value="${c.id}" 
+                                                       onchange="UI.toggleClientePlantao('${c.id}', this.checked)"
+                                                       style="margin-right: 8px;">
+                                                <label for="plantao-cliente-${c.id}" style="flex: 1; cursor: pointer;">
+                                                    <div style="font-weight: 600;">${c.nome}</div>
+                                                    <div style="font-size: 0.8rem; color: var(--secondary);">${c.telefone}</div>
+                                                </label>
+                                            </div>
+                                        `).join('')
+                                        : '<div style="text-align: center; padding: 20px; color: var(--secondary);">Nenhum cliente cadastrado</div>'
+                                    }
+                                </div>
+                                <div style="margin-top: 8px; font-size: 0.8rem; color: var(--secondary);">
+                                    <i class="fas fa-info-circle"></i> Selecione os clientes que serão atendidos neste plantão
+                                </div>
                             </div>
                         `;
                         break;
                         
+                    case 'assinatura':
                     case 'proposta':
+                    case 'reuniao':
+                    case 'negociacao':
+                    case 'captacao':
+                    case 'vistoria':
+                    case 'entrega':
+                    case 'followup':
+                    case 'outro':
                         fieldsHTML = `
                             <div class="form-group">
-                                <label class="form-label required">Imóvel</label>
-                                <select id="a-imovel-proposta" class="form-control" required>
+                                <label class="form-label required">Cliente</label>
+                                <select id="a-cliente" class="form-control" required>
                                     <option value="">Selecione...</option>
-                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
+                                    ${Sistema.data.clientes.map(c => `<option value="${c.id}">${c.nome}</option>`).join('')}
                                 </select>
                             </div>
                         `;
@@ -3065,10 +3225,32 @@
                 fieldsDiv.innerHTML = fieldsHTML;
             },
             
+            // NOVO: Toggle para selecionar/deselecionar clientes no plantão
+            toggleClientePlantao: function(clienteId, isChecked) {
+                if (isChecked) {
+                    if (!this.selectedClientesPlantao.includes(clienteId)) {
+                        this.selectedClientesPlantao.push(clienteId);
+                    }
+                } else {
+                    this.selectedClientesPlantao = this.selectedClientesPlantao.filter(id => id !== clienteId);
+                }
+                
+                // Atualizar contador se existir
+                const counter = document.getElementById('plantao-clientes-counter');
+                if (counter) {
+                    counter.textContent = `${this.selectedClientesPlantao.length} cliente(s) selecionado(s)`;
+                }
+            },
+            
             closeModal: function(type) {
                 const modal = document.getElementById(`modal-${type}`);
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                
+                // Limpar seleção de clientes do plantão
+                if (type === 'agenda-generico') {
+                    this.selectedClientesPlantao = [];
+                }
             },
             
             // Accordion - CORREÇÃO PRINCIPAL
@@ -3104,12 +3286,13 @@
                 }
             },
             
-            // Visualizador de fotos
+            // Visualizador de fotos MELHORADO
             viewPhoto: function(imovelId, photoIndex) {
                 const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                 if (imovel && imovel.fotos && imovel.fotos[photoIndex]) {
                     this.currentPhotoImovelId = imovelId;
                     this.currentPhotoIndex = photoIndex;
+                    this.isPhotoZoomed = false;
                     
                     const viewer = document.getElementById('photo-viewer');
                     const img = document.getElementById('fullscreen-photo');
@@ -3118,8 +3301,31 @@
                     img.src = imovel.fotos[photoIndex];
                     counter.textContent = `${photoIndex + 1}/${imovel.fotos.length}`;
                     
+                    // Resetar zoom
+                    img.style.transform = 'scale(1)';
+                    img.style.cursor = 'grab';
+                    viewer.classList.remove('zoomed');
+                    
                     viewer.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                }
+            },
+            
+            // NOVO: Alternar zoom da foto
+            togglePhotoZoom: function() {
+                const img = document.getElementById('fullscreen-photo');
+                const viewer = document.getElementById('photo-viewer');
+                
+                this.isPhotoZoomed = !this.isPhotoZoomed;
+                
+                if (this.isPhotoZoomed) {
+                    img.style.transform = 'scale(2)';
+                    img.style.cursor = 'grabbing';
+                    viewer.classList.add('zoomed');
+                } else {
+                    img.style.transform = 'scale(1)';
+                    img.style.cursor = 'grab';
+                    viewer.classList.remove('zoomed');
                 }
             },
             
@@ -3153,6 +3359,12 @@
                 
                 img.src = imovel.fotos[this.currentPhotoIndex];
                 counter.textContent = `${this.currentPhotoIndex + 1}/${imovel.fotos.length}`;
+                
+                // Resetar zoom ao mudar de foto
+                this.isPhotoZoomed = false;
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'grab';
+                document.getElementById('photo-viewer').classList.remove('zoomed');
             },
             
             closePhotoViewer: function() {
@@ -3160,6 +3372,7 @@
                 document.body.style.overflow = 'auto';
                 this.currentPhotoImovelId = null;
                 this.currentPhotoIndex = 0;
+                this.isPhotoZoomed = false;
             },
             
             // Configurações
@@ -4667,13 +4880,13 @@
                 }
             },
             
+            // ATUALIZADO: Agenda com suporte a multi-seleção de clientes para plantão
             agenda: {
                 save: function(event) {
                     event.preventDefault();
                     
                     const id = 'agenda_' + Date.now();
                     const tipo = document.getElementById('a-tipo').value;
-                    const clienteId = document.getElementById('a-cliente').value;
                     const data = document.getElementById('a-data').value;
                     const horario = document.getElementById('a-horario').value;
                     const local = document.getElementById('a-local').value;
@@ -4681,22 +4894,30 @@
                     
                     // Campos específicos
                     let camposEspecificos = {};
+                    let clientesSelecionados = [];
+                    
                     switch(tipo) {
                         case 'visita':
                             camposEspecificos = {
+                                clienteId: document.getElementById('a-cliente').value,
                                 imovelId: document.getElementById('a-imovel').value
                             };
+                            clientesSelecionados = [document.getElementById('a-cliente').value];
                             break;
+                            
                         case 'plantao':
                             camposEspecificos = {
                                 empreendimento: document.getElementById('a-empreendimento').value,
                                 periodo: document.getElementById('a-periodo').value
                             };
                             
+                            // Usar clientes selecionados da UI
+                            clientesSelecionados = UI.selectedClientesPlantao;
+                            
                             // Criar registro de plantão detalhado
                             const plantao = {
                                 id: id,
-                                clientesAtendidos: [],
+                                clientesAtendidos: clientesSelecionados,
                                 tratativas: [],
                                 observacoes: ''
                             };
@@ -4708,28 +4929,37 @@
                                 Sistema.data.plantoes.push(plantao);
                             }
                             break;
+                            
                         case 'assinatura':
-                            camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-assinatura').value
-                            };
-                            break;
                         case 'proposta':
+                        case 'reuniao':
+                        case 'negociacao':
+                        case 'captacao':
+                        case 'vistoria':
+                        case 'entrega':
+                        case 'followup':
+                        case 'outro':
                             camposEspecificos = {
-                                imovelId: document.getElementById('a-imovel-proposta').value
+                                clienteId: document.getElementById('a-cliente').value
                             };
+                            clientesSelecionados = [document.getElementById('a-cliente').value];
                             break;
                     }
+                    
+                    // Para plantão, não temos um cliente específico, então usamos o primeiro selecionado ou null
+                    const clienteIdPlantao = tipo === 'plantao' && clientesSelecionados.length > 0 ? clientesSelecionados[0] : null;
                     
                     const agenda = {
                         id,
                         tipo,
-                        clienteId,
+                        clienteId: tipo !== 'plantao' ? document.getElementById('a-cliente')?.value : clienteIdPlantao,
                         data,
                         horario,
                         local,
                         observacoes,
                         ...camposEspecificos,
-                        status: 'agendado'
+                        status: 'agendado',
+                        clientesSelecionados: tipo === 'plantao' ? clientesSelecionados : [document.getElementById('a-cliente')?.value]
                     };
                     
                     Sistema.data.agenda.push(agenda);
@@ -4739,6 +4969,9 @@
                     UI.renderCalendar();
                     UI.showDayEvents(data);
                     UI.renderDashboard();
+                    
+                    // Limpar seleção de clientes
+                    UI.selectedClientesPlantao = [];
                 },
                 
                 confirmar: function(agendaId) {
@@ -4767,8 +5000,17 @@
                     const agenda = Sistema.data.agenda.find(a => a.id === agendaId);
                     if (!agenda) return;
                     
-                    const cliente = Sistema.data.clientes.find(c => c.id === agenda.clienteId);
+                    const cliente = agenda.clienteId ? Sistema.data.clientes.find(c => c.id === agenda.clienteId) : null;
                     const imovel = agenda.imovelId ? Sistema.data.imoveis.find(i => i.id === agenda.imovelId) : null;
+                    
+                    // Para plantão, mostrar todos os clientes selecionados
+                    let clientesInfo = '';
+                    if (agenda.tipo === 'plantao' && agenda.clientesSelecionados && agenda.clientesSelecionados.length > 0) {
+                        clientesInfo = agenda.clientesSelecionados.map(clienteId => {
+                            const c = Sistema.data.clientes.find(c => c.id === clienteId);
+                            return c ? c.nome : 'Cliente não encontrado';
+                        }).join(', ');
+                    }
                     
                     // Modal de detalhes
                     let detalhes = '';
@@ -4777,6 +5019,10 @@
                     switch(agenda.tipo) {
                         case 'visita':
                             detalhes = `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Cliente</div>
+                                    <div style="font-weight: 600;">${cliente ? cliente.nome : 'Não informado'}</div>
+                                </div>
                                 <div>
                                     <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
                                     <div style="font-weight: 600;">${imovel ? imovel.nome : 'Não informado'}</div>
@@ -4797,6 +5043,12 @@
                                     <div style="font-weight: 600;">${agenda.periodo}</div>
                                 </div>
                                 ` : ''}
+                                ${clientesInfo ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Clientes Selecionados</div>
+                                    <div style="font-weight: 600;">${clientesInfo}</div>
+                                </div>
+                                ` : ''}
                             `;
                             botoesEspeciais = `
                                 <div style="margin-top: 16px;">
@@ -4806,12 +5058,21 @@
                                 </div>
                             `;
                             break;
+                        default:
+                            detalhes = `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Cliente</div>
+                                    <div style="font-weight: 600;">${cliente ? cliente.nome : 'Não informado'}</div>
+                                </div>
+                            `;
+                            break;
                     }
                     
                     const modalBody = `
                         <div style="padding: 20px;">
                             <h3 style="margin-bottom: 16px; color: var(--dark);">
-                                ${agenda.tipo.charAt(0).toUpperCase() + agenda.tipo.slice(1)} - ${cliente ? cliente.nome : 'Cliente'}
+                                ${agenda.tipo.charAt(0).toUpperCase() + agenda.tipo.slice(1)}
+                                ${cliente ? ` - ${cliente.nome}` : ''}
                             </h3>
                             <div style="display: grid; gap: 12px;">
                                 <div>
