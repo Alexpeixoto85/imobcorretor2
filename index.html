@@ -1067,7 +1067,7 @@
             display: none;
         }
         
-        /* --- Accordion --- */
+        /* --- Accordion (Corrigido) --- */
         .accordion {
             margin-bottom: 12px;
             border: 1px solid var(--border);
@@ -1082,6 +1082,7 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            user-select: none;
         }
         
         .accordion-content {
@@ -1094,6 +1095,7 @@
         .accordion.active .accordion-content {
             padding: 16px;
             max-height: 1000px;
+            overflow-y: auto;
         }
         
         /* --- Badges --- */
@@ -1113,6 +1115,125 @@
         .badge-success {
             background: #d1fae5;
             color: var(--success);
+        }
+        
+        /* --- Calendário Agenda --- */
+        .calendar {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .calendar-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .calendar-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--light);
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .calendar-day:active {
+            background: var(--light);
+        }
+        
+        .calendar-day.today {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .calendar-day.has-event {
+            background: var(--warning);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .calendar-day.other-month {
+            color: #cbd5e1;
+        }
+        
+        .calendar-day.selected {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .calendar-events {
+            margin-top: 20px;
+        }
+        
+        .calendar-event-item {
+            padding: 12px;
+            background: var(--light);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .calendar-event-time {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+        
+        .calendar-event-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
         }
     </style>
 </head>
@@ -1220,16 +1341,10 @@
             </div>
         </div>
 
-        <!-- Agenda View -->
+        <!-- Agenda View (Calendário) -->
         <div id="agenda-view" class="view">
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Buscar na agenda..." 
-                       oninput="UI.searchAgenda(this.value)">
-            </div>
-            
-            <div class="filter-buttons" id="agenda-filter" style="display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 8px;">
-                <!-- Filtros dinâmicos -->
+            <div class="calendar" id="calendar-container">
+                <!-- Calendário dinâmico -->
             </div>
             
             <div id="agenda-list"></div>
@@ -1316,7 +1431,7 @@
             <div class="modal-body">
                 <form id="form-cliente" onsubmit="App.cliente.save(event)">
                     <input type="hidden" id="c-id">
-                    <div class="accordion" id="cliente-dados-pessoais">
+                    <div class="accordion active" id="cliente-dados-pessoais">
                         <div class="accordion-header" onclick="UI.toggleAccordion('cliente-dados-pessoais')">
                             <span><i class="fas fa-user-circle"></i> Dados Pessoais</span>
                             <i class="fas fa-chevron-down"></i>
@@ -1521,7 +1636,7 @@
                 <form id="form-imovel" onsubmit="App.imovel.save(event)">
                     <input type="hidden" id="i-id">
                     
-                    <div class="accordion" id="imovel-basico">
+                    <div class="accordion active" id="imovel-basico">
                         <div class="accordion-header" onclick="UI.toggleAccordion('imovel-basico')">
                             <span><i class="fas fa-info-circle"></i> Informações Básicas</span>
                             <i class="fas fa-chevron-down"></i>
@@ -2033,10 +2148,12 @@
             fabOpen: false,
             currentPhotoIndex: 0,
             currentPhotoImovelId: null,
+            calendarDate: new Date(),
             
             init: function() {
                 this.renderDashboard();
                 this.setupEventListeners();
+                this.setupAccordions();
             },
             
             setupEventListeners: function() {
@@ -2074,6 +2191,25 @@
                     } else if (touchEndX - touchStartX > 50) {
                         this.prevPhoto();
                     }
+                });
+            },
+            
+            setupAccordions: function() {
+                // Configurar todos os accordions para funcionar corretamente
+                document.querySelectorAll('.accordion').forEach(accordion => {
+                    const header = accordion.querySelector('.accordion-header');
+                    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    
+                    if (accordion.classList.contains('active')) {
+                        if (icon) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
+                    }
+                    
+                    header.addEventListener('click', () => {
+                        this.toggleAccordion(accordion.id);
+                    });
                 });
             },
             
@@ -2118,7 +2254,7 @@
                         Funnel.render();
                         break;
                     case 'agenda-view':
-                        this.renderAgenda();
+                        this.renderCalendar();
                         break;
                     case 'relatorios-view':
                         Relatorios.render();
@@ -2156,7 +2292,7 @@
                             <button class="fab-sub-btn" onclick="UI.showModal('cliente', 'new')" title="Novo Cliente">
                                 <i class="fas fa-user-plus"></i>
                             </button>
-                            <button class="fab-sub-btn" onclick="UI.showModal('agenda-generico')" title="Novo Agendamento">
+                            <button class="fab-sub-btn" onclick="UI.showAgendaModalForDate(null)" title="Novo Agendamento">
                                 <i class="fas fa-calendar-plus"></i>
                             </button>
                         `;
@@ -2170,7 +2306,7 @@
                         break;
                     case 'agenda-view':
                         html = `
-                            <button class="fab-sub-btn" onclick="UI.showModal('agenda-generico')" title="Novo Agendamento">
+                            <button class="fab-sub-btn" onclick="UI.showAgendaModalForDate(null)" title="Novo Agendamento">
                                 <i class="fas fa-calendar-plus"></i>
                             </button>
                         `;
@@ -2403,59 +2539,192 @@
                 }
             },
             
-            renderAgenda: function(filter = '') {
-                let agenda = Sistema.data.agenda;
+            renderCalendar: function() {
+                const hoje = new Date();
+                const year = this.calendarDate.getFullYear();
+                const month = this.calendarDate.getMonth();
                 
-                if (filter) {
-                    agenda = agenda.filter(a => {
-                        const cliente = Sistema.data.clientes.find(c => c.id === a.clienteId);
-                        return cliente && cliente.nome.toLowerCase().includes(filter.toLowerCase());
-                    });
+                // Nome do mês em português
+                const monthNames = [
+                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                ];
+                
+                // Primeiro dia do mês
+                const firstDay = new Date(year, month, 1);
+                // Último dia do mês
+                const lastDay = new Date(year, month + 1, 0);
+                // Dia da semana do primeiro dia (0 = Domingo, 1 = Segunda, etc.)
+                const firstDayWeekday = firstDay.getDay();
+                // Total de dias no mês
+                const totalDays = lastDay.getDate();
+                
+                // Construir calendário
+                let calendarHTML = `
+                    <div class="calendar-header">
+                        <div class="calendar-title">${monthNames[month]} ${year}</div>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" onclick="UI.prevMonth()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="calendar-nav-btn" onclick="UI.todayCalendar()">
+                                Hoje
+                            </button>
+                            <button class="calendar-nav-btn" onclick="UI.nextMonth()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-weekdays">
+                        <div>Dom</div>
+                        <div>Seg</div>
+                        <div>Ter</div>
+                        <div>Qua</div>
+                        <div>Qui</div>
+                        <div>Sex</div>
+                        <div>Sáb</div>
+                    </div>
+                    
+                    <div class="calendar-days">
+                `;
+                
+                // Dias vazios antes do primeiro dia do mês
+                for (let i = 0; i < firstDayWeekday; i++) {
+                    calendarHTML += `<div class="calendar-day other-month"></div>`;
                 }
                 
-                const agendaList = document.getElementById('agenda-list');
+                // Dias do mês
+                for (let day = 1; day <= totalDays; day++) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const events = Sistema.data.agenda.filter(a => a.data === dateStr);
+                    const hasEvent = events.length > 0;
+                    const isToday = hoje.getDate() === day && hoje.getMonth() === month && hoje.getFullYear() === year;
+                    const classes = ['calendar-day'];
+                    
+                    if (isToday) classes.push('today');
+                    if (hasEvent) classes.push('has-event');
+                    
+                    calendarHTML += `
+                        <div class="${classes.join(' ')}" onclick="UI.selectDate('${dateStr}')">
+                            ${day}
+                            ${hasEvent ? `<div style="position: absolute; bottom: 2px; width: 4px; height: 4px; background: var(--primary); border-radius: 50%;"></div>` : ''}
+                        </div>
+                    `;
+                }
                 
-                if (agenda.length === 0) {
-                    agendaList.innerHTML = `
+                // Dias vazios após o último dia do mês (para completar 6 semanas)
+                const totalCells = 42; // 6 semanas * 7 dias
+                const usedCells = firstDayWeekday + totalDays;
+                for (let i = usedCells; i < totalCells; i++) {
+                    calendarHTML += `<div class="calendar-day other-month"></div>`;
+                }
+                
+                calendarHTML += `</div>`;
+                
+                document.getElementById('calendar-container').innerHTML = calendarHTML;
+                
+                // Mostrar eventos do dia selecionado (hoje por padrão)
+                this.showDayEvents(hoje.toISOString().split('T')[0]);
+            },
+            
+            showDayEvents: function(dateStr) {
+                const events = Sistema.data.agenda.filter(a => a.data === dateStr);
+                const date = new Date(dateStr);
+                const formattedDate = date.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+                
+                let eventsHTML = '';
+                
+                if (events.length === 0) {
+                    eventsHTML = `
                         <div class="empty-state">
-                            <i class="fas fa-calendar-alt"></i>
-                            <p>Nenhum agendamento</p>
-                            <button class="btn-block" onclick="UI.showModal('agenda-generico')" style="margin-top: 20px;">
+                            <i class="fas fa-calendar-day"></i>
+                            <p>Nenhum agendamento para ${formattedDate}</p>
+                            <button class="btn-block" onclick="UI.showAgendaModalForDate('${dateStr}')" style="margin-top: 20px;">
                                 <i class="fas fa-plus"></i> Novo Agendamento
                             </button>
                         </div>
                     `;
                 } else {
-                    agendaList.innerHTML = agenda.map(item => {
-                        const cliente = Sistema.data.clientes.find(c => c.id === item.clienteId) || { nome: 'Cliente' };
-                        const imovel = item.imovelId ? Sistema.data.imoveis.find(i => i.id === item.imovelId) : null;
+                    eventsHTML = `
+                        <div class="section-title">
+                            <i class="fas fa-calendar-day"></i> Agendamentos para ${formattedDate}
+                            <button class="btn-sm btn-primary" onclick="UI.showAgendaModalForDate('${dateStr}')">
+                                <i class="fas fa-plus"></i> Novo
+                            </button>
+                        </div>
+                    `;
+                    
+                    events.forEach(event => {
+                        const cliente = Sistema.data.clientes.find(c => c.id === event.clienteId) || { nome: 'Cliente' };
+                        const imovel = event.imovelId ? Sistema.data.imoveis.find(i => i.id === event.imovelId) : null;
                         
-                        return `
-                            <div class="list-card" onclick="App.agenda.showDetails('${item.id}')">
-                                <div class="card-header">
-                                    <div class="card-title">${item.tipo} - ${cliente.nome}</div>
-                                    <span class="tag tag-primary">${item.data} ${item.horario}</span>
+                        eventsHTML += `
+                            <div class="calendar-event-item" onclick="App.agenda.showDetails('${event.id}')">
+                                <div class="calendar-event-time">
+                                    <i class="fas fa-clock"></i> ${event.horario}
                                 </div>
+                                <div class="calendar-event-title">${event.tipo} - ${cliente.nome}</div>
                                 ${imovel ? `
-                                    <div class="card-subtitle">
+                                    <div style="font-size: 0.8rem; color: var(--secondary); margin-top: 4px;">
                                         <i class="fas fa-home"></i> ${imovel.nome}
                                     </div>
                                 ` : ''}
-                                <div class="card-subtitle">
-                                    <i class="fas fa-map-marker-alt"></i> ${item.local || 'Local não informado'}
-                                </div>
-                                <div class="action-row">
-                                    <button class="btn-sm btn-success" onclick="event.stopPropagation(); App.agenda.confirmar('${item.id}')">
-                                        <i class="fas fa-check"></i> Confirmar
-                                    </button>
-                                    <button class="btn-sm btn-danger" onclick="event.stopPropagation(); App.agenda.cancelar('${item.id}')">
-                                        <i class="fas fa-times"></i> Cancelar
-                                    </button>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge ${event.status === 'confirmado' ? 'badge-success' : event.status === 'cancelado' ? 'badge-danger' : 'badge-primary'}">
+                                        ${event.status}
+                                    </span>
                                 </div>
                             </div>
                         `;
-                    }).join('');
+                    });
                 }
+                
+                document.getElementById('agenda-list').innerHTML = eventsHTML;
+            },
+            
+            selectDate: function(dateStr) {
+                // Remover seleção anterior
+                document.querySelectorAll('.calendar-day.selected').forEach(day => {
+                    day.classList.remove('selected');
+                });
+                
+                // Adicionar seleção ao dia clicado
+                const dayElement = document.querySelector(`.calendar-day[onclick*="${dateStr}"]`);
+                if (dayElement) {
+                    dayElement.classList.add('selected');
+                }
+                
+                // Mostrar eventos do dia selecionado
+                this.showDayEvents(dateStr);
+            },
+            
+            prevMonth: function() {
+                this.calendarDate.setMonth(this.calendarDate.getMonth() - 1);
+                this.renderCalendar();
+            },
+            
+            nextMonth: function() {
+                this.calendarDate.setMonth(this.calendarDate.getMonth() + 1);
+                this.renderCalendar();
+            },
+            
+            todayCalendar: function() {
+                this.calendarDate = new Date();
+                this.renderCalendar();
+            },
+            
+            showAgendaModalForDate: function(dateStr) {
+                this.showModal('agenda-generico');
+                // Configurar data se fornecida
+                setTimeout(() => {
+                    if (dateStr) {
+                        const dateInput = document.getElementById('a-data');
+                        if (dateInput) {
+                            dateInput.value = dateStr;
+                        }
+                    }
+                }, 100);
             },
             
             // Buscas
@@ -2495,8 +2764,10 @@
                                 imoveisSelect.innerHTML += `<option value="${imovel.id}">${imovel.nome}</option>`;
                             });
                             
-                            // Abrir primeiro accordion
-                            setTimeout(() => this.toggleAccordion('cliente-dados-pessoais', true), 100);
+                            // Configurar accordions
+                            setTimeout(() => {
+                                this.setupAccordions();
+                            }, 100);
                         } else if (action === 'edit' && id) {
                             App.cliente.edit(id);
                         }
@@ -2507,8 +2778,10 @@
                             document.getElementById('modal-imovel-title').innerHTML = '<i class="fas fa-home"></i> Novo Imóvel';
                             this.resetImovelForm();
                             
-                            // Abrir primeiro accordion
-                            setTimeout(() => this.toggleAccordion('imovel-basico', true), 100);
+                            // Configurar accordions
+                            setTimeout(() => {
+                                this.setupAccordions();
+                            }, 100);
                         } else if (action === 'edit' && id) {
                             App.imovel.edit(id);
                         }
@@ -2552,6 +2825,13 @@
                 Array.from(imoveisSelect.options).forEach(option => {
                     option.selected = false;
                 });
+                
+                // Resetar accordions
+                document.querySelectorAll('.accordion').forEach(acc => {
+                    acc.classList.remove('active');
+                });
+                // Primeiro accordion aberto por padrão
+                document.getElementById('cliente-dados-pessoais').classList.add('active');
             },
             
             resetImovelForm: function() {
@@ -2582,6 +2862,13 @@
                 // Limpar fotos
                 App.imovel.fotosTemporarias = [];
                 document.getElementById('imovel-photos-preview').innerHTML = '';
+                
+                // Resetar accordions
+                document.querySelectorAll('.accordion').forEach(acc => {
+                    acc.classList.remove('active');
+                });
+                // Primeiro accordion aberto por padrão
+                document.getElementById('imovel-basico').classList.add('active');
             },
             
             showAgendaModal: function() {
@@ -2827,6 +3114,54 @@
                             </div>
                         `;
                         break;
+                        
+                    case 'vistoria':
+                        fieldsHTML = `
+                            <div class="form-group">
+                                <label class="form-label">Imóvel *</label>
+                                <select id="a-imovel-vistoria" class="form-control" required>
+                                    <option value="">Selecione...</option>
+                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tipo de Vistoria</label>
+                                <select id="a-tipo-vistoria" class="form-control">
+                                    <option value="entrada">Entrada</option>
+                                    <option value="saida">Saída</option>
+                                    <option value="periodica">Periódica</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Itens a Verificar</label>
+                                <textarea id="a-itens-vistoria" class="form-control" placeholder="Itens para verificação..."></textarea>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'entrega':
+                        fieldsHTML = `
+                            <div class="form-group">
+                                <label class="form-label">Imóvel *</label>
+                                <select id="a-imovel-entrega" class="form-control" required>
+                                    <option value="">Selecione...</option>
+                                    ${Sistema.data.imoveis.map(i => `<option value="${i.id}">${i.nome}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tipo de Entrega</label>
+                                <select id="a-tipo-entrega" class="form-control">
+                                    <option value="chaves">Entrega de Chaves</option>
+                                    <option value="documentos">Entrega de Documentos</option>
+                                    <option value="imovel">Entrega do Imóvel</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Documentos para Entrega</label>
+                                <textarea id="a-documentos-entrega" class="form-control" placeholder="Documentos a serem entregues..."></textarea>
+                            </div>
+                        `;
+                        break;
                 }
                 
                 fieldsDiv.innerHTML = fieldsHTML;
@@ -2839,14 +3174,20 @@
             },
             
             // Accordion
-            toggleAccordion: function(id, forceOpen = false) {
+            toggleAccordion: function(id) {
                 const accordion = document.getElementById(id);
-                const isActive = accordion.classList.contains('active');
+                const icon = accordion.querySelector('.accordion-header .fa-chevron-down, .accordion-header .fa-chevron-up');
                 
-                if (forceOpen && !isActive) {
-                    accordion.classList.add('active');
-                } else {
-                    accordion.classList.toggle('active');
+                accordion.classList.toggle('active');
+                
+                if (icon) {
+                    if (accordion.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
                 }
             },
             
@@ -3394,12 +3735,12 @@
                             </div>
                             
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('cliente-detalhes-contato')">
                                     <span><i class="fas fa-phone"></i> Contato</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 12px;">
+                                <div class="accordion-content" id="cliente-detalhes-contato-content">
+                                    <div style="display: grid; gap: 12px; padding: 16px;">
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Telefone Principal</div>
                                             <div style="font-weight: 600; font-size: 1.1rem;">
@@ -3434,12 +3775,12 @@
                             
                             ${cliente.endereco && cliente.endereco.logradouro ? `
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('cliente-detalhes-endereco')">
                                     <span><i class="fas fa-map-marker-alt"></i> Endereço</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 8px;">
+                                <div class="accordion-content" id="cliente-detalhes-endereco-content">
+                                    <div style="display: grid; gap: 8px; padding: 16px;">
                                         <div>${cliente.endereco.logradouro}, ${cliente.endereco.numero}</div>
                                         ${cliente.endereco.complemento ? `<div>${cliente.endereco.complemento}</div>` : ''}
                                         <div>${cliente.endereco.bairro}</div>
@@ -3452,12 +3793,12 @@
                             
                             ${cliente.interesses && (cliente.interesses.imoveis.length > 0 || cliente.interesses.tipo || cliente.interesses.bairros.length > 0) ? `
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('cliente-detalhes-interesses')">
                                     <span><i class="fas fa-home"></i> Interesses</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 12px;">
+                                <div class="accordion-content" id="cliente-detalhes-interesses-content">
+                                    <div style="display: grid; gap: 12px; padding: 16px;">
                                         ${cliente.interesses.tipo ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Imóvel</div>
@@ -3503,12 +3844,12 @@
                             
                             ${cliente.observacoes || cliente.fonte ? `
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('cliente-detalhes-outros')">
                                     <span><i class="fas fa-sticky-note"></i> Outras Informações</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 12px;">
+                                <div class="accordion-content" id="cliente-detalhes-outros-content">
+                                    <div style="display: grid; gap: 12px; padding: 16px;">
                                         ${cliente.fonte ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Fonte do Lead</div>
@@ -3568,6 +3909,30 @@
                     
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
+                    
+                    // Configurar accordions do modal
+                    setTimeout(() => {
+                        const accordions = tempModal.querySelectorAll('.accordion');
+                        accordions.forEach(accordion => {
+                            accordion.classList.remove('active');
+                            const header = accordion.querySelector('.accordion-header');
+                            const content = accordion.querySelector('.accordion-content');
+                            
+                            header.addEventListener('click', () => {
+                                accordion.classList.toggle('active');
+                                const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                                if (icon) {
+                                    if (accordion.classList.contains('active')) {
+                                        icon.classList.remove('fa-chevron-down');
+                                        icon.classList.add('fa-chevron-up');
+                                    } else {
+                                        icon.classList.remove('fa-chevron-up');
+                                        icon.classList.add('fa-chevron-down');
+                                    }
+                                }
+                            });
+                        });
+                    }, 10);
                 },
                 
                 generatePDF: function(clienteId) {
@@ -3931,12 +4296,12 @@
                             </div>
                             
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-valores')">
                                     <span><i class="fas fa-dollar-sign"></i> Valores</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 12px;">
+                                <div class="accordion-content" id="imovel-detalhes-valores-content">
+                                    <div style="display: grid; gap: 12px; padding: 16px;">
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Valor</div>
                                             <div style="font-weight: 600; font-size: 1.2rem; color: var(--primary);">
@@ -3964,12 +4329,12 @@
                             </div>
                             
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-endereco')">
                                     <span><i class="fas fa-map-marker-alt"></i> Endereço</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; gap: 8px;">
+                                <div class="accordion-content" id="imovel-detalhes-endereco-content">
+                                    <div style="display: grid; gap: 8px; padding: 16px;">
                                         <div style="font-weight: 600;">${imovel.endereco.logradouro}, ${imovel.endereco.numero}</div>
                                         ${imovel.endereco.complemento ? `<div>${imovel.endereco.complemento}</div>` : ''}
                                         <div>${imovel.endereco.bairro}</div>
@@ -3980,12 +4345,12 @@
                             </div>
                             
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-caracteristicas')">
                                     <span><i class="fas fa-clipboard-list"></i> Características</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                                <div class="accordion-content" id="imovel-detalhes-caracteristicas-content">
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px;">
                                         ${imovel.caracteristicas.areaTotal ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Área Total</div>
@@ -4031,7 +4396,7 @@
                                     </div>
                                     
                                     ${imovel.caracteristicas.especiais && imovel.caracteristicas.especiais.length > 0 ? `
-                                    <div style="margin-top: 16px;">
+                                    <div style="margin-top: 16px; padding: 0 16px 16px;">
                                         <div style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 8px;">Características Especiais</div>
                                         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                                             ${imovel.caracteristicas.especiais.map(caracteristica => `
@@ -4045,18 +4410,20 @@
                             
                             ${imovel.fotos && imovel.fotos.length > 0 ? `
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-fotos')">
                                     <span><i class="fas fa-camera"></i> Fotos (${imovel.fotos.length})</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div class="imovel-photos">
-                                        ${imovel.fotos.map((foto, index) => `
-                                            <img src="${foto}" class="imovel-photo" onclick="UI.viewPhoto('${imovel.id}', ${index})">
-                                        `).join('')}
-                                    </div>
-                                    <div style="text-align: center; margin-top: 12px; font-size: 0.8rem; color: var(--secondary);">
-                                        Clique nas fotos para visualizar em tela cheia
+                                <div class="accordion-content" id="imovel-detalhes-fotos-content">
+                                    <div style="padding: 16px;">
+                                        <div class="imovel-photos">
+                                            ${imovel.fotos.map((foto, index) => `
+                                                <img src="${foto}" class="imovel-photo" onclick="UI.viewPhoto('${imovel.id}', ${index})">
+                                            `).join('')}
+                                        </div>
+                                        <div style="text-align: center; margin-top: 12px; font-size: 0.8rem; color: var(--secondary);">
+                                            Clique nas fotos para visualizar em tela cheia
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -4064,12 +4431,14 @@
                             
                             ${imovel.observacoes ? `
                             <div class="accordion" style="margin-bottom: 12px;">
-                                <div class="accordion-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'; this.querySelector('i').classList.toggle('fa-chevron-down'); this.querySelector('i').classList.toggle('fa-chevron-up')">
+                                <div class="accordion-header" onclick="UI.toggleAccordion('imovel-detalhes-observacoes')">
                                     <span><i class="fas fa-sticky-note"></i> Observações</span>
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
-                                <div class="accordion-content" style="display: none; padding: 16px; border-top: 1px solid var(--border);">
-                                    <div>${imovel.observacoes}</div>
+                                <div class="accordion-content" id="imovel-detalhes-observacoes-content">
+                                    <div style="padding: 16px;">
+                                        <div>${imovel.observacoes}</div>
+                                    </div>
                                 </div>
                             </div>
                             ` : ''}
@@ -4112,6 +4481,30 @@
                     
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
+                    
+                    // Configurar accordions do modal
+                    setTimeout(() => {
+                        const accordions = tempModal.querySelectorAll('.accordion');
+                        accordions.forEach(accordion => {
+                            accordion.classList.remove('active');
+                            const header = accordion.querySelector('.accordion-header');
+                            const content = accordion.querySelector('.accordion-content');
+                            
+                            header.addEventListener('click', () => {
+                                accordion.classList.toggle('active');
+                                const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                                if (icon) {
+                                    if (accordion.classList.contains('active')) {
+                                        icon.classList.remove('fa-chevron-down');
+                                        icon.classList.add('fa-chevron-up');
+                                    } else {
+                                        icon.classList.remove('fa-chevron-up');
+                                        icon.classList.add('fa-chevron-down');
+                                    }
+                                }
+                            });
+                        });
+                    }, 10);
                 },
                 
                 generatePDF: function(imovelId) {
@@ -4356,6 +4749,20 @@
                                 observacoesCaptacao: document.getElementById('a-obs-captacao').value
                             };
                             break;
+                        case 'vistoria':
+                            camposEspecificos = {
+                                imovelId: document.getElementById('a-imovel-vistoria').value,
+                                tipoVistoria: document.getElementById('a-tipo-vistoria').value,
+                                itensVistoria: document.getElementById('a-itens-vistoria').value
+                            };
+                            break;
+                        case 'entrega':
+                            camposEspecificos = {
+                                imovelId: document.getElementById('a-imovel-entrega').value,
+                                tipoEntrega: document.getElementById('a-tipo-entrega').value,
+                                documentosEntrega: document.getElementById('a-documentos-entrega').value
+                            };
+                            break;
                     }
                     
                     const agenda = {
@@ -4376,7 +4783,8 @@
                     Sistema.saveData();
                     UI.closeModal('agenda-generico');
                     UI.showToast('Agendamento salvo com sucesso');
-                    UI.renderAgenda();
+                    UI.renderCalendar();
+                    UI.showDayEvents(data);
                     UI.renderDashboard();
                 },
                 
@@ -4385,7 +4793,7 @@
                     if (agenda) {
                         agenda.status = 'confirmado';
                         Sistema.saveData();
-                        UI.renderAgenda();
+                        UI.showDayEvents(agenda.data);
                         UI.showToast('Agendamento confirmado');
                     }
                 },
@@ -4396,7 +4804,7 @@
                         if (agenda) {
                             agenda.status = 'cancelado';
                             Sistema.saveData();
-                            UI.renderAgenda();
+                            UI.showDayEvents(agenda.data);
                             UI.showToast('Agendamento cancelado');
                         }
                     }
@@ -4491,6 +4899,50 @@
                                 <div>
                                     <div style="font-size: 0.8rem; color: var(--secondary);">Atividades</div>
                                     <div>${agenda.atividades}</div>
+                                </div>
+                                ` : ''}
+                            `;
+                            break;
+                        case 'vistoria':
+                            detalhes = `
+                                ${imovel ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
+                                    <div style="font-weight: 600;">${imovel.nome}</div>
+                                </div>
+                                ` : ''}
+                                ${agenda.tipoVistoria ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Vistoria</div>
+                                    <div style="font-weight: 600;">${agenda.tipoVistoria}</div>
+                                </div>
+                                ` : ''}
+                                ${agenda.itensVistoria ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Itens a Verificar</div>
+                                    <div>${agenda.itensVistoria}</div>
+                                </div>
+                                ` : ''}
+                            `;
+                            break;
+                        case 'entrega':
+                            detalhes = `
+                                ${imovel ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Imóvel</div>
+                                    <div style="font-weight: 600;">${imovel.nome}</div>
+                                </div>
+                                ` : ''}
+                                ${agenda.tipoEntrega ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Tipo de Entrega</div>
+                                    <div style="font-weight: 600;">${agenda.tipoEntrega}</div>
+                                </div>
+                                ` : ''}
+                                ${agenda.documentosEntrega ? `
+                                <div>
+                                    <div style="font-size: 0.8rem; color: var(--secondary);">Documentos para Entrega</div>
+                                    <div>${agenda.documentosEntrega}</div>
                                 </div>
                                 ` : ''}
                             `;
@@ -5330,31 +5782,24 @@
                 }
             });
             
-            // Abrir todos os accordions nos modais por padrão
+            // Configurar accordions nos modais
             setTimeout(() => {
                 document.querySelectorAll('.accordion').forEach(accordion => {
                     const header = accordion.querySelector('.accordion-header');
-                    const content = accordion.querySelector('.accordion-content');
-                    if (header && content) {
-                        header.addEventListener('click', function() {
-                            const icon = this.querySelector('i.fa-chevron-down, i.fa-chevron-up');
-                            if (content.style.display === 'none') {
-                                content.style.display = 'block';
-                                if (icon) {
-                                    icon.classList.remove('fa-chevron-down');
-                                    icon.classList.add('fa-chevron-up');
-                                }
-                            } else {
-                                content.style.display = 'none';
-                                if (icon) {
-                                    icon.classList.remove('fa-chevron-up');
-                                    icon.classList.add('fa-chevron-down');
-                                }
-                            }
-                        });
+                    const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    
+                    if (accordion.classList.contains('active')) {
+                        if (icon) {
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        }
                     }
+                    
+                    header.addEventListener('click', () => {
+                        UI.toggleAccordion(accordion.id);
+                    });
                 });
-            }, 500);
+            }, 100);
         });
     </script>
 </body>
