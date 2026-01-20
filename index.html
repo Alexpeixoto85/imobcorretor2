@@ -143,6 +143,56 @@
         }
 
         /* --- Dashboard Stats --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .dashboard-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .quick-action-btn {
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .quick-action-btn:active {
+            transform: scale(0.98);
+            background: var(--light);
+        }
+        
+        .quick-action-btn.primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -193,6 +243,46 @@
             letter-spacing: 0.5px;
         }
 
+        /* --- Dashboard Sections --- */
+        .dashboard-section {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-action {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .section-action:active {
+            opacity: 0.7;
+        }
+
         /* --- Funil Personalizável --- */
         .funnel-config {
             background: var(--surface);
@@ -214,16 +304,18 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 10px;
+            padding: 12px;
             background: var(--light);
             border-radius: var(--radius-sm);
             border-left: 4px solid var(--primary);
-            position: relative;
+            flex-wrap: nowrap;
+            overflow-x: auto;
         }
         
         .stage-color-picker {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
             border-radius: 6px;
             border: 2px solid var(--border);
             cursor: pointer;
@@ -232,12 +324,11 @@
         
         .stage-name-input {
             flex: 1;
-            min-width: 0;
-            padding: 6px 10px;
+            min-width: 120px;
+            padding: 8px 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 0.85rem;
-            max-width: 120px;
+            font-size: 0.9rem;
         }
         
         .stage-actions {
@@ -247,15 +338,16 @@
         }
         
         .stage-btn {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
             border-radius: 8px;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             transition: all 0.2s ease;
             flex-shrink: 0;
         }
@@ -326,28 +418,27 @@
         }
         
         .level-label {
-            min-width: 100px;
+            min-width: 120px;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--dark);
             display: flex;
             align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
+            gap: 8px;
         }
         
         .level-icon {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
         
         .level-bar-container {
             flex: 1;
-            height: 28px;
+            height: 30px;
             background: var(--light);
             border-radius: 6px;
             overflow: hidden;
@@ -360,8 +451,8 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding: 0 10px;
-            font-size: 0.75rem;
+            padding: 0 12px;
+            font-size: 0.8rem;
             font-weight: 700;
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -369,12 +460,11 @@
         }
         
         .level-stats {
-            min-width: 50px;
+            min-width: 60px;
             text-align: right;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--secondary);
-            flex-shrink: 0;
         }
 
         /* --- Metas Mensais --- */
@@ -403,6 +493,9 @@
             font-weight: 600;
             color: var(--dark);
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .meta-value {
@@ -412,12 +505,13 @@
         }
         
         .meta-input {
-            width: 100px;
+            width: 120px;
             padding: 8px 12px;
             border: 1px solid var(--border);
             border-radius: 8px;
             text-align: right;
             font-weight: 600;
+            font-size: 0.9rem;
         }
         
         .meta-progress {
@@ -433,22 +527,27 @@
             border-radius: 3px;
             transition: width 0.3s ease;
         }
-
-        /* --- Cards & Lists --- */
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-            color: var(--dark);
+        
+        .edit-meta-btn {
+            padding: 6px 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
         
-        .section-title i {
-            color: var(--primary);
+        .edit-meta-btn:active {
+            transform: scale(0.95);
         }
 
+        /* --- Cards & Lists --- */
         .search-container {
             position: relative;
             margin-bottom: 16px;
@@ -505,6 +604,9 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .card-title {
@@ -512,6 +614,9 @@
             font-size: 1rem;
             color: var(--dark);
             flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .card-subtitle {
@@ -521,6 +626,7 @@
             gap: 6px;
             align-items: center;
             margin-bottom: 4px;
+            flex-wrap: wrap;
         }
 
         .tag {
@@ -531,6 +637,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .tag-primary { background: #dbeafe; color: var(--primary); }
@@ -542,14 +649,16 @@
 
         .action-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-top: 12px;
             padding-top: 12px;
             border-top: 1px solid var(--border);
+            flex-wrap: wrap;
         }
         
         .btn-sm {
             flex: 1;
+            min-width: 80px;
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -561,6 +670,7 @@
             gap: 6px;
             cursor: pointer;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .btn-sm:active {
@@ -703,7 +813,7 @@
             transform: scale(0.95);
         }
 
-        /* --- Modais --- */
+        /* --- Modals --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -814,11 +924,6 @@
             -webkit-appearance: none;
         }
         
-        .form-control.money {
-            font-family: 'Inter', monospace;
-            letter-spacing: 0.5px;
-        }
-        
         .form-control:focus {
             background: white;
             border-color: var(--primary);
@@ -838,6 +943,11 @@
             background-position: right 16px center;
             background-size: 16px;
             padding-right: 40px;
+        }
+        
+        .form-control.money {
+            text-align: right;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-block {
@@ -1008,7 +1118,18 @@
             border-radius: 20px;
             font-size: 0.7rem;
             font-weight: 700;
-            margin-left: 8px;
+            white-space: nowrap;
+        }
+        
+        .birthday-today {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* --- Relatórios --- */
@@ -1116,12 +1237,27 @@
                 height: 40px;
             }
             
-            .stage-name-input {
-                max-width: 100px;
+            .quick-actions {
+                flex-direction: column;
+                width: 100%;
             }
             
-            .funnel-stage-item {
-                gap: 6px;
+            .quick-action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quick-actions {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 8px;
             }
         }
 
@@ -1212,6 +1348,7 @@
             font-size: 0.7rem;
             font-weight: 700;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .badge-primary {
@@ -1355,12 +1492,12 @@
             color: var(--dark);
         }
         
-        /* --- Links Úteis --- */
+        /* --- Links Importantes --- */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 12px;
-            margin-bottom: 20px;
+            margin-top: 16px;
         }
         
         .link-card {
@@ -1371,9 +1508,6 @@
             border: 1px solid var(--border);
             transition: all 0.2s ease;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
         
         .link-card:active {
@@ -1384,69 +1518,97 @@
             width: 40px;
             height: 40px;
             background: var(--light);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
             color: var(--primary);
-        }
-        
-        .link-info {
-            flex: 1;
+            margin-bottom: 12px;
         }
         
         .link-title {
             font-weight: 700;
             font-size: 0.9rem;
             color: var(--dark);
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            word-break: break-word;
         }
         
         .link-url {
             font-size: 0.75rem;
             color: var(--secondary);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            word-break: break-all;
         }
         
-        .link-actions {
-            display: flex;
-            gap: 4px;
+        /* --- Logo Upload --- */
+        .logo-upload-container {
+            margin-bottom: 20px;
         }
         
-        .link-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            border: none;
+        .logo-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            border: 2px dashed var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: var(--light);
+        }
+        
+        .logo-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* --- Dashboard Quick Stats --- */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-stat {
+            background: var(--surface);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
         }
         
-        .link-btn:active {
-            transform: scale(0.95);
+        .quick-stat:active {
+            transform: scale(0.98);
         }
         
-        .link-btn-edit {
-            background: #e0f2fe;
+        .quick-stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--primary);
+            line-height: 1;
+            margin-bottom: 4px;
         }
         
-        .link-btn-delete {
-            background: #fee2e2;
-            color: var(--danger);
+        .quick-stat-label {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand">
+        <div class="brand" id="brand-logo">
             <i class="fas fa-home"></i>
             <span>ImobiManager Pro</span>
         </div>
@@ -1463,39 +1625,77 @@
     <div id="toast" class="toast"></div>
 
     <main>
-        <!-- Dashboard View -->
+        <!-- Dashboard View (MELHORADA) -->
         <div id="dashboard-view" class="view active">
-            <div class="section-title">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-                <span class="badge badge-primary" id="birthday-count" style="display:none">0</span>
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                    <span class="badge badge-primary" id="birthday-count" style="display:none">0</span>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="UI.showModal('cliente', 'new')">
+                        <i class="fas fa-user-plus"></i> Cliente
+                    </button>
+                    <button class="quick-action-btn" onclick="UI.showModal('imovel', 'new')">
+                        <i class="fas fa-home"></i> Imóvel
+                    </button>
+                    <button class="quick-action-btn primary" onclick="UI.showAgendaModalForDate(null)">
+                        <i class="fas fa-calendar-plus"></i> Agendar
+                    </button>
+                </div>
             </div>
             
-            <div class="stats-grid" id="dashboard-stats">
-                <!-- Stats dinâmicas -->
+            <div class="quick-stats" id="quick-stats">
+                <!-- Stats rápidas -->
             </div>
             
-            <div class="section-title">
-                <i class="fas fa-birthday-cake"></i> Aniversários do Mês
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-birthday-cake"></i> Aniversários do Mês
+                    </div>
+                    <div class="section-action" onclick="UI.showBirthdaysList()">
+                        Ver todos <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div id="birthday-list"></div>
             </div>
-            <div id="birthday-list"></div>
             
-            <div class="section-title">
-                <i class="fas fa-calendar-day"></i> Agenda Hoje
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-calendar-day"></i> Agenda de Hoje
+                    </div>
+                    <div class="section-action" onclick="UI.switchTab(document.querySelector('[data-target=\"agenda-view\"]'))">
+                        Ver agenda <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div id="agenda-today-list"></div>
             </div>
-            <div id="agenda-today-list"></div>
             
-            <div class="section-title">
-                <i class="fas fa-filter"></i> Funil - Visão Geral
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-filter"></i> Funil de Vendas
+                    </div>
+                    <div class="section-action" onclick="UI.switchTab(document.querySelector('[data-target=\"funil-view\"]'))">
+                        Ver funil <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div id="funnel-overview"></div>
             </div>
-            <div id="funnel-overview"></div>
             
-            <div class="section-title">
-                <i class="fas fa-link"></i> Links Úteis
-                <button class="btn-sm btn-primary" onclick="UI.showModal('link', 'new')" style="padding: 6px 12px;">
-                    <i class="fas fa-plus"></i> Novo
-                </button>
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-link"></i> Links Importantes
+                    </div>
+                    <div class="section-action" onclick="UI.showLinksModal()">
+                        Gerenciar <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div id="links-dashboard-list"></div>
             </div>
-            <div id="links-list"></div>
         </div>
 
         <!-- Clientes View -->
@@ -1530,7 +1730,7 @@
 
         <!-- Funil View -->
         <div id="funil-view" class="view">
-            <div class="section-title">
+            <div class="section-title" style="margin-bottom: 20px;">
                 <i class="fas fa-filter"></i> Funil de Vendas
             </div>
             
@@ -1631,7 +1831,7 @@
         </a>
     </nav>
 
-    <!-- Modal de Cliente (Completo) -->
+    <!-- Modal de Cliente -->
     <div class="modal-overlay" id="modal-cliente">
         <div class="modal">
             <div class="modal-header">
@@ -1773,8 +1973,8 @@
                             <div class="form-group">
                                 <label class="form-label">Faixa de Valor (R$)</label>
                                 <div style="display: flex; gap: 12px;">
-                                    <input type="text" id="c-valor-min" class="form-control money" placeholder="Mínimo" oninput="formatCurrency(this)">
-                                    <input type="text" id="c-valor-max" class="form-control money" placeholder="Máximo" oninput="formatCurrency(this)">
+                                    <input type="text" id="c-valor-min" class="form-control money" placeholder="Mínimo" oninput="Utils.formatMoney(this)">
+                                    <input type="text" id="c-valor-max" class="form-control money" placeholder="Máximo" oninput="Utils.formatMoney(this)">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1829,7 +2029,7 @@
         </div>
     </div>
 
-    <!-- Modal de Imóvel (Completo) -->
+    <!-- Modal de Imóvel -->
     <div class="modal-overlay" id="modal-imovel">
         <div class="modal">
             <div class="modal-header">
@@ -1856,7 +2056,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Valor (R$)</label>
-                                <input type="text" id="i-valor" class="form-control money" required oninput="formatCurrency(this)">
+                                <input type="text" id="i-valor" class="form-control money" required 
+                                       oninput="Utils.formatMoney(this)" placeholder="0,00">
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Data de Entrega/Disponibilidade</label>
@@ -1895,11 +2096,13 @@
                         <div class="accordion-content">
                             <div class="form-group">
                                 <label class="form-label">Valor do Condomínio (R$)</label>
-                                <input type="text" id="i-condominio" class="form-control money" oninput="formatCurrency(this)">
+                                <input type="text" id="i-condominio" class="form-control money" 
+                                       oninput="Utils.formatMoney(this)" placeholder="0,00">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">IPTU (R$)</label>
-                                <input type="text" id="i-iptu" class="form-control money" oninput="formatCurrency(this)">
+                                <input type="text" id="i-iptu" class="form-control money" 
+                                       oninput="Utils.formatMoney(this)" placeholder="0,00">
                             </div>
                         </div>
                     </div>
@@ -2077,7 +2280,7 @@
         </div>
     </div>
 
-    <!-- Modal de Agendamento Genérico (ATUALIZADO para Plantão) -->
+    <!-- Modal de Agendamento -->
     <div class="modal-overlay" id="modal-agenda-generico">
         <div class="modal">
             <div class="modal-header">
@@ -2089,7 +2292,7 @@
                 </button>
             </div>
             <div class="modal-body" id="modal-agenda-body">
-                <!-- Conteúdo dinâmico baseado no tipo -->
+                <!-- Conteúdo dinâmico -->
             </div>
         </div>
     </div>
@@ -2117,7 +2320,8 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Meta de Receita (R$)</label>
-                        <input type="text" id="meta-receita" class="form-control money" required oninput="formatCurrency(this)">
+                        <input type="text" id="meta-receita" class="form-control money" required 
+                               oninput="Utils.formatMoney(this)" placeholder="0,00">
                     </div>
                 </form>
             </div>
@@ -2132,7 +2336,7 @@
         </div>
     </div>
 
-    <!-- Photo Viewer (MELHORADO) -->
+    <!-- Photo Viewer -->
     <div class="photo-viewer" id="photo-viewer">
         <button class="photo-close" onclick="UI.closePhotoViewer()">
             <i class="fas fa-times"></i>
@@ -2150,7 +2354,7 @@
         </div>
     </div>
 
-    <!-- Modal de Configurações -->
+    <!-- Modal de Configurações (MELHORADO) -->
     <div class="modal-overlay" id="modal-settings">
         <div class="modal">
             <div class="modal-header">
@@ -2162,25 +2366,83 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-settings" onsubmit="App.settings.save(event)">
+                <form id="form-settings" onsubmit="Settings.save(event)">
                     <div class="form-group">
-                        <label class="form-label">Nome do Corretor</label>
+                        <label class="form-label required">Nome do Corretor</label>
                         <input type="text" id="s-nome" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">CRECI</label>
+                        <label class="form-label required">CRECI</label>
                         <input type="text" id="s-creci" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Telefone para Contato</label>
-                        <input type="text" id="s-telefone" class="form-control" placeholder="(11) 99999-9999" required>
+                        <label class="form-label required">Telefone para Contato</label>
+                        <input type="text" id="s-telefone" class="form-control" required placeholder="(11) 99999-9999">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">E-mail</label>
-                        <input type="email" id="s-email" class="form-control" placeholder="seu@email.com" required>
+                        <label class="form-label required">E-mail</label>
+                        <input type="email" id="s-email" class="form-control" required placeholder="seu@email.com">
                     </div>
                     
-                    <div class="modal-footer" style="padding: 0; border: none; margin-top: 20px;">
+                    <div class="logo-upload-container">
+                        <label class="form-label">Logo do Corretor</label>
+                        <div class="logo-preview" id="logo-preview">
+                            <i class="fas fa-building" style="font-size: 2rem; color: var(--secondary);"></i>
+                        </div>
+                        <div class="file-input-container">
+                            <label for="logo-file" class="file-input-label">
+                                <i class="fas fa-image"></i> Selecionar Logo
+                            </label>
+                            <input type="file" id="logo-file" class="file-input" accept="image/*" onchange="Settings.handleLogoUpload(this)">
+                        </div>
+                    </div>
+                    
+                    <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
+                        <i class="fas fa-link"></i> Links Importantes
+                    </div>
+                    
+                    <div id="links-list">
+                        <!-- Links dinâmicos -->
+                    </div>
+                    
+                    <button type="button" class="btn-block btn-secondary" onclick="Settings.addLink()" style="margin-bottom: 20px;">
+                        <i class="fas fa-plus"></i> Adicionar Link
+                    </button>
+                    
+                    <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
+                        <i class="fas fa-database"></i> Backup e Restauração
+                    </div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportData()">
+                            <i class="fas fa-download"></i> Exportar Backup
+                        </button>
+                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
+                            <i class="fas fa-home"></i> Backup Imóveis
+                        </button>
+                    </div>
+                    
+                    <div class="file-input-container">
+                        <label for="backup-file" class="file-input-label">
+                            <i class="fas fa-upload"></i> Importar Backup
+                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de qualquer estrutura</span>
+                        </label>
+                        <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importUniversalData(this)">
+                    </div>
+                    
+                    <div class="file-input-container" style="margin-top: 12px;">
+                        <label for="backup-imoveis-file" class="file-input-label">
+                            <i class="fas fa-home"></i> Importar Imóveis
+                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
+                        </label>
+                        <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
+                    </div>
+                    
+                    <button type="button" class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 24px;">
+                        <i class="fas fa-trash"></i> Limpar Todos os Dados
+                    </button>
+                    
+                    <div style="display: flex; gap: 12px; margin-top: 24px;">
                         <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('settings')">
                             Cancelar
                         </button>
@@ -2189,39 +2451,6 @@
                         </button>
                     </div>
                 </form>
-                
-                <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
-                    <i class="fas fa-database"></i> Backup e Restauração
-                </div>
-                
-                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-                    <button class="btn-block btn-secondary" onclick="App.backup.exportData()">
-                        <i class="fas fa-download"></i> Exportar Backup
-                    </button>
-                    <button class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
-                        <i class="fas fa-home"></i> Backup Imóveis
-                    </button>
-                </div>
-                
-                <div class="file-input-container">
-                    <label for="backup-file" class="file-input-label">
-                        <i class="fas fa-upload"></i> Importar Backup Completo
-                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de qualquer estrutura</span>
-                    </label>
-                    <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importData(this)">
-                </div>
-                
-                <div class="file-input-container" style="margin-top: 12px;">
-                    <label for="backup-imoveis-file" class="file-input-label">
-                        <i class="fas fa-home"></i> Importar Imóveis
-                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
-                    </label>
-                    <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
-                </div>
-                
-                <button class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 24px;">
-                    <i class="fas fa-trash"></i> Limpar Todos os Dados
-                </button>
             </div>
         </div>
     </div>
@@ -2243,7 +2472,7 @@
         </div>
     </div>
 
-    <!-- Modal de Plantão Detalhado (Melhorado) -->
+    <!-- Modal de Plantão Detalhado -->
     <div class="modal-overlay" id="modal-plantao-detalhado">
         <div class="modal" style="max-width: 600px;">
             <div class="modal-header">
@@ -2260,59 +2489,80 @@
         </div>
     </div>
 
-    <!-- Modal de Links Úteis -->
-    <div class="modal-overlay" id="modal-link">
+    <!-- Modal de Links -->
+    <div class="modal-overlay" id="modal-links">
         <div class="modal">
             <div class="modal-header">
-                <h3 class="modal-title" id="modal-link-title">
-                    <i class="fas fa-link"></i> Novo Link Útil
+                <h3 class="modal-title">
+                    <i class="fas fa-link"></i> Links Importantes
                 </h3>
-                <button class="modal-close" onclick="UI.closeModal('link')">
+                <button class="modal-close" onclick="UI.closeModal('links')">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-link" onsubmit="App.link.save(event)">
-                    <input type="hidden" id="l-id">
-                    <div class="form-group">
-                        <label class="form-label required">Título do Link</label>
-                        <input type="text" id="l-titulo" class="form-control" required placeholder="Ex: Portal do CRECI">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label required">URL</label>
-                        <input type="url" id="l-url" class="form-control" required placeholder="https://exemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Categoria</label>
-                        <select id="l-categoria" class="form-control">
-                            <option value="geral">Geral</option>
-                            <option value="creci">CRECI</option>
-                            <option value="ferramentas">Ferramentas</option>
-                            <option value="imobiliarias">Imobiliárias</option>
-                            <option value="financiamento">Financiamento</option>
-                            <option value="documentos">Documentos</option>
-                            <option value="sites">Sites</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Ícone (Font Awesome)</label>
-                        <input type="text" id="l-icone" class="form-control" placeholder="fas fa-link">
-                        <small style="color: var(--secondary); font-size: 0.8rem;">Use classes do Font Awesome, ex: fas fa-link, fas fa-globe, fas fa-file-pdf</small>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('link')">
-                    Cancelar
-                </button>
-                <button type="submit" form="form-link" class="btn-block">
-                    Salvar Link
+                <div id="links-management-list"></div>
+                <button class="btn-block" onclick="Settings.addLink()" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Adicionar Novo Link
                 </button>
             </div>
         </div>
     </div>
 
     <script>
+        // --- UTILIDADES ---
+        const Utils = {
+            // Formatar valor monetário
+            formatMoney: function(input) {
+                let value = input.value.replace(/\D/g, '');
+                value = (value / 100).toFixed(2) + '';
+                value = value.replace('.', ',');
+                value = value.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+                value = value.replace(/(\d)(\d{3}),/g, "$1.$2,");
+                input.value = value;
+            },
+            
+            // Converter string monetária para número
+            parseMoney: function(str) {
+                if (!str) return 0;
+                return parseFloat(str.replace(/\./g, '').replace(',', '.'));
+            },
+            
+            // Formatar número para exibição monetária
+            formatCurrency: function(num) {
+                return num.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+            },
+            
+            // Verificar se é aniversário hoje
+            isBirthdayToday: function(birthdate) {
+                if (!birthdate) return false;
+                const hoje = new Date();
+                const nascimento = new Date(birthdate);
+                return nascimento.getMonth() === hoje.getMonth() && 
+                       nascimento.getDate() === hoje.getDate();
+            },
+            
+            // Gerar ID único
+            generateId: function(prefix = '') {
+                return prefix + '_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            },
+            
+            // Validar URL
+            isValidUrl: function(string) {
+                try {
+                    new URL(string);
+                    return true;
+                } catch (_) {
+                    return false;
+                }
+            }
+        };
+
         // --- SISTEMA PRINCIPAL ---
         const Sistema = {
             // Dados
@@ -2340,7 +2590,8 @@
                     nome: 'Corretor',
                     creci: '00000',
                     telefone: '',
-                    email: ''
+                    email: '',
+                    logo: ''
                 }
             },
             
@@ -2350,7 +2601,14 @@
                 UI.init();
                 this.checkBirthdays();
                 this.updateDashboard();
-                this.renderLinks();
+                
+                // Atualizar logo se existir
+                if (this.data.settings.logo) {
+                    document.getElementById('brand-logo').innerHTML = `
+                        <img src="${this.data.settings.logo}" style="height: 32px; width: auto; border-radius: 6px;">
+                        <span>ImobiManager Pro</span>
+                    `;
+                }
             },
             
             // Carregar dados do localStorage
@@ -2359,12 +2617,9 @@
                 if (saved) {
                     const data = JSON.parse(saved);
                     this.data = data;
-                    if (!this.data.plantoes) {
-                        this.data.plantoes = [];
-                    }
-                    if (!this.data.links) {
-                        this.data.links = [];
-                    }
+                    if (!this.data.plantoes) this.data.plantoes = [];
+                    if (!this.data.links) this.data.links = [];
+                    if (!this.data.settings.logo) this.data.settings.logo = '';
                 }
             },
             
@@ -2382,6 +2637,17 @@
                     if (!cliente.nascimento) return false;
                     const [ano, mes, dia] = cliente.nascimento.split('-');
                     return parseInt(mes) === mesAtual;
+                });
+            },
+            
+            // Verificar aniversários hoje
+            checkBirthdaysToday: function() {
+                const hoje = new Date();
+                return this.data.clientes.filter(cliente => {
+                    if (!cliente.nascimento) return false;
+                    const [ano, mes, dia] = cliente.nascimento.split('-');
+                    return parseInt(mes) === hoje.getMonth() + 1 && 
+                           parseInt(dia) === hoje.getDate();
                 });
             },
             
@@ -2409,78 +2675,14 @@
                     ).length,
                     leadsAtivos: this.data.clientes.filter(c => 
                         c.status === 'lead' || c.status === 'prospect'
-                    ).length
+                    ).length,
+                    aniversariosMes: this.checkBirthdays().length,
+                    aniversariosHoje: this.checkBirthdaysToday().length
                 };
                 
                 return stats;
-            },
-            
-            // Renderizar links
-            renderLinks: function() {
-                const linksList = document.getElementById('links-list');
-                if (!linksList) return;
-                
-                if (this.data.links.length === 0) {
-                    linksList.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-link"></i>
-                            <p>Nenhum link útil cadastrado</p>
-                            <button class="btn-block" onclick="UI.showModal('link', 'new')" style="margin-top: 20px;">
-                                <i class="fas fa-plus"></i> Adicionar Primeiro Link
-                            </button>
-                        </div>
-                    `;
-                } else {
-                    linksList.innerHTML = this.data.links.map(link => `
-                        <div class="link-card">
-                            <div class="link-icon">
-                                <i class="${link.icone || 'fas fa-link'}"></i>
-                            </div>
-                            <div class="link-info" onclick="window.open('${link.url}', '_blank')">
-                                <div class="link-title">${link.titulo}</div>
-                                <div class="link-url">${link.url}</div>
-                            </div>
-                            <div class="link-actions">
-                                <button class="link-btn link-btn-edit" onclick="event.stopPropagation(); App.link.edit('${link.id}')">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="link-btn link-btn-delete" onclick="event.stopPropagation(); App.link.delete('${link.id}')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                }
             }
         };
-
-        // --- FUNÇÕES AUXILIARES ---
-        function formatCurrency(input) {
-            // Remove tudo que não é número
-            let value = input.value.replace(/\D/g, '');
-            
-            // Converte para número
-            let number = parseFloat(value) / 100;
-            
-            // Formata como moeda brasileira
-            if (!isNaN(number)) {
-                input.value = number.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).replace('R$', '').trim();
-            } else {
-                input.value = '';
-            }
-        }
-
-        function parseCurrency(value) {
-            if (!value) return 0;
-            // Remove R$, pontos e vírgulas, mantém apenas números
-            const numberStr = value.replace(/[^\d,]/g, '').replace(',', '.');
-            return parseFloat(numberStr) || 0;
-        }
 
         // --- INTERFACE DO USUÁRIO ---
         const UI = {
@@ -2489,24 +2691,28 @@
             currentPhotoIndex: 0,
             currentPhotoImovelId: null,
             calendarDate: new Date(),
-            selectedClientesPlantao: [], // Array para armazenar clientes selecionados no plantão
+            selectedClientesPlantao: [],
             isPhotoZoomed: false,
-            photoStartX: 0,
-            photoStartY: 0,
             
             init: function() {
                 this.renderDashboard();
                 this.setupEventListeners();
                 this.setupAccordions();
+                
+                // Verificar aniversários hoje e mostrar alerta
+                const birthdaysToday = Sistema.checkBirthdaysToday();
+                if (birthdaysToday.length > 0) {
+                    setTimeout(() => {
+                        UI.showToast(`🎉 Hoje é aniversário de ${birthdaysToday.length} cliente(s)!`, 'success');
+                    }, 1000);
+                }
             },
             
             setupEventListeners: function() {
-                // Prevenir comportamento padrão dos links
                 document.querySelectorAll('.bottom-nav a').forEach(link => {
                     link.addEventListener('click', e => e.preventDefault());
                 });
                 
-                // Adicionar evento de teclado para navegação de fotos
                 document.addEventListener('keydown', (e) => {
                     const photoViewer = document.getElementById('photo-viewer');
                     if (photoViewer.classList.contains('active')) {
@@ -2520,53 +2726,28 @@
                     }
                 });
                 
-                // Adicionar evento de swipe para fotos (mobile) - MELHORADO
+                // Eventos de swipe para fotos
                 const photoViewer = document.getElementById('photo-viewer');
                 let touchStartX = 0;
-                let touchStartY = 0;
-                let touchEndX = 0;
-                let touchEndY = 0;
                 
                 photoViewer.addEventListener('touchstart', (e) => {
                     touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                    this.photoStartX = touchStartX;
-                    this.photoStartY = touchStartY;
                 });
                 
                 photoViewer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-                    
-                    // Calcular distância
+                    const touchEndX = e.changedTouches[0].screenX;
                     const diffX = touchStartX - touchEndX;
-                    const diffY = touchStartY - touchEndY;
                     
-                    // Verificar se é um swipe horizontal (mais horizontal que vertical)
-                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 30) {
-                        if (diffX > 50) {
-                            // Swipe para esquerda = próxima foto
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
                             this.nextPhoto();
-                        } else if (diffX < -50) {
-                            // Swipe para direita = foto anterior
+                        } else {
                             this.prevPhoto();
                         }
                     }
-                    
-                    // Toque duplo para zoom
-                    const now = new Date().getTime();
-                    const lastTouch = this.lastTouch || 0;
-                    const diffTime = now - lastTouch;
-                    
-                    if (diffTime < 300 && diffTime > 0) {
-                        // Toque duplo detectado
-                        this.togglePhotoZoom();
-                    }
-                    
-                    this.lastTouch = now;
                 });
                 
-                // Adicionar evento de toque duplo para zoom
+                // Toque duplo para zoom
                 const fullscreenPhoto = document.getElementById('fullscreen-photo');
                 fullscreenPhoto.addEventListener('dblclick', (e) => {
                     this.togglePhotoZoom();
@@ -2574,7 +2755,6 @@
             },
             
             setupAccordions: function() {
-                // Configurar todos os accordions para funcionar corretamente
                 document.querySelectorAll('.accordion').forEach(accordion => {
                     const header = accordion.querySelector('.accordion-header');
                     const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -2591,7 +2771,6 @@
                         }
                     }
                     
-                    // Corrigido: Remover evento duplicado e usar o correto
                     header.onclick = (e) => {
                         e.stopPropagation();
                         this.toggleAccordion(accordion.id);
@@ -2600,28 +2779,19 @@
             },
             
             switchTab: function(element) {
-                // Remover classe active de todas as tabs
                 document.querySelectorAll('.nav-item').forEach(tab => {
                     tab.classList.remove('active');
                 });
                 
-                // Remover classe active de todas as views
                 document.querySelectorAll('.view').forEach(view => {
                     view.classList.remove('active');
                 });
                 
-                // Adicionar classe active à tab clicada
                 element.classList.add('active');
-                
-                // Mostrar a view correspondente
                 const target = element.getAttribute('data-target');
                 document.getElementById(target).classList.add('active');
                 this.currentView = target;
-                
-                // Atualizar o conteúdo da view
                 this.updateView(target);
-                
-                // Atualizar FAB
                 this.updateFab();
             },
             
@@ -2652,11 +2822,9 @@
                 const fab = document.getElementById('main-fab');
                 const submenu = document.getElementById('fab-submenu');
                 
-                // Fechar submenu se estiver aberto
                 submenu.classList.remove('active');
                 this.fabOpen = false;
                 
-                // Atualizar ações do FAB baseado na view atual
                 let html = '';
                 
                 switch(this.currentView) {
@@ -2713,66 +2881,71 @@
             // Renderização de Views
             renderDashboard: function() {
                 const stats = Sistema.updateDashboard();
-                const birthdays = Sistema.checkBirthdays();
                 
-                // Stats - Cards clicáveis (CORRIGIDO)
-                document.getElementById('dashboard-stats').innerHTML = `
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'clientes-view\\']'))">
-                        <div class="stat-icon" style="background: #dbeafe; color: #3b82f6;">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-value">${stats.totalClientes}</div>
-                        <div class="stat-label">Clientes</div>
+                // Stats rápidas
+                document.getElementById('quick-stats').innerHTML = `
+                    <div class="quick-stat" onclick="UI.switchTab(document.querySelector('[data-target=\\'clientes-view\\']'))">
+                        <div class="quick-stat-value">${stats.totalClientes}</div>
+                        <div class="quick-stat-label">Clientes</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'imoveis-view\\']'))">
-                        <div class="stat-icon" style="background: #f3e8ff; color: #8b5cf6;">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="stat-value">${stats.totalImoveis}</div>
-                        <div class="stat-label">Imóveis</div>
+                    <div class="quick-stat" onclick="UI.switchTab(document.querySelector('[data-target=\\'imoveis-view\\']'))">
+                        <div class="quick-stat-value">${stats.totalImoveis}</div>
+                        <div class="quick-stat-label">Imóveis</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'funil-view\\']'))">
-                        <div class="stat-icon" style="background: #dcfce7; color: #16a34a;">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="stat-value">${stats.vendasMes}</div>
-                        <div class="stat-label">Vendas/Mês</div>
+                    <div class="quick-stat" onclick="UI.switchTab(document.querySelector('[data-target=\\'funil-view\\']'))">
+                        <div class="quick-stat-value">${stats.vendasMes}</div>
+                        <div class="quick-stat-label">Vendas</div>
                     </div>
-                    <div class="stat-card" onclick="UI.switchTab(document.querySelector('[data-target=\\'agenda-view\\']'))">
-                        <div class="stat-icon" style="background: #fef3c7; color: #d97706;">
-                            <i class="fas fa-calendar-day"></i>
-                        </div>
-                        <div class="stat-value">${stats.agendaHoje}</div>
-                        <div class="stat-label">Agenda Hoje</div>
+                    <div class="quick-stat" onclick="UI.switchTab(document.querySelector('[data-target=\\'agenda-view\\']'))">
+                        <div class="quick-stat-value">${stats.agendaHoje}</div>
+                        <div class="quick-stat-label">Agenda</div>
                     </div>
                 `;
                 
                 // Aniversários
+                const birthdays = Sistema.checkBirthdays();
                 const birthdayList = document.getElementById('birthday-list');
+                const birthdayCount = document.getElementById('birthday-count');
+                
                 if (birthdays.length > 0) {
-                    document.getElementById('birthday-count').style.display = 'inline-block';
-                    document.getElementById('birthday-count').textContent = birthdays.length;
+                    birthdayCount.style.display = 'inline-block';
+                    birthdayCount.textContent = birthdays.length;
                     
-                    birthdayList.innerHTML = birthdays.slice(0, 3).map(cliente => `
-                        <div class="list-card birthday" onclick="App.cliente.showDetails('${cliente.id}')">
-                            <div class="card-header">
-                                <div class="card-title">${cliente.nome}</div>
-                                <span class="birthday-badge">
-                                    <i class="fas fa-birthday-cake"></i> Aniversário
-                                </span>
+                    const birthdaysToday = Sistema.checkBirthdaysToday();
+                    const todayCount = birthdaysToday.length;
+                    
+                    if (todayCount > 0) {
+                        birthdayList.innerHTML = `
+                            <div class="list-card birthday" style="border-left-color: #ef4444;">
+                                <div class="card-header">
+                                    <div class="card-title">🎉 ${todayCount} Aniversário(s) Hoje!</div>
+                                </div>
+                                <div class="action-row">
+                                    <button class="btn-sm btn-warning" onclick="UI.showBirthdaysList()">
+                                        <i class="fas fa-birthday-cake"></i> Ver Todos
+                                    </button>
+                                </div>
                             </div>
-                            <div class="card-subtitle">
-                                <i class="fas fa-phone"></i> ${cliente.telefone}
+                        `;
+                    } else {
+                        birthdayList.innerHTML = birthdays.slice(0, 2).map(cliente => `
+                            <div class="list-card birthday" onclick="App.cliente.showDetails('${cliente.id}')">
+                                <div class="card-header">
+                                    <div class="card-title">${cliente.nome}</div>
+                                    ${Utils.isBirthdayToday(cliente.nascimento) ? 
+                                        `<span class="birthday-badge birthday-today">HOJE!</span>` : 
+                                        `<span class="birthday-badge">Aniversário</span>`
+                                    }
+                                </div>
+                                <div class="card-subtitle">
+                                    <i class="fas fa-phone"></i> ${cliente.telefone}
+                                </div>
                             </div>
-                            <div class="action-row">
-                                <button class="btn-sm btn-warning" onclick="event.stopPropagation(); App.whatsapp.sendBirthdayMessage('${cliente.id}')">
-                                    <i class="fab fa-whatsapp"></i> Parabéns
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
+                        `).join('');
+                    }
                 } else {
                     birthdayList.innerHTML = '<div class="empty-state"><p>Nenhum aniversário este mês</p></div>';
+                    birthdayCount.style.display = 'none';
                 }
                 
                 // Agenda de hoje
@@ -2799,11 +2972,99 @@
                     agendaList.innerHTML = '<div class="empty-state"><p>Nenhum agendamento para hoje</p></div>';
                 }
                 
+                // Links importantes
+                const linksList = document.getElementById('links-dashboard-list');
+                if (Sistema.data.links.length > 0) {
+                    linksList.innerHTML = Sistema.data.links.slice(0, 4).map(link => `
+                        <div class="link-card" onclick="window.open('${link.url}', '_blank')">
+                            <div class="link-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div class="link-title">${link.title}</div>
+                            <div class="link-url">${link.url.substring(0, 30)}...</div>
+                        </div>
+                    `).join('');
+                } else {
+                    linksList.innerHTML = '<div class="empty-state"><p>Nenhum link cadastrado</p></div>';
+                }
+                
                 // Visão geral do funil
                 Funnel.renderOverview();
+            },
+            
+            showBirthdaysList: function() {
+                const birthdays = Sistema.checkBirthdays();
+                const birthdaysToday = Sistema.checkBirthdaysToday();
                 
-                // Links Úteis
-                Sistema.renderLinks();
+                let html = '<div style="padding: 20px;">';
+                html += '<h3 style="margin-bottom: 16px;">🎂 Aniversários do Mês</h3>';
+                
+                if (birthdaysToday.length > 0) {
+                    html += '<h4 style="color: #ef4444; margin-bottom: 12px;">🎉 Aniversariantes de Hoje</h4>';
+                    html += birthdaysToday.map(cliente => `
+                        <div class="list-card birthday" style="margin-bottom: 12px; border-left-color: #ef4444;">
+                            <div class="card-header">
+                                <div class="card-title">${cliente.nome}</div>
+                                <span class="birthday-badge birthday-today">HOJE!</span>
+                            </div>
+                            <div class="card-subtitle">
+                                <i class="fas fa-phone"></i> ${cliente.telefone}
+                            </div>
+                            <div class="action-row">
+                                <button class="btn-sm btn-warning" onclick="App.whatsapp.sendBirthdayMessage('${cliente.id}')">
+                                    <i class="fab fa-whatsapp"></i> Parabéns
+                                </button>
+                                <button class="btn-sm btn-primary" onclick="App.cliente.showDetails('${cliente.id}')">
+                                    <i class="fas fa-eye"></i> Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                if (birthdays.length > birthdaysToday.length) {
+                    html += '<h4 style="margin-top: 20px; margin-bottom: 12px;">Outros Aniversários do Mês</h4>';
+                    const outrosAniversarios = birthdays.filter(c => !Utils.isBirthdayToday(c.nascimento));
+                    html += outrosAniversarios.map(cliente => {
+                        const nascimento = new Date(cliente.nascimento);
+                        const dia = nascimento.getDate();
+                        return `
+                            <div class="list-card" style="margin-bottom: 12px;">
+                                <div class="card-header">
+                                    <div class="card-title">${cliente.nome}</div>
+                                    <span class="tag tag-warning">Dia ${dia}</span>
+                                </div>
+                                <div class="card-subtitle">
+                                    <i class="fas fa-phone"></i> ${cliente.telefone}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+                
+                html += '</div>';
+                
+                // Criar modal
+                const tempModal = document.createElement('div');
+                tempModal.className = 'modal-overlay active';
+                tempModal.innerHTML = `
+                    <div class="modal">
+                        <div class="modal-header">
+                            <h3 class="modal-title">
+                                <i class="fas fa-birthday-cake"></i> Aniversários
+                            </h3>
+                            <button class="modal-close" onclick="this.parentElement.parentElement.parentElement.classList.remove('active')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ${html}
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(tempModal);
+                document.body.style.overflow = 'hidden';
             },
             
             renderClientes: function(filter = '') {
@@ -2831,18 +3092,14 @@
                     `;
                 } else {
                     clientesList.innerHTML = clientes.map(cliente => {
-                        const hoje = new Date();
-                        const nascimento = cliente.nascimento ? new Date(cliente.nascimento) : null;
-                        const isBirthday = nascimento && 
-                                          nascimento.getMonth() === hoje.getMonth() && 
-                                          nascimento.getDate() === hoje.getDate();
+                        const isBirthdayToday = Utils.isBirthdayToday(cliente.nascimento);
                         
                         return `
-                            <div class="list-card ${isBirthday ? 'birthday' : ''}" onclick="App.cliente.showDetails('${cliente.id}')">
+                            <div class="list-card ${isBirthdayToday ? 'birthday' : ''}" onclick="App.cliente.showDetails('${cliente.id}')">
                                 <div class="card-header">
                                     <div class="card-title">${cliente.nome}</div>
-                                    ${isBirthday ? `
-                                        <span class="birthday-badge">
+                                    ${isBirthdayToday ? `
+                                        <span class="birthday-badge birthday-today">
                                             <i class="fas fa-birthday-cake"></i> Hoje!
                                         </span>
                                     ` : ''}
@@ -2855,7 +3112,7 @@
                                         <i class="fas fa-edit"></i> Editar
                                     </button>
                                     <button class="btn-sm btn-success" onclick="event.stopPropagation(); App.whatsapp.openConversa('${cliente.id}')">
-                                        <i class="fab fa-whatsapp"></i> Zap
+                                        <i class="fab fa-whatsapp"></i> WhatsApp
                                     </button>
                                     <button class="btn-sm btn-secondary" onclick="event.stopPropagation(); App.cliente.generatePDF('${cliente.id}')">
                                         <i class="fas fa-file-pdf"></i> PDF
@@ -2895,7 +3152,7 @@
                         <div class="list-card" onclick="App.imovel.showDetails('${imovel.id}')">
                             <div class="card-header">
                                 <div class="card-title">${imovel.nome}</div>
-                                <span class="tag tag-success">${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                <span class="tag tag-success">${Utils.formatCurrency(imovel.valor)}</span>
                             </div>
                             ${imovel.fotos && imovel.fotos.length > 0 ? `
                                 <div class="imovel-photos">
@@ -2925,22 +3182,16 @@
                 const year = this.calendarDate.getFullYear();
                 const month = this.calendarDate.getMonth();
                 
-                // Nome do mês em português
                 const monthNames = [
                     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                     'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
                 ];
                 
-                // Primeiro dia do mês
                 const firstDay = new Date(year, month, 1);
-                // Último dia do mês
                 const lastDay = new Date(year, month + 1, 0);
-                // Dia da semana do primeiro dia (0 = Domingo, 1 = Segunda, etc.)
                 const firstDayWeekday = firstDay.getDay();
-                // Total de dias no mês
                 const totalDays = lastDay.getDate();
                 
-                // Construir calendário
                 let calendarHTML = `
                     <div class="calendar-header">
                         <div class="calendar-title">${monthNames[month]} ${year}</div>
@@ -2970,12 +3221,10 @@
                     <div class="calendar-days">
                 `;
                 
-                // Dias vazios antes do primeiro dia do mês
                 for (let i = 0; i < firstDayWeekday; i++) {
                     calendarHTML += `<div class="calendar-day other-month"></div>`;
                 }
                 
-                // Dias do mês
                 for (let day = 1; day <= totalDays; day++) {
                     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                     const events = Sistema.data.agenda.filter(a => a.data === dateStr);
@@ -2986,7 +3235,6 @@
                     if (isToday) classes.push('today');
                     if (hasEvent) classes.push('has-event');
                     
-                    // CORRIGIDO: Agora ao clicar em uma data, abre modal de agendamento
                     calendarHTML += `
                         <div class="${classes.join(' ')}" onclick="UI.selectDateAndOpenModal('${dateStr}')">
                             ${day}
@@ -2995,8 +3243,7 @@
                     `;
                 }
                 
-                // Dias vazios após o último dia do mês (para completar 6 semanas)
-                const totalCells = 42; // 6 semanas * 7 dias
+                const totalCells = 42;
                 const usedCells = firstDayWeekday + totalDays;
                 for (let i = usedCells; i < totalCells; i++) {
                     calendarHTML += `<div class="calendar-day other-month"></div>`;
@@ -3005,12 +3252,9 @@
                 calendarHTML += `</div>`;
                 
                 document.getElementById('calendar-container').innerHTML = calendarHTML;
-                
-                // Mostrar eventos do dia selecionado (hoje por padrão)
                 this.showDayEvents(hoje.toISOString().split('T')[0]);
             },
             
-            // NOVO MÉTODO: Seleciona data e abre modal
             selectDateAndOpenModal: function(dateStr) {
                 this.selectDate(dateStr);
                 this.showAgendaModalForDate(dateStr);
@@ -3072,18 +3316,15 @@
             },
             
             selectDate: function(dateStr) {
-                // Remover seleção anterior
                 document.querySelectorAll('.calendar-day.selected').forEach(day => {
                     day.classList.remove('selected');
                 });
                 
-                // Adicionar seleção ao dia clicado
                 const dayElement = document.querySelector(`.calendar-day[onclick*="${dateStr}"]`);
                 if (dayElement) {
                     dayElement.classList.add('selected');
                 }
                 
-                // Mostrar eventos do dia selecionado
                 this.showDayEvents(dateStr);
             },
             
@@ -3104,7 +3345,6 @@
             
             showAgendaModalForDate: function(dateStr) {
                 this.showModal('agenda-generico');
-                // Configurar data se fornecida
                 setTimeout(() => {
                     if (dateStr) {
                         const dateInput = document.getElementById('a-data');
@@ -3115,17 +3355,12 @@
                 }, 100);
             },
             
-            // Buscas
             searchClientes: function(term) {
                 this.renderClientes(term);
             },
             
             searchImoveis: function(term) {
                 this.renderImoveis(term);
-            },
-            
-            searchAgenda: function(term) {
-                this.renderAgenda(term);
             },
             
             // Modais
@@ -3147,7 +3382,6 @@
                             document.getElementById('modal-imovel-title').innerHTML = '<i class="fas fa-home"></i> Novo Imóvel';
                             this.resetImovelForm();
                             
-                            // Configurar data atual como padrão para data de entrega
                             const hoje = new Date().toISOString().split('T')[0];
                             document.getElementById('i-data-entrega').value = hoje;
                         } else if (action === 'edit' && id) {
@@ -3159,49 +3393,32 @@
                         this.showAgendaModal();
                         break;
                         
-                    case 'link':
-                        if (action === 'new') {
-                            document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-link"></i> Novo Link Útil';
-                            this.resetLinkForm();
-                        } else if (action === 'edit' && id) {
-                            App.link.edit(id);
-                        }
-                        break;
-                        
-                    case 'settings':
-                        document.getElementById('s-nome').value = Sistema.data.settings.nome;
-                        document.getElementById('s-creci').value = Sistema.data.settings.creci;
-                        document.getElementById('s-telefone').value = Sistema.data.settings.telefone || '';
-                        document.getElementById('s-email').value = Sistema.data.settings.email || '';
+                    case 'metas':
+                        document.getElementById('meta-leads').value = Sistema.data.funnel.metas.leads;
+                        document.getElementById('meta-vendas').value = Sistema.data.funnel.metas.vendas;
+                        document.getElementById('meta-receita').value = Utils.formatCurrency(Sistema.data.funnel.metas.receita);
                         break;
                 }
                 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
-                // CORREÇÃO: Configurar accordions após mostrar o modal
                 setTimeout(() => {
                     this.setupAccordionsForModal(modal);
                 }, 10);
             },
             
-            // NOVO MÉTODO: Configurar accordions específicos para modais
             setupAccordionsForModal: function(modal) {
                 const accordions = modal.querySelectorAll('.accordion');
                 accordions.forEach(accordion => {
                     const header = accordion.querySelector('.accordion-header');
                     const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
                     
-                    // Remover evento anterior
-                    header.onclick = null;
-                    
-                    // Adicionar novo evento
                     header.onclick = (e) => {
                         e.stopPropagation();
                         this.toggleAccordion(accordion.id);
                     };
                     
-                    // Configurar estado inicial
                     if (accordion.classList.contains('active')) {
                         if (icon) {
                             icon.classList.remove('fa-chevron-down');
@@ -3241,7 +3458,6 @@
                 document.getElementById('c-estado').value = '';
                 document.getElementById('c-status').value = 'lead';
                 
-                // Resetar accordions
                 document.querySelectorAll('#modal-cliente .accordion').forEach(acc => {
                     acc.classList.remove('active');
                     const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -3256,7 +3472,6 @@
                     }
                 });
                 
-                // Primeiro accordion aberto por padrão
                 const firstAccordion = document.getElementById('cliente-dados-pessoais');
                 firstAccordion.classList.add('active');
                 const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
@@ -3297,11 +3512,9 @@
                 document.getElementById('i-estado').value = '';
                 document.getElementById('i-status').value = 'disponivel';
                 
-                // Limpar fotos
                 App.imovel.fotosTemporarias = [];
                 document.getElementById('imovel-photos-preview').innerHTML = '';
                 
-                // Resetar accordions
                 document.querySelectorAll('#modal-imovel .accordion').forEach(acc => {
                     acc.classList.remove('active');
                     const icon = acc.querySelector('.fa-chevron-down, .fa-chevron-up');
@@ -3316,7 +3529,6 @@
                     }
                 });
                 
-                // Primeiro accordion aberto por padrão
                 const firstAccordion = document.getElementById('imovel-basico');
                 firstAccordion.classList.add('active');
                 const firstIcon = firstAccordion.querySelector('.fa-chevron-down');
@@ -3331,15 +3543,6 @@
                 }
             },
             
-            resetLinkForm: function() {
-                document.getElementById('l-id').value = '';
-                document.getElementById('l-titulo').value = '';
-                document.getElementById('l-url').value = '';
-                document.getElementById('l-categoria').value = 'geral';
-                document.getElementById('l-icone').value = 'fas fa-link';
-            },
-            
-            // NOVO: Modal de agendamento com multi-seleção para plantão
             showAgendaModal: function() {
                 const modalBody = document.getElementById('modal-agenda-body');
                 modalBody.innerHTML = `
@@ -3394,16 +3597,13 @@
                     </div>
                 `;
                 
-                // Inicializar campos
                 this.updateAgendaFields();
                 
-                // Configurar accordions
                 setTimeout(() => {
                     this.setupAccordionsForModal(document.getElementById('modal-agenda-generico'));
                 }, 10);
             },
             
-            // ATUALIZADO: Campos específicos para plantão com multi-seleção
             updateAgendaFields: function() {
                 const tipo = document.getElementById('a-tipo')?.value;
                 const fieldsDiv = document.getElementById('agenda-fields');
@@ -3433,7 +3633,6 @@
                         break;
                         
                     case 'plantao':
-                        // Limpar seleção anterior
                         this.selectedClientesPlantao = [];
                         
                         fieldsHTML = `
@@ -3478,15 +3677,7 @@
                         `;
                         break;
                         
-                    case 'assinatura':
-                    case 'proposta':
-                    case 'reuniao':
-                    case 'negociacao':
-                    case 'captacao':
-                    case 'vistoria':
-                    case 'entrega':
-                    case 'followup':
-                    case 'outro':
+                    default:
                         fieldsHTML = `
                             <div class="form-group">
                                 <label class="form-label required">Cliente</label>
@@ -3502,7 +3693,6 @@
                 fieldsDiv.innerHTML = fieldsHTML;
             },
             
-            // NOVO: Toggle para selecionar/deselecionar clientes no plantão
             toggleClientePlantao: function(clienteId, isChecked) {
                 if (isChecked) {
                     if (!this.selectedClientesPlantao.includes(clienteId)) {
@@ -3511,12 +3701,6 @@
                 } else {
                     this.selectedClientesPlantao = this.selectedClientesPlantao.filter(id => id !== clienteId);
                 }
-                
-                // Atualizar contador se existir
-                const counter = document.getElementById('plantao-clientes-counter');
-                if (counter) {
-                    counter.textContent = `${this.selectedClientesPlantao.length} cliente(s) selecionado(s)`;
-                }
             },
             
             closeModal: function(type) {
@@ -3524,13 +3708,11 @@
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
                 
-                // Limpar seleção de clientes do plantão
                 if (type === 'agenda-generico') {
                     this.selectedClientesPlantao = [];
                 }
             },
             
-            // Accordion - CORREÇÃO PRINCIPAL
             toggleAccordion: function(id) {
                 const accordion = document.getElementById(id);
                 if (!accordion) return;
@@ -3539,7 +3721,6 @@
                 const content = accordion.querySelector('.accordion-content');
                 
                 if (accordion.classList.contains('active')) {
-                    // Fechar
                     accordion.classList.remove('active');
                     if (icon) {
                         icon.classList.remove('fa-chevron-up');
@@ -3550,7 +3731,6 @@
                         content.style.padding = '0';
                     }
                 } else {
-                    // Abrir
                     accordion.classList.add('active');
                     if (icon) {
                         icon.classList.remove('fa-chevron-down');
@@ -3563,7 +3743,7 @@
                 }
             },
             
-            // Visualizador de fotos MELHORADO
+            // Visualizador de fotos
             viewPhoto: function(imovelId, photoIndex) {
                 const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                 if (imovel && imovel.fotos && imovel.fotos[photoIndex]) {
@@ -3578,7 +3758,6 @@
                     img.src = imovel.fotos[photoIndex];
                     counter.textContent = `${photoIndex + 1}/${imovel.fotos.length}`;
                     
-                    // Resetar zoom
                     img.style.transform = 'scale(1)';
                     img.style.cursor = 'grab';
                     viewer.classList.remove('zoomed');
@@ -3588,7 +3767,6 @@
                 }
             },
             
-            // NOVO: Alternar zoom da foto
             togglePhotoZoom: function() {
                 const img = document.getElementById('fullscreen-photo');
                 const viewer = document.getElementById('photo-viewer');
@@ -3637,7 +3815,6 @@
                 img.src = imovel.fotos[this.currentPhotoIndex];
                 counter.textContent = `${this.currentPhotoIndex + 1}/${imovel.fotos.length}`;
                 
-                // Resetar zoom ao mudar de foto
                 this.isPhotoZoomed = false;
                 img.style.transform = 'scale(1)';
                 img.style.cursor = 'grab';
@@ -3654,7 +3831,31 @@
             
             // Configurações
             showSettings: function() {
-                this.showModal('settings');
+                document.getElementById('s-nome').value = Sistema.data.settings.nome;
+                document.getElementById('s-creci').value = Sistema.data.settings.creci;
+                document.getElementById('s-telefone').value = Sistema.data.settings.telefone || '';
+                document.getElementById('s-email').value = Sistema.data.settings.email || '';
+                
+                // Logo preview
+                const logoPreview = document.getElementById('logo-preview');
+                if (Sistema.data.settings.logo) {
+                    logoPreview.innerHTML = `<img src="${Sistema.data.settings.logo}" alt="Logo">`;
+                } else {
+                    logoPreview.innerHTML = `<i class="fas fa-building" style="font-size: 2rem; color: var(--secondary);"></i>`;
+                }
+                
+                // Links
+                Settings.renderLinksList();
+                
+                document.getElementById('modal-settings').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            },
+            
+            // Links
+            showLinksModal: function() {
+                Settings.renderLinksManagement();
+                document.getElementById('modal-links').classList.add('active');
+                document.body.style.overflow = 'hidden';
             },
             
             // Toast
@@ -3671,12 +3872,11 @@
                 }, 3000);
             },
             
-            // Modal de Plantão Detalhado (MELHORADO)
+            // Modal de Plantão Detalhado
             showPlantaoDetalhadoModal: function(plantaoId) {
                 const modal = document.getElementById('modal-plantao-detalhado');
                 const modalBody = document.getElementById('plantao-detalhado-body');
                 
-                // Buscar dados do plantão
                 const plantao = Sistema.data.plantoes.find(p => p.id === plantaoId) || {
                     id: plantaoId,
                     clientesAtendidos: [],
@@ -3685,8 +3885,6 @@
                 };
                 
                 const agenda = Sistema.data.agenda.find(a => a.id === plantaoId);
-                
-                // MELHORIA: Seleção múltipla de clientes
                 const clientesSelecionados = plantao.clientesAtendidos || [];
                 
                 modalBody.innerHTML = `
@@ -3913,7 +4111,7 @@
                                         <i class="fas fa-edit"></i> Editar
                                     </button>
                                     <button class="btn-sm btn-success" onclick="event.stopPropagation(); App.whatsapp.openConversa('${cliente.id}')">
-                                        <i class="fab fa-whatsapp"></i> Zap
+                                        <i class="fab fa-whatsapp"></i> WhatsApp
                                     </button>
                                 </div>
                             </div>
@@ -3929,7 +4127,6 @@
                 const diaAtual = hoje.getDate();
                 const diasNoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
                 
-                // Cálculo de progresso
                 const progressoLeads = Sistema.data.clientes.filter(c => c.status === 'lead' || c.status === 'prospect').length;
                 const progressoVendas = Sistema.data.clientes.filter(c => c.status === 'fechado').length;
                 const progressoReceita = Sistema.data.clientes
@@ -3943,7 +4140,7 @@
                 container.innerHTML = `
                     <div class="section-title" style="font-size: 1rem; margin-bottom: 16px;">
                         <i class="fas fa-bullseye"></i> Metas Mensais
-                        <button class="btn-sm btn-primary" onclick="UI.showModal('metas')" style="padding: 6px 12px; font-size: 0.8rem;">
+                        <button class="edit-meta-btn" onclick="UI.showModal('metas')">
                             <i class="fas fa-edit"></i> Editar
                         </button>
                     </div>
@@ -3977,7 +4174,7 @@
                             <i class="fas fa-money-bill-wave" style="color: #8b5cf6;"></i> Receita
                         </div>
                         <div class="meta-value">
-                            <span>${progressoReceita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} / ${metas.receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                            <span>${Utils.formatCurrency(progressoReceita)} / ${Utils.formatCurrency(metas.receita)}</span>
                         </div>
                     </div>
                     <div class="meta-progress">
@@ -3992,9 +4189,6 @@
             
             renderOverview: function() {
                 const container = document.getElementById('funnel-overview');
-                const metas = Sistema.data.funnel.metas;
-                
-                // Resumo do funil
                 const resumo = {
                     leads: Sistema.data.clientes.filter(c => c.status === 'lead' || c.status === 'prospect').length,
                     visitas: Sistema.data.clientes.filter(c => c.status === 'visita').length,
@@ -4016,10 +4210,9 @@
                 `;
             },
             
-            // Métodos de manipulação
             addStage: function() {
                 const stages = Sistema.data.funnel.stages;
-                const newId = 'stage_' + Date.now();
+                const newId = Utils.generateId('stage');
                 const newOrder = stages.length + 1;
                 const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
                 const icons = ['fas fa-user', 'fas fa-user-check', 'fas fa-eye', 'fas fa-file-contract', 'fas fa-handshake', 'fas fa-comment', 'fas fa-chart-line', 'fas fa-star'];
@@ -4047,7 +4240,6 @@
                 
                 Sistema.data.funnel.stages = Sistema.data.funnel.stages.filter(s => s.id !== stageId);
                 
-                // Reordenar
                 Sistema.data.funnel.stages.forEach((stage, index) => {
                     stage.order = index + 1;
                 });
@@ -4080,12 +4272,10 @@
                 const index = stages.findIndex(s => s.id === stageId);
                 
                 if (index > 0) {
-                    // Trocar ordens
                     const tempOrder = stages[index].order;
                     stages[index].order = stages[index - 1].order;
                     stages[index - 1].order = tempOrder;
                     
-                    // Ordenar array
                     stages.sort((a, b) => a.order - b.order);
                     Sistema.saveData();
                     this.render();
@@ -4097,12 +4287,10 @@
                 const index = stages.findIndex(s => s.id === stageId);
                 
                 if (index < stages.length - 1) {
-                    // Trocar ordens
                     const tempOrder = stages[index].order;
                     stages[index].order = stages[index + 1].order;
                     stages[index + 1].order = tempOrder;
                     
-                    // Ordenar array
                     stages.sort((a, b) => a.order - b.order);
                     Sistema.saveData();
                     this.render();
@@ -4118,13 +4306,136 @@
                 Sistema.data.funnel.metas = {
                     leads: parseInt(document.getElementById('meta-leads').value) || 0,
                     vendas: parseInt(document.getElementById('meta-vendas').value) || 0,
-                    receita: parseCurrency(document.getElementById('meta-receita').value) || 0
+                    receita: Utils.parseMoney(document.getElementById('meta-receita').value) || 0
                 };
                 
                 Sistema.saveData();
                 UI.closeModal('metas');
                 UI.showToast('Metas salvas com sucesso');
                 Funnel.renderMetas();
+                UI.renderDashboard();
+            }
+        };
+
+        // --- CONFIGURAÇÕES ---
+        const Settings = {
+            save: function(event) {
+                event.preventDefault();
+                
+                Sistema.data.settings = {
+                    nome: document.getElementById('s-nome').value,
+                    creci: document.getElementById('s-creci').value,
+                    telefone: document.getElementById('s-telefone').value,
+                    email: document.getElementById('s-email').value,
+                    logo: Sistema.data.settings.logo // Mantém o logo atual
+                };
+                
+                Sistema.saveData();
+                UI.closeModal('settings');
+                UI.showToast('Configurações salvas com sucesso');
+                
+                // Atualizar logo no header
+                if (Sistema.data.settings.logo) {
+                    document.getElementById('brand-logo').innerHTML = `
+                        <img src="${Sistema.data.settings.logo}" style="height: 32px; width: auto; border-radius: 6px;">
+                        <span>ImobiManager Pro</span>
+                    `;
+                }
+            },
+            
+            handleLogoUpload: function(input) {
+                const file = input.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    Sistema.data.settings.logo = e.target.result;
+                    const logoPreview = document.getElementById('logo-preview');
+                    logoPreview.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+                };
+                reader.readAsDataURL(file);
+            },
+            
+            addLink: function() {
+                const linkId = Utils.generateId('link');
+                Sistema.data.links.push({
+                    id: linkId,
+                    title: 'Novo Link',
+                    url: 'https://',
+                    icon: 'fas fa-link'
+                });
+                
+                Sistema.saveData();
+                this.renderLinksList();
+                UI.showToast('Link adicionado');
+            },
+            
+            removeLink: function(linkId) {
+                Sistema.data.links = Sistema.data.links.filter(l => l.id !== linkId);
+                Sistema.saveData();
+                this.renderLinksList();
+                UI.showToast('Link removido');
+            },
+            
+            updateLink: function(linkId, field, value) {
+                const link = Sistema.data.links.find(l => l.id === linkId);
+                if (link) {
+                    link[field] = value;
+                    Sistema.saveData();
+                }
+            },
+            
+            renderLinksList: function() {
+                const container = document.getElementById('links-list');
+                container.innerHTML = Sistema.data.links.map(link => `
+                    <div class="list-card" style="margin-bottom: 12px;">
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <div style="width: 40px; height: 40px; background: var(--light); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <i class="${link.icon}" style="color: var(--primary);"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <input type="text" class="form-control" value="${link.title}" 
+                                       onchange="Settings.updateLink('${link.id}', 'title', this.value)"
+                                       style="margin-bottom: 8px; font-size: 0.9rem;">
+                                <input type="text" class="form-control" value="${link.url}" 
+                                       onchange="Settings.updateLink('${link.id}', 'url', this.value)"
+                                       style="font-size: 0.8rem;">
+                            </div>
+                            <button class="btn-sm btn-danger" onclick="Settings.removeLink('${link.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            },
+            
+            renderLinksManagement: function() {
+                const container = document.getElementById('links-management-list');
+                if (Sistema.data.links.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>Nenhum link cadastrado</p></div>';
+                } else {
+                    container.innerHTML = Sistema.data.links.map(link => `
+                        <div class="list-card" style="margin-bottom: 12px;">
+                            <div class="card-header">
+                                <div class="card-title">${link.title}</div>
+                                <span class="tag tag-primary">
+                                    <i class="${link.icon}"></i>
+                                </span>
+                            </div>
+                            <div class="card-subtitle">
+                                <i class="fas fa-link"></i> ${link.url}
+                            </div>
+                            <div class="action-row">
+                                <button class="btn-sm btn-primary" onclick="window.open('${link.url}', '_blank')">
+                                    <i class="fas fa-external-link-alt"></i> Abrir
+                                </button>
+                                <button class="btn-sm btn-danger" onclick="Settings.removeLink('${link.id}')">
+                                    <i class="fas fa-trash"></i> Remover
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
             }
         };
 
@@ -4134,7 +4445,7 @@
                 save: function(event) {
                     event.preventDefault();
                     
-                    const id = document.getElementById('c-id').value || 'cliente_' + Date.now();
+                    const id = document.getElementById('c-id').value || Utils.generateId('cliente');
                     const nome = document.getElementById('c-nome').value;
                     const cpf = document.getElementById('c-cpf').value;
                     const nascimento = document.getElementById('c-nascimento').value;
@@ -4149,8 +4460,8 @@
                     const estado = document.getElementById('c-estado').value;
                     const cep = document.getElementById('c-cep').value;
                     const tipoInteresse = document.getElementById('c-tipo-interesse').value;
-                    const valorMin = parseCurrency(document.getElementById('c-valor-min').value);
-                    const valorMax = parseCurrency(document.getElementById('c-valor-max').value);
+                    const valorMin = Utils.parseMoney(document.getElementById('c-valor-min').value);
+                    const valorMax = Utils.parseMoney(document.getElementById('c-valor-max').value);
                     const bairrosInteresse = document.getElementById('c-bairros-interesse').value;
                     const fonte = document.getElementById('c-fonte').value;
                     const status = document.getElementById('c-status').value;
@@ -4167,8 +4478,8 @@
                         endereco: { logradouro, numero, complemento, bairro, cidade, estado, cep },
                         interesses: {
                             tipo: tipoInteresse,
-                            valorMin: valorMin,
-                            valorMax: valorMax,
+                            valorMin: valorMin || null,
+                            valorMax: valorMax || null,
                             bairros: bairrosInteresse ? bairrosInteresse.split(',').map(b => b.trim()) : []
                         },
                         fonte,
@@ -4177,7 +4488,6 @@
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
                     
-                    // Verificar se é edição ou novo
                     const index = Sistema.data.clientes.findIndex(c => c.id === id);
                     if (index >= 0) {
                         Sistema.data.clientes[index] = cliente;
@@ -4196,7 +4506,6 @@
                     const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                     if (!cliente) return;
                     
-                    // Preencher formulário
                     document.getElementById('c-id').value = cliente.id;
                     document.getElementById('c-nome').value = cliente.nome;
                     document.getElementById('c-cpf').value = cliente.cpf || '';
@@ -4217,8 +4526,8 @@
                     
                     if (cliente.interesses) {
                         document.getElementById('c-tipo-interesse').value = cliente.interesses.tipo || '';
-                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin ? cliente.interesses.valorMin.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
-                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax ? cliente.interesses.valorMax.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin ? Utils.formatCurrency(cliente.interesses.valorMin) : '';
+                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax ? Utils.formatCurrency(cliente.interesses.valorMax) : '';
                         document.getElementById('c-bairros-interesse').value = cliente.interesses.bairros ? cliente.interesses.bairros.join(', ') : '';
                     }
                     
@@ -4234,10 +4543,8 @@
                     const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                     if (!cliente) return;
                     
-                    // Obter etapa do funil
                     const stage = Sistema.data.funnel.stages.find(s => s.id === cliente.status) || { name: 'Não definido', color: '#64748b' };
                     
-                    // Modal de detalhes completo
                     const modalBody = `
                         <div style="padding: 20px;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
@@ -4332,9 +4639,9 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Faixa de Valor</div>
                                             <div style="font-weight: 600;">
-                                                ${cliente.interesses.valorMin ? 'R$ ' + cliente.interesses.valorMin.toLocaleString('pt-BR') : ''} 
+                                                ${cliente.interesses.valorMin ? Utils.formatCurrency(cliente.interesses.valorMin) : ''} 
                                                 ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''}
-                                                ${cliente.interesses.valorMax ? 'R$ ' + cliente.interesses.valorMax.toLocaleString('pt-BR') : ''}
+                                                ${cliente.interesses.valorMax ? Utils.formatCurrency(cliente.interesses.valorMax) : ''}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4395,7 +4702,6 @@
                         </div>
                     `;
                     
-                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -4417,7 +4723,6 @@
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
                     
-                    // Configurar accordions do modal
                     setTimeout(() => {
                         const accordions = tempModal.querySelectorAll('.accordion');
                         accordions.forEach(accordion => {
@@ -4458,7 +4763,6 @@
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF();
                     
-                    // Configurações
                     const settings = Sistema.data.settings;
                     const hoje = new Date().toLocaleDateString('pt-BR');
                     
@@ -4551,7 +4855,7 @@
                         }
                         
                         if (cliente.interesses.valorMin || cliente.interesses.valorMax) {
-                            const valorStr = `${cliente.interesses.valorMin ? 'R$ ' + cliente.interesses.valorMin.toLocaleString('pt-BR') : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? 'R$ ' + cliente.interesses.valorMax.toLocaleString('pt-BR') : ''}`;
+                            const valorStr = `${cliente.interesses.valorMin ? Utils.formatCurrency(cliente.interesses.valorMin) : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? Utils.formatCurrency(cliente.interesses.valorMax) : ''}`;
                             doc.text(`Faixa de Valor: ${valorStr}`, 20, y);
                             y += 7;
                         }
@@ -4611,14 +4915,14 @@
                 save: function(event) {
                     event.preventDefault();
                     
-                    const id = document.getElementById('i-id').value || 'imovel_' + Date.now();
+                    const id = document.getElementById('i-id').value || Utils.generateId('imovel');
                     const nome = document.getElementById('i-nome').value;
                     const tipo = document.getElementById('i-tipo').value;
                     const finalidade = document.getElementById('i-finalidade').value;
-                    const valor = parseCurrency(document.getElementById('i-valor').value);
+                    const valor = Utils.parseMoney(document.getElementById('i-valor').value) || 0;
                     const dataEntrega = document.getElementById('i-data-entrega').value;
-                    const condominio = parseCurrency(document.getElementById('i-condominio').value);
-                    const iptu = parseCurrency(document.getElementById('i-iptu').value);
+                    const condominio = Utils.parseMoney(document.getElementById('i-condominio').value) || null;
+                    const iptu = Utils.parseMoney(document.getElementById('i-iptu').value) || null;
                     const logradouro = document.getElementById('i-logradouro').value;
                     const numero = document.getElementById('i-numero').value;
                     const complemento = document.getElementById('i-complemento').value;
@@ -4661,7 +4965,6 @@
                         dataCadastro: new Date().toISOString().split('T')[0]
                     };
                     
-                    // Verificar se é edição ou novo
                     const index = Sistema.data.imoveis.findIndex(i => i.id === id);
                     if (index >= 0) {
                         Sistema.data.imoveis[index] = imovel;
@@ -4675,7 +4978,6 @@
                     UI.renderImoveis();
                     UI.renderDashboard();
                     
-                    // Limpar fotos temporárias
                     this.fotosTemporarias = [];
                 },
                 
@@ -4683,15 +4985,14 @@
                     const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                     if (!imovel) return;
                     
-                    // Preencher formulário
                     document.getElementById('i-id').value = imovel.id;
                     document.getElementById('i-nome').value = imovel.nome;
                     document.getElementById('i-tipo').value = imovel.tipo;
                     document.getElementById('i-finalidade').value = imovel.finalidade;
-                    document.getElementById('i-valor').value = imovel.valor ? imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                    document.getElementById('i-valor').value = Utils.formatCurrency(imovel.valor);
                     document.getElementById('i-data-entrega').value = imovel.dataEntrega || new Date().toISOString().split('T')[0];
-                    document.getElementById('i-condominio').value = imovel.condominio ? imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
-                    document.getElementById('i-iptu').value = imovel.iptu ? imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                    document.getElementById('i-condominio').value = imovel.condominio ? Utils.formatCurrency(imovel.condominio) : '';
+                    document.getElementById('i-iptu').value = imovel.iptu ? Utils.formatCurrency(imovel.iptu) : '';
                     
                     if (imovel.endereco) {
                         document.getElementById('i-logradouro').value = imovel.endereco.logradouro;
@@ -4716,7 +5017,6 @@
                     document.getElementById('i-status').value = imovel.status;
                     document.getElementById('i-observacoes').value = imovel.observacoes || '';
                     
-                    // Carregar fotos
                     this.fotosTemporarias = imovel.fotos || [];
                     this.renderFotosPreview();
                     
@@ -4759,7 +5059,6 @@
                     const imovel = Sistema.data.imoveis.find(i => i.id === imovelId);
                     if (!imovel) return;
                     
-                    // Modal de detalhes completo
                     const modalBody = `
                         <div style="padding: 20px;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
@@ -4786,14 +5085,14 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Valor</div>
                                             <div style="font-weight: 600; font-size: 1.2rem; color: var(--primary);">
-                                                ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                ${Utils.formatCurrency(imovel.valor)}
                                             </div>
                                         </div>
                                         ${imovel.condominio ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Condomínio</div>
                                             <div style="font-weight: 600;">
-                                                ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                ${Utils.formatCurrency(imovel.condominio)}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4801,7 +5100,7 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">IPTU</div>
                                             <div style="font-weight: 600;">
-                                                ${imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                ${Utils.formatCurrency(imovel.iptu)}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4940,7 +5239,6 @@
                         </div>
                     `;
                     
-                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -4962,7 +5260,6 @@
                     document.body.appendChild(tempModal);
                     document.body.style.overflow = 'hidden';
                     
-                    // Configurar accordions do modal
                     setTimeout(() => {
                         const accordions = tempModal.querySelectorAll('.accordion');
                         accordions.forEach(accordion => {
@@ -5003,193 +5300,192 @@
                     const { jsPDF } = window.jspdf;
                     const doc = new jsPDF('p', 'mm', 'a4');
                     
-                    // Configurações
                     const settings = Sistema.data.settings;
                     const hoje = new Date().toLocaleDateString('pt-BR');
                     
+                    // Configurações
+                    const pageWidth = doc.internal.pageSize.width;
+                    const margin = 20;
+                    const contentWidth = pageWidth - (margin * 2);
+                    
                     // Cabeçalho
                     doc.setFontSize(18);
-                    doc.text('FICHA DO IMÓVEL', 105, 20, { align: 'center' });
+                    doc.text('FICHA DO IMÓVEL', pageWidth / 2, 20, { align: 'center' });
                     
                     doc.setFontSize(10);
-                    doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
-                    doc.text(`Data: ${hoje}`, 20, 36);
+                    doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, margin, 30);
+                    doc.text(`Data: ${hoje}`, margin, 36);
                     
-                    // Dados do imóvel
                     let y = 50;
                     
+                    // Dados do imóvel
                     doc.setFontSize(12);
                     doc.setFont(undefined, 'bold');
-                    doc.text('DADOS DO IMÓVEL', 20, y);
+                    doc.text('DADOS DO IMÓVEL', margin, y);
                     y += 10;
                     
                     doc.setFontSize(10);
                     doc.setFont(undefined, 'normal');
-                    doc.text(`Nome/Descrição: ${imovel.nome}`, 20, y);
+                    doc.text(`Nome/Descrição: ${imovel.nome}`, margin, y);
                     y += 7;
-                    doc.text(`Tipo: ${imovel.tipo}`, 20, y);
+                    doc.text(`Tipo: ${imovel.tipo}`, margin, y);
                     y += 7;
-                    doc.text(`Finalidade: ${imovel.finalidade}`, 20, y);
+                    doc.text(`Finalidade: ${imovel.finalidade}`, margin, y);
                     y += 7;
-                    doc.text(`Status: ${imovel.status}`, 20, y);
+                    doc.text(`Status: ${imovel.status}`, margin, y);
                     y += 7;
-                    doc.text(`Valor: ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
+                    doc.text(`Valor: ${Utils.formatCurrency(imovel.valor)}`, margin, y);
                     y += 7;
                     
                     if (imovel.dataEntrega) {
-                        doc.text(`Data de Entrega: ${imovel.dataEntrega}`, 20, y);
+                        doc.text(`Data de Entrega: ${imovel.dataEntrega}`, margin, y);
                         y += 7;
                     }
                     
                     if (imovel.condominio) {
-                        doc.text(`Condomínio: ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
+                        doc.text(`Condomínio: ${Utils.formatCurrency(imovel.condominio)}`, margin, y);
                         y += 7;
                     }
                     
                     if (imovel.iptu) {
-                        doc.text(`IPTU: ${imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
+                        doc.text(`IPTU: ${Utils.formatCurrency(imovel.iptu)}`, margin, y);
                         y += 7;
                     }
                     
-                    doc.text(`Data de Cadastro: ${imovel.dataCadastro}`, 20, y);
-                    y += 7;
+                    doc.text(`Data de Cadastro: ${imovel.dataCadastro}`, margin, y);
+                    y += 10;
                     
                     // Endereço
                     if (imovel.endereco && imovel.endereco.logradouro) {
-                        y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
-                        doc.text('ENDEREÇO', 20, y);
+                        doc.text('ENDEREÇO', margin, y);
                         y += 10;
                         
                         doc.setFontSize(10);
                         doc.setFont(undefined, 'normal');
-                        doc.text(`${imovel.endereco.logradouro}, ${imovel.endereco.numero}`, 20, y);
+                        doc.text(`${imovel.endereco.logradouro}, ${imovel.endereco.numero}`, margin, y);
                         y += 7;
                         
                         if (imovel.endereco.complemento) {
-                            doc.text(`Complemento: ${imovel.endereco.complemento}`, 20, y);
+                            doc.text(`Complemento: ${imovel.endereco.complemento}`, margin, y);
                             y += 7;
                         }
                         
-                        doc.text(`Bairro: ${imovel.endereco.bairro}`, 20, y);
+                        doc.text(`Bairro: ${imovel.endereco.bairro}`, margin, y);
                         y += 7;
-                        doc.text(`Cidade: ${imovel.endereco.cidade} - ${imovel.endereco.estado}`, 20, y);
+                        doc.text(`Cidade: ${imovel.endereco.cidade} - ${imovel.endereco.estado}`, margin, y);
                         y += 7;
-                        doc.text(`CEP: ${imovel.endereco.cep}`, 20, y);
-                        y += 7;
+                        doc.text(`CEP: ${imovel.endereco.cep}`, margin, y);
+                        y += 10;
                     }
                     
                     // Características
                     if (imovel.caracteristicas) {
-                        y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
-                        doc.text('CARACTERÍSTICAS', 20, y);
+                        doc.text('CARACTERÍSTICAS', margin, y);
                         y += 10;
                         
                         doc.setFontSize(10);
                         doc.setFont(undefined, 'normal');
                         
                         if (imovel.caracteristicas.areaTotal) {
-                            doc.text(`Área Total: ${imovel.caracteristicas.areaTotal} m²`, 20, y);
+                            doc.text(`Área Total: ${imovel.caracteristicas.areaTotal} m²`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.areaConstruida) {
-                            doc.text(`Área Construída: ${imovel.caracteristicas.areaConstruida} m²`, 20, y);
+                            doc.text(`Área Construída: ${imovel.caracteristicas.areaConstruida} m²`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.quartos) {
-                            doc.text(`Quartos: ${imovel.caracteristicas.quartos}`, 20, y);
+                            doc.text(`Quartos: ${imovel.caracteristicas.quartos}`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.suites) {
-                            doc.text(`Suítes: ${imovel.caracteristicas.suites}`, 20, y);
+                            doc.text(`Suítes: ${imovel.caracteristicas.suites}`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.banheiros) {
-                            doc.text(`Banheiros: ${imovel.caracteristicas.banheiros}`, 20, y);
+                            doc.text(`Banheiros: ${imovel.caracteristicas.banheiros}`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.vagas) {
-                            doc.text(`Vagas: ${imovel.caracteristicas.vagas}`, 20, y);
+                            doc.text(`Vagas: ${imovel.caracteristicas.vagas}`, margin, y);
                             y += 7;
                         }
                         
                         if (imovel.caracteristicas.mobiliado) {
-                            doc.text(`Mobiliado: ${imovel.caracteristicas.mobiliado}`, 20, y);
+                            doc.text(`Mobiliado: ${imovel.caracteristicas.mobiliado}`, margin, y);
                             y += 7;
                         }
+                        y += 10;
+                    }
+                    
+                    // FOTOS - Layout otimizado (2 por linha)
+                    if (imovel.fotos && imovel.fotos.length > 0) {
+                        doc.setFontSize(12);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('FOTOS DO IMÓVEL', margin, y);
+                        y += 10;
+                        
+                        // Configurações para fotos
+                        const photoWidth = (contentWidth - 10) / 2; // 10px de gap entre fotos
+                        const photoHeight = photoWidth * 0.75; // Proporção 4:3
+                        
+                        // Processar fotos em grupos de 2
+                        for (let i = 0; i < imovel.fotos.length; i += 2) {
+                            // Verificar se há espaço na página
+                            if (y + photoHeight > doc.internal.pageSize.height - margin) {
+                                doc.addPage();
+                                y = margin;
+                            }
+                            
+                            // Primeira foto
+                            try {
+                                doc.addImage(imovel.fotos[i], 'JPEG', margin, y, photoWidth, photoHeight);
+                            } catch (e) {
+                                console.error('Erro ao adicionar imagem:', e);
+                                doc.text(`Foto ${i + 1}: Erro ao carregar`, margin, y);
+                            }
+                            
+                            // Segunda foto (se existir)
+                            if (i + 1 < imovel.fotos.length) {
+                                try {
+                                    doc.addImage(imovel.fotos[i + 1], 'JPEG', margin + photoWidth + 10, y, photoWidth, photoHeight);
+                                } catch (e) {
+                                    console.error('Erro ao adicionar imagem:', e);
+                                    doc.text(`Foto ${i + 2}: Erro ao carregar`, margin + photoWidth + 10, y);
+                                }
+                            }
+                            
+                            y += photoHeight + 10;
+                        }
+                        
+                        y += 10;
                     }
                     
                     // Observações
                     if (imovel.observacoes) {
-                        y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
-                        doc.text('OBSERVAÇÕES', 20, y);
+                        doc.text('OBSERVAÇÕES', margin, y);
                         y += 10;
                         
                         doc.setFontSize(10);
                         doc.setFont(undefined, 'normal');
-                        const observacoesLines = doc.splitTextToSize(imovel.observacoes, 170);
+                        const observacoesLines = doc.splitTextToSize(imovel.observacoes, contentWidth);
                         observacoesLines.forEach(line => {
-                            if (y < 270) {
-                                doc.text(line, 20, y);
+                            if (y < doc.internal.pageSize.height - margin) {
+                                doc.text(line, margin, y);
                                 y += 7;
                             }
                         });
-                    }
-                    
-                    // FOTOS - NOVA IMPLEMENTAÇÃO (2 fotos por linha)
-                    if (imovel.fotos && imovel.fotos.length > 0) {
-                        y += 10;
-                        doc.setFontSize(12);
-                        doc.setFont(undefined, 'bold');
-                        doc.text('FOTOS DO IMÓVEL', 20, y);
-                        y += 15;
-                        
-                        // Calcular tamanho das fotos (2 por linha)
-                        const photoWidth = 85; // 85mm cada (2 por linha = 170mm)
-                        const photoHeight = 60; // Altura padrão
-                        const startX = 20;
-                        
-                        for (let i = 0; i < imovel.fotos.length; i++) {
-                            const col = i % 2;
-                            const row = Math.floor(i / 2);
-                            
-                            const x = startX + (col * (photoWidth + 10)); // 10mm de espaçamento
-                            const currentY = y + (row * (photoHeight + 10));
-                            
-                            // Verificar se precisa de nova página
-                            if (currentY + photoHeight > 280) {
-                                doc.addPage();
-                                y = 20;
-                                const newRow = Math.floor((i) / 2);
-                                const newX = startX + (col * (photoWidth + 10));
-                                const newY = y + (newRow * (photoHeight + 10));
-                                
-                                try {
-                                    doc.addImage(imovel.fotos[i], 'JPEG', newX, newY, photoWidth, photoHeight);
-                                } catch(e) {
-                                    console.log('Erro ao adicionar foto:', e);
-                                }
-                            } else {
-                                try {
-                                    doc.addImage(imovel.fotos[i], 'JPEG', x, currentY, photoWidth, photoHeight);
-                                } catch(e) {
-                                    console.log('Erro ao adicionar foto:', e);
-                                }
-                            }
-                        }
-                        
-                        // Atualizar y após as fotos
-                        y += (Math.ceil(imovel.fotos.length / 2) * (photoHeight + 10)) + 10;
                     }
                     
                     // Salvar PDF
@@ -5198,19 +5494,17 @@
                 }
             },
             
-            // ATUALIZADO: Agenda com suporte a multi-seleção de clientes para plantão
             agenda: {
                 save: function(event) {
                     event.preventDefault();
                     
-                    const id = 'agenda_' + Date.now();
+                    const id = Utils.generateId('agenda');
                     const tipo = document.getElementById('a-tipo').value;
                     const data = document.getElementById('a-data').value;
                     const horario = document.getElementById('a-horario').value;
                     const local = document.getElementById('a-local').value;
                     const observacoes = document.getElementById('a-observacoes').value;
                     
-                    // Campos específicos
                     let camposEspecificos = {};
                     let clientesSelecionados = [];
                     
@@ -5229,10 +5523,8 @@
                                 periodo: document.getElementById('a-periodo').value
                             };
                             
-                            // Usar clientes selecionados da UI
                             clientesSelecionados = UI.selectedClientesPlantao;
                             
-                            // Criar registro de plantão detalhado
                             const plantao = {
                                 id: id,
                                 clientesAtendidos: clientesSelecionados,
@@ -5248,23 +5540,14 @@
                             }
                             break;
                             
-                        case 'assinatura':
-                        case 'proposta':
-                        case 'reuniao':
-                        case 'negociacao':
-                        case 'captacao':
-                        case 'vistoria':
-                        case 'entrega':
-                        case 'followup':
-                        case 'outro':
+                        default:
                             camposEspecificos = {
                                 clienteId: document.getElementById('a-cliente').value
                             };
-                            clientesSelecionados = [document.getElementById('a-cliente').value];
+                            clientesSelecionados = [document.getElementById('a-cliente')?.value];
                             break;
                     }
                     
-                    // Para plantão, não temos um cliente específico, então usamos o primeiro selecionado ou null
                     const clienteIdPlantao = tipo === 'plantao' && clientesSelecionados.length > 0 ? clientesSelecionados[0] : null;
                     
                     const agenda = {
@@ -5288,7 +5571,6 @@
                     UI.showDayEvents(data);
                     UI.renderDashboard();
                     
-                    // Limpar seleção de clientes
                     UI.selectedClientesPlantao = [];
                 },
                 
@@ -5321,7 +5603,6 @@
                     const cliente = agenda.clienteId ? Sistema.data.clientes.find(c => c.id === agenda.clienteId) : null;
                     const imovel = agenda.imovelId ? Sistema.data.imoveis.find(i => i.id === agenda.imovelId) : null;
                     
-                    // Para plantão, mostrar todos os clientes selecionados
                     let clientesInfo = '';
                     if (agenda.tipo === 'plantao' && agenda.clientesSelecionados && agenda.clientesSelecionados.length > 0) {
                         clientesInfo = agenda.clientesSelecionados.map(clienteId => {
@@ -5330,7 +5611,6 @@
                         }).join(', ');
                     }
                     
-                    // Modal de detalhes
                     let detalhes = '';
                     let botoesEspeciais = '';
                     
@@ -5429,7 +5709,6 @@
                         </div>
                     `;
                     
-                    // Criar modal temporário
                     const tempModal = document.createElement('div');
                     tempModal.className = 'modal-overlay active';
                     tempModal.innerHTML = `
@@ -5454,7 +5733,6 @@
             },
             
             plantao: {
-                // MELHORIA: Seleção múltipla de clientes
                 toggleClienteAtendido: function(plantaoId, clienteId, isChecked) {
                     let plantao = Sistema.data.plantoes.find(p => p.id === plantaoId);
                     if (!plantao) {
@@ -5472,7 +5750,6 @@
                             plantao.clientesAtendidos.push(clienteId);
                             Sistema.saveData();
                             
-                            // Atualizar visualização
                             const cliente = Sistema.data.clientes.find(c => c.id === clienteId);
                             const lista = document.getElementById('clientes-atendidos-list');
                             lista.innerHTML += `
@@ -5511,13 +5788,11 @@
                         plantao.clientesAtendidos = plantao.clientesAtendidos.filter(id => id !== clienteId);
                         Sistema.saveData();
                         
-                        // Desmarcar checkbox
                         const checkbox = document.getElementById(`cliente-${clienteId}`);
                         if (checkbox) {
                             checkbox.checked = false;
                         }
                         
-                        // Remover da visualização
                         const lista = document.getElementById('clientes-atendidos-list');
                         const item = lista.querySelector(`[onclick*="${clienteId}"]`)?.parentElement?.parentElement;
                         if (item) {
@@ -5550,7 +5825,7 @@
                     }
                     
                     const tratativa = {
-                        id: 'tratativa_' + Date.now(),
+                        id: Utils.generateId('tratativa'),
                         clienteId: clienteId || null,
                         tipo,
                         descricao,
@@ -5561,7 +5836,6 @@
                     Sistema.saveData();
                     UI.showToast('Tratativa adicionada');
                     
-                    // Atualizar lista
                     const lista = document.getElementById('tratativas-list');
                     const cliente = clienteId ? Sistema.data.clientes.find(c => c.id === clienteId) : null;
                     lista.innerHTML += `
@@ -5582,7 +5856,6 @@
                         </div>
                     `;
                     
-                    // Limpar campos
                     document.getElementById('nova-tratativa-cliente').value = '';
                     document.getElementById('nova-tratativa-tipo').value = '';
                     document.getElementById('nova-tratativa-descricao').value = '';
@@ -5595,7 +5868,6 @@
                         Sistema.saveData();
                         UI.showToast('Tratativa removida');
                         
-                        // Recarregar modal
                         UI.showPlantaoDetalhadoModal(plantaoId);
                     }
                 },
@@ -5638,7 +5910,6 @@
                     
                     const numero = cliente.telefone.replace(/\D/g, '');
                     
-                    // Verificar se o número tem DDD (11 dígitos para celular)
                     if (numero.length < 10 || numero.length > 11) {
                         UI.showToast('Número de telefone inválido', 'error');
                         return;
@@ -5659,12 +5930,11 @@
                     
                     const settings = Sistema.data.settings;
                     
-                    // Construir mensagem com detalhes do imóvel
                     let mensagem = `🏠 *${imovel.nome}*\n\n`;
-                    mensagem += `💰 *Valor:* ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
+                    mensagem += `💰 *Valor:* ${Utils.formatCurrency(imovel.valor)}\n`;
                     
                     if (imovel.condominio) {
-                        mensagem += `🏢 *Condomínio:* ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
+                        mensagem += `🏢 *Condomínio:* ${Utils.formatCurrency(imovel.condominio)}\n`;
                     }
                     
                     if (imovel.endereco) {
@@ -5710,7 +5980,6 @@
                     
                     const numero = cliente.telefone.replace(/\D/g, '');
                     
-                    // Verificar se o número tem DDD (11 dígitos para celular)
                     if (numero.length < 10 || numero.length > 11) {
                         UI.showToast('Número de telefone inválido', 'error');
                         return;
@@ -5724,86 +5993,12 @@
                 }
             },
             
-            link: {
-                save: function(event) {
-                    event.preventDefault();
-                    
-                    const id = document.getElementById('l-id').value || 'link_' + Date.now();
-                    const titulo = document.getElementById('l-titulo').value;
-                    const url = document.getElementById('l-url').value;
-                    const categoria = document.getElementById('l-categoria').value;
-                    const icone = document.getElementById('l-icone').value || 'fas fa-link';
-                    
-                    const link = {
-                        id,
-                        titulo,
-                        url,
-                        categoria,
-                        icone,
-                        dataCadastro: new Date().toISOString().split('T')[0]
-                    };
-                    
-                    // Verificar se é edição ou novo
-                    const index = Sistema.data.links.findIndex(l => l.id === id);
-                    if (index >= 0) {
-                        Sistema.data.links[index] = link;
-                    } else {
-                        Sistema.data.links.push(link);
-                    }
-                    
-                    Sistema.saveData();
-                    UI.closeModal('link');
-                    UI.showToast('Link salvo com sucesso');
-                    Sistema.renderLinks();
-                },
-                
-                edit: function(linkId) {
-                    const link = Sistema.data.links.find(l => l.id === linkId);
-                    if (!link) return;
-                    
-                    document.getElementById('l-id').value = link.id;
-                    document.getElementById('l-titulo').value = link.titulo;
-                    document.getElementById('l-url').value = link.url;
-                    document.getElementById('l-categoria').value = link.categoria;
-                    document.getElementById('l-icone').value = link.icone;
-                    
-                    document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-edit"></i> Editar Link';
-                    UI.showModal('link', 'edit');
-                },
-                
-                delete: function(linkId) {
-                    if (confirm('Excluir este link?')) {
-                        Sistema.data.links = Sistema.data.links.filter(l => l.id !== linkId);
-                        Sistema.saveData();
-                        UI.showToast('Link excluído');
-                        Sistema.renderLinks();
-                    }
-                }
-            },
-            
-            settings: {
-                save: function(event) {
-                    event.preventDefault();
-                    
-                    Sistema.data.settings = {
-                        nome: document.getElementById('s-nome').value,
-                        creci: document.getElementById('s-creci').value,
-                        telefone: document.getElementById('s-telefone').value,
-                        email: document.getElementById('s-email').value
-                    };
-                    
-                    Sistema.saveData();
-                    UI.closeModal('settings');
-                    UI.showToast('Configurações salvas com sucesso');
-                }
-            },
-            
             backup: {
                 exportData: function() {
                     const data = {
                         ...Sistema.data,
                         exportDate: new Date().toISOString(),
-                        version: '1.0'
+                        version: '2.0'
                     };
                     
                     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -5823,7 +6018,7 @@
                     const data = {
                         imoveis: Sistema.data.imoveis,
                         exportDate: new Date().toISOString(),
-                        version: '1.0',
+                        version: '2.0',
                         type: 'imoveis_only'
                     };
                     
@@ -5840,98 +6035,85 @@
                     UI.showToast('Backup de imóveis exportado com sucesso');
                 },
                 
-                importData: function(input) {
+                importUniversalData: function(input) {
                     const file = input.files[0];
                     if (!file) return;
                     
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         try {
-                            const importedData = JSON.parse(e.target.result);
+                            const data = JSON.parse(e.target.result);
                             
-                            // Função para extrair dados de qualquer estrutura JSON
-                            const extractData = (data) => {
-                                const extracted = {
-                                    clientes: [],
-                                    imoveis: [],
-                                    agenda: [],
-                                    plantoes: [],
-                                    links: [],
-                                    funnel: Sistema.data.funnel, // Manter configuração atual
-                                    settings: Sistema.data.settings // Manter configuração atual
-                                };
-                                
-                                // Função recursiva para buscar arrays
-                                const findArrays = (obj, path = '') => {
-                                    if (Array.isArray(obj)) {
-                                        // Verificar tipo de array pelo conteúdo
-                                        if (obj.length > 0) {
-                                            const firstItem = obj[0];
-                                            if (firstItem.nome && firstItem.telefone) {
-                                                // Provavelmente clientes
-                                                if (!extracted.clientes.length) {
-                                                    extracted.clientes = obj;
-                                                }
-                                            } else if (firstItem.nome && firstItem.valor !== undefined) {
-                                                // Provavelmente imóveis
-                                                if (!extracted.imoveis.length) {
-                                                    extracted.imoveis = obj;
-                                                }
-                                            } else if (firstItem.tipo && firstItem.data) {
-                                                // Provavelmente agenda
-                                                if (!extracted.agenda.length) {
-                                                    extracted.agenda = obj;
-                                                }
-                                            } else if (firstItem.titulo && firstItem.url) {
-                                                // Provavelmente links
-                                                if (!extracted.links.length) {
-                                                    extracted.links = obj;
-                                                }
-                                            }
-                                        }
-                                    } else if (typeof obj === 'object' && obj !== null) {
-                                        for (const key in obj) {
-                                            findArrays(obj[key], path ? `${path}.${key}` : key);
-                                        }
+                            // Extrair dados de qualquer estrutura JSON
+                            const extractedData = {
+                                clientes: data.clientes || data.Clientes || data.clients || [],
+                                imoveis: data.imoveis || data.Imoveis || data.properties || data.imoveis_list || [],
+                                agenda: data.agenda || data.Agenda || data.schedule || [],
+                                plantoes: data.plantoes || data.Plantoes || data.shifts || [],
+                                links: data.links || data.Links || [],
+                                funnel: data.funnel || data.Funnel || {
+                                    stages: [
+                                        { id: 'lead', name: 'Lead', color: '#3b82f6', order: 1, icon: 'fas fa-user' },
+                                        { id: 'prospect', name: 'Prospect', color: '#60a5fa', order: 2, icon: 'fas fa-user-check' },
+                                        { id: 'visita', name: 'Visita', color: '#93c5fd', order: 3, icon: 'fas fa-eye' },
+                                        { id: 'proposta', name: 'Proposta', color: '#bfdbfe', order: 4, icon: 'fas fa-file-contract' },
+                                        { id: 'fechado', name: 'Fechado', color: '#10b981', order: 5, icon: 'fas fa-handshake' }
+                                    ],
+                                    metas: data.funnel?.metas || data.metas || {
+                                        leads: 50,
+                                        vendas: 5,
+                                        receita: 500000
                                     }
-                                };
-                                
-                                findArrays(data);
-                                
-                                // Tentar extrair pelo nome das propriedades
-                                if (data.clientes && Array.isArray(data.clientes)) extracted.clientes = data.clientes;
-                                if (data.imoveis && Array.isArray(data.imoveis)) extracted.imoveis = data.imoveis;
-                                if (data.agenda && Array.isArray(data.agenda)) extracted.agenda = data.agenda;
-                                if (data.plantoes && Array.isArray(data.plantoes)) extracted.plantoes = data.plantoes;
-                                if (data.links && Array.isArray(data.links)) extracted.links = data.links;
-                                if (data.funnel && typeof data.funnel === 'object') extracted.funnel = data.funnel;
-                                if (data.settings && typeof data.settings === 'object') extracted.settings = data.settings;
-                                
-                                return extracted;
+                                },
+                                settings: data.settings || data.Settings || {
+                                    nome: 'Corretor',
+                                    creci: '00000',
+                                    telefone: '',
+                                    email: '',
+                                    logo: ''
+                                }
                             };
                             
-                            const extractedData = extractData(importedData);
+                            // Verificar se há dados para importar
+                            const totalItems = extractedData.clientes.length + extractedData.imoveis.length + 
+                                              extractedData.agenda.length + extractedData.plantoes.length;
                             
-                            if (confirm(`Importar backup?\n\nEncontrado:\n• ${extractedData.clientes.length} clientes\n• ${extractedData.imoveis.length} imóveis\n• ${extractedData.agenda.length} agendamentos\n• ${extractedData.links.length} links\n\nEsta ação substituirá os dados atuais.`)) {
-                                Sistema.data = {
-                                    ...Sistema.data,
-                                    clientes: extractedData.clientes,
-                                    imoveis: extractedData.imoveis,
-                                    agenda: extractedData.agenda,
-                                    plantoes: extractedData.plantoes,
-                                    links: extractedData.links
-                                };
+                            if (totalItems === 0) {
+                                UI.showToast('Arquivo não contém dados válidos para importação', 'error');
+                                return;
+                            }
+                            
+                            if (confirm(`Encontrados:\n${extractedData.clientes.length} clientes\n${extractedData.imoveis.length} imóveis\n${extractedData.agenda.length} agendamentos\n\nDeseja importar estes dados?`)) {
+                                Sistema.data.clientes = [...Sistema.data.clientes, ...extractedData.clientes];
+                                Sistema.data.imoveis = [...Sistema.data.imoveis, ...extractedData.imoveis];
+                                Sistema.data.agenda = [...Sistema.data.agenda, ...extractedData.agenda];
+                                Sistema.data.plantoes = [...Sistema.data.plantoes, ...extractedData.plantoes];
+                                Sistema.data.links = [...Sistema.data.links, ...extractedData.links];
+                                
+                                // Atualizar funnel apenas se tiver dados
+                                if (extractedData.funnel.stages && extractedData.funnel.stages.length > 0) {
+                                    Sistema.data.funnel.stages = extractedData.funnel.stages;
+                                }
+                                if (extractedData.funnel.metas) {
+                                    Sistema.data.funnel.metas = extractedData.funnel.metas;
+                                }
+                                
+                                // Atualizar settings apenas se tiver dados
+                                if (extractedData.settings.nome !== 'Corretor') {
+                                    Sistema.data.settings = extractedData.settings;
+                                }
                                 
                                 Sistema.saveData();
+                                UI.showToast('Dados importados com sucesso!');
                                 location.reload();
                             }
                         } catch (error) {
+                            console.error('Erro ao importar:', error);
                             UI.showToast('Erro ao importar backup: ' + error.message, 'error');
                         }
                     };
                     reader.readAsText(file);
                     
-                    // Limpar input
                     input.value = '';
                 },
                 
@@ -5944,41 +6126,16 @@
                         try {
                             const data = JSON.parse(e.target.result);
                             
-                            // Extrair imóveis de qualquer estrutura
-                            let imoveis = [];
-                            
-                            if (data.imoveis && Array.isArray(data.imoveis)) {
-                                imoveis = data.imoveis;
-                            } else if (Array.isArray(data)) {
-                                // Se o arquivo for um array direto
-                                imoveis = data.filter(item => item.nome && item.valor !== undefined);
-                            } else {
-                                // Buscar recursivamente
-                                const findImoveis = (obj) => {
-                                    if (Array.isArray(obj)) {
-                                        return obj.filter(item => item.nome && item.valor !== undefined);
-                                    } else if (typeof obj === 'object' && obj !== null) {
-                                        for (const key in obj) {
-                                            if (Array.isArray(obj[key]) && obj[key].length > 0 && obj[key][0].nome) {
-                                                return obj[key];
-                                            }
-                                            const found = findImoveis(obj[key]);
-                                            if (found.length > 0) return found;
-                                        }
-                                    }
-                                    return [];
-                                };
-                                imoveis = findImoveis(data);
-                            }
+                            const imoveis = data.imoveis || data.Imoveis || data.properties || data.imoveis_list || [];
                             
                             if (imoveis.length === 0) {
-                                throw new Error('Nenhum imóvel encontrado no arquivo');
+                                throw new Error('Arquivo não contém imóveis válidos');
                             }
                             
-                            if (confirm(`Importar ${imoveis.length} imóveis?\n\nEsta ação substituirá os imóveis atuais.`)) {
-                                Sistema.data.imoveis = imoveis;
+                            if (confirm(`Importar ${imoveis.length} imóveis?`)) {
+                                Sistema.data.imoveis = [...Sistema.data.imoveis, ...imoveis];
                                 Sistema.saveData();
-                                UI.showToast(`${imoveis.length} imóveis importados com sucesso`);
+                                UI.showToast('Imóveis importados com sucesso');
                                 UI.renderImoveis();
                                 UI.renderDashboard();
                             }
@@ -5988,7 +6145,6 @@
                     };
                     reader.readAsText(file);
                     
-                    // Limpar input
                     input.value = '';
                 },
                 
@@ -6066,14 +6222,6 @@
                         <div class="report-title">Relatório de Plantão</div>
                         <div class="report-desc">Detalhado com clientes atendidos</div>
                     </div>
-                    
-                    <div class="report-card" onclick="Relatorios.gerarRelatorioLinks()">
-                        <div class="report-icon">
-                            <i class="fas fa-link"></i>
-                        </div>
-                        <div class="report-title">Relatório de Links</div>
-                        <div class="report-desc">Links úteis cadastrados</div>
-                    </div>
                 `;
             },
             
@@ -6081,7 +6229,6 @@
                 const ctx = document.getElementById('performance-chart').getContext('2d');
                 const metas = Sistema.data.funnel.metas;
                 
-                // Dados dos últimos 6 meses
                 const hoje = new Date();
                 const meses = [];
                 const vendasPorMes = [];
@@ -6091,7 +6238,6 @@
                     const mesFormatado = mes.toLocaleDateString('pt-BR', { month: 'short' });
                     meses.push(mesFormatado);
                     
-                    // Calcular vendas do mês
                     const vendas = Sistema.data.clientes.filter(c => {
                         if (c.status !== 'fechado' || !c.dataFechamento) return false;
                         
@@ -6134,7 +6280,6 @@
                 });
             },
             
-            // Métodos de geração de relatórios
             gerarRelatorioVendas: function() {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
@@ -6143,7 +6288,6 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE VENDAS', 105, 20, { align: 'center' });
                 
@@ -6152,19 +6296,17 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
-                // Vendas do mês
                 const vendas = Sistema.data.clientes.filter(c => c.status === 'fechado');
                 let y = 60;
                 
                 if (vendas.length === 0) {
                     doc.text('Nenhuma venda registrada neste período.', 20, y);
                 } else {
-                    // Tabela de vendas
                     const tableData = vendas.map((venda, index) => [
                         index + 1,
                         venda.nome,
                         venda.telefone,
-                        venda.valorVenda ? venda.valorVenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-',
+                        venda.valorVenda ? Utils.formatCurrency(venda.valorVenda) : '-',
                         venda.dataFechamento || '-'
                     ]);
                     
@@ -6178,17 +6320,15 @@
                     
                     y = doc.lastAutoTable.finalY + 10;
                     
-                    // Totais
                     const totalVendas = vendas.length;
                     const totalReceita = vendas.reduce((acc, v) => acc + (v.valorVenda || 0), 0);
                     
                     doc.setFont(undefined, 'bold');
                     doc.text(`Total de Vendas: ${totalVendas}`, 20, y);
                     y += 7;
-                    doc.text(`Receita Total: ${totalReceita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
+                    doc.text(`Receita Total: ${Utils.formatCurrency(totalReceita)}`, 20, y);
                 }
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Vendas_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de vendas gerado em PDF');
             },
@@ -6200,7 +6340,6 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE CLIENTES', 105, 20, { align: 'center' });
                 
@@ -6209,7 +6348,6 @@
                 doc.text(`Data: ${hoje}`, 20, 36);
                 doc.text(`Total de Clientes: ${Sistema.data.clientes.length}`, 20, 42);
                 
-                // Tabela de clientes
                 const tableData = Sistema.data.clientes.map((cliente, index) => [
                     index + 1,
                     cliente.nome,
@@ -6226,7 +6364,6 @@
                     headStyles: { fillColor: [59, 130, 246] }
                 });
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Clientes_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório de clientes gerado em PDF');
             },
@@ -6238,7 +6375,6 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE IMÓVEIS', 105, 20, { align: 'center' });
                 
@@ -6247,11 +6383,10 @@
                 doc.text(`Data: ${hoje}`, 20, 36);
                 doc.text(`Total de Imóveis: ${Sistema.data.imoveis.length}`, 20, 42);
                 
-                // Tabela de imóveis
                 const tableData = Sistema.data.imoveis.map((imovel, index) => [
                     index + 1,
                     imovel.nome,
-                    imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+                    Utils.formatCurrency(imovel.valor),
                     imovel.status,
                     imovel.dataCadastro || '-'
                 ]);
@@ -6264,7 +6399,6 @@
                     headStyles: { fillColor: [59, 130, 246] }
                 });
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Imoveis_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório de imóveis gerado em PDF');
             },
@@ -6277,7 +6411,6 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE AGENDA', 105, 20, { align: 'center' });
                 
@@ -6286,7 +6419,6 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
-                // Agendamentos do mês
                 const mes = hoje.getMonth();
                 const ano = hoje.getFullYear();
                 const agendaMes = Sistema.data.agenda.filter(a => {
@@ -6299,7 +6431,6 @@
                 if (agendaMes.length === 0) {
                     doc.text('Nenhum agendamento neste período.', 20, y);
                 } else {
-                    // Tabela de agendamentos
                     const tableData = agendaMes.map((agenda, index) => {
                         const cliente = Sistema.data.clientes.find(c => c.id === agenda.clienteId);
                         return [
@@ -6322,7 +6453,6 @@
                     
                     y = doc.lastAutoTable.finalY + 10;
                     
-                    // Estatísticas
                     const stats = {
                         total: agendaMes.length,
                         confirmados: agendaMes.filter(a => a.status === 'confirmado').length,
@@ -6336,7 +6466,6 @@
                     doc.text(`Confirmados: ${stats.confirmados} | Pendentes: ${stats.pendentes} | Cancelados: ${stats.cancelados}`, 20, y);
                 }
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Agenda_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de agenda gerado em PDF');
             },
@@ -6348,7 +6477,6 @@
                 const settings = Sistema.data.settings;
                 const hoje = new Date().toLocaleDateString('pt-BR');
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DO FUNIL', 105, 20, { align: 'center' });
                 
@@ -6356,7 +6484,6 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
                 doc.text(`Data: ${hoje}`, 20, 36);
                 
-                // Estatísticas do funil
                 const stages = Sistema.data.funnel.stages;
                 const totalClientes = Sistema.data.clientes.length;
                 
@@ -6377,7 +6504,6 @@
                     y += 15;
                 });
                 
-                // Análise de conversão
                 y += 10;
                 doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
@@ -6397,7 +6523,6 @@
                 doc.setFont(undefined, 'bold');
                 doc.text(`Taxa de Conversão: ${taxaConversao}%`, 20, y);
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Funil_${hoje.replace(/\//g, '-')}.pdf`);
                 UI.showToast('Relatório do funil gerado em PDF');
             },
@@ -6410,7 +6535,6 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE METAS', 105, 20, { align: 'center' });
                 
@@ -6419,7 +6543,6 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
-                // Metas vs Realizado
                 const metas = Sistema.data.funnel.metas;
                 const stats = Sistema.updateDashboard();
                 
@@ -6430,12 +6553,11 @@
                 doc.text('METAS MENSAS', 20, y);
                 y += 10;
                 
-                // Tabela de metas
                 const tableData = [
                     ['Leads', metas.leads, stats.leadsAtivos, ((stats.leadsAtivos / metas.leads) * 100).toFixed(1) + '%'],
                     ['Vendas', metas.vendas, stats.vendasMes, ((stats.vendasMes / metas.vendas) * 100).toFixed(1) + '%'],
-                    ['Receita', metas.receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), 
-                     stats.receitaMes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), 
+                    ['Receita', Utils.formatCurrency(metas.receita), 
+                     Utils.formatCurrency(stats.receitaMes), 
                      ((stats.receitaMes / metas.receita) * 100).toFixed(1) + '%']
                 ];
                 
@@ -6464,7 +6586,6 @@
                 
                 y = doc.lastAutoTable.finalY + 15;
                 
-                // Análise
                 doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
                 doc.text('ANÁLISE DE DESEMPENHO', 20, y);
@@ -6489,7 +6610,6 @@
                     doc.text('Reveja sua estratégia e intensifique a prospecção.', 20, y);
                 }
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Metas_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de metas gerado em PDF');
             },
@@ -6502,7 +6622,6 @@
                 const hoje = new Date();
                 const mesAtual = hoje.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
                 
-                // Cabeçalho
                 doc.setFontSize(18);
                 doc.text('RELATÓRIO DE PLANTÃO DETALHADO', 105, 20, { align: 'center' });
                 
@@ -6511,7 +6630,6 @@
                 doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 36);
                 doc.text(`Data: ${hoje.toLocaleDateString('pt-BR')}`, 20, 42);
                 
-                // Plantões do mês
                 const mes = hoje.getMonth();
                 const ano = hoje.getFullYear();
                 const plantoesAgenda = Sistema.data.agenda.filter(a => {
@@ -6525,7 +6643,6 @@
                 if (plantoesAgenda.length === 0) {
                     doc.text('Nenhum plantão registrado neste período.', 20, y);
                 } else {
-                    // Para cada plantão, mostrar detalhes
                     plantoesAgenda.forEach((plantaoAgenda, index) => {
                         const plantaoDetalhes = Sistema.data.plantoes.find(p => p.id === plantaoAgenda.id);
                         
@@ -6540,7 +6657,6 @@
                         y += 7;
                         
                         if (plantaoDetalhes) {
-                            // Clientes atendidos
                             if (plantaoDetalhes.clientesAtendidos.length > 0) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6557,7 +6673,6 @@
                                 });
                             }
                             
-                            // Tratativas
                             if (plantaoDetalhes.tratativas.length > 0) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6581,7 +6696,6 @@
                                 });
                             }
                             
-                            // Observações
                             if (plantaoDetalhes.observacoes) {
                                 y += 5;
                                 doc.setFont(undefined, 'bold');
@@ -6600,10 +6714,9 @@
                             y += 7;
                         }
                         
-                        y += 10; // Espaço entre plantões
+                        y += 10;
                     });
                     
-                    // Estatísticas
                     const stats = {
                         total: plantoesAgenda.length,
                         comDetalhes: plantoesAgenda.filter(p => Sistema.data.plantoes.find(pd => pd.id === p.id)).length,
@@ -6636,54 +6749,11 @@
                     doc.text(`Média de Clientes por Plantão: ${(stats.clientesAtendidos / stats.comDetalhes).toFixed(1)}`, 20, y);
                 }
                 
-                // Salvar PDF
                 doc.save(`Relatorio_Plantao_Detalhado_${hoje.toISOString().split('T')[0]}.pdf`);
                 UI.showToast('Relatório de plantão detalhado gerado em PDF');
             },
             
-            gerarRelatorioLinks: function() {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                const settings = Sistema.data.settings;
-                const hoje = new Date().toLocaleDateString('pt-BR');
-                
-                // Cabeçalho
-                doc.setFontSize(18);
-                doc.text('RELATÓRIO DE LINKS ÚTEIS', 105, 20, { align: 'center' });
-                
-                doc.setFontSize(10);
-                doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
-                doc.text(`Data: ${hoje}`, 20, 36);
-                doc.text(`Total de Links: ${Sistema.data.links.length}`, 20, 42);
-                
-                // Tabela de links
-                const tableData = Sistema.data.links.map((link, index) => [
-                    index + 1,
-                    link.titulo,
-                    link.url,
-                    link.categoria,
-                    link.dataCadastro
-                ]);
-                
-                doc.autoTable({
-                    head: [['#', 'Título', 'URL', 'Categoria', 'Cadastro']],
-                    body: tableData,
-                    startY: 50,
-                    theme: 'grid',
-                    headStyles: { fillColor: [59, 130, 246] },
-                    columnStyles: {
-                        2: { cellWidth: 80 } // URL mais larga
-                    }
-                });
-                
-                // Salvar PDF
-                doc.save(`Relatorio_Links_${hoje.replace(/\//g, '-')}.pdf`);
-                UI.showToast('Relatório de links gerado em PDF');
-            },
-            
             gerarFichaClientePrompt: function() {
-                // Mostrar modal para selecionar cliente
                 const modal = document.getElementById('modal-select-pdf');
                 const title = document.getElementById('pdf-modal-title');
                 const list = document.getElementById('pdf-select-list');
@@ -6706,7 +6776,6 @@
             },
             
             gerarFichaImovelPrompt: function() {
-                // Mostrar modal para selecionar imóvel
                 const modal = document.getElementById('modal-select-pdf');
                 const title = document.getElementById('pdf-modal-title');
                 const list = document.getElementById('pdf-select-list');
@@ -6719,7 +6788,7 @@
                     list.innerHTML = Sistema.data.imoveis.map(imovel => `
                         <div class="list-card" style="margin-bottom: 8px;" onclick="App.imovel.generatePDF('${imovel.id}'); UI.closeModal('select-pdf')">
                             <div class="card-title">${imovel.nome}</div>
-                            <div class="card-subtitle">${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
+                            <div class="card-subtitle">${Utils.formatCurrency(imovel.valor)}</div>
                         </div>
                     `).join('');
                 }
@@ -6733,7 +6802,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             Sistema.init();
             
-            // Configurar evento de fechar modais
             document.querySelectorAll('.modal-overlay').forEach(modal => {
                 modal.addEventListener('click', function(e) {
                     if (e.target === this) {
@@ -6743,7 +6811,6 @@
                 });
             });
             
-            // Configurar evento de fechar photo viewer
             document.getElementById('photo-viewer').addEventListener('click', function(e) {
                 if (e.target === this) {
                     UI.closePhotoViewer();
