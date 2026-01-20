@@ -206,7 +206,7 @@
         .funnel-stages-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             margin-top: 16px;
         }
         
@@ -218,6 +218,7 @@
             background: var(--light);
             border-radius: var(--radius-sm);
             border-left: 4px solid var(--primary);
+            position: relative;
         }
         
         .stage-color-picker {
@@ -325,27 +326,28 @@
         }
         
         .level-label {
-            min-width: 80px;
+            min-width: 100px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--dark);
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
         }
         
         .level-icon {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         .level-bar-container {
             flex: 1;
-            height: 30px;
+            height: 28px;
             background: var(--light);
             border-radius: 6px;
             overflow: hidden;
@@ -358,8 +360,8 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding: 0 12px;
-            font-size: 0.8rem;
+            padding: 0 10px;
+            font-size: 0.75rem;
             font-weight: 700;
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -367,11 +369,12 @@
         }
         
         .level-stats {
-            min-width: 60px;
+            min-width: 50px;
             text-align: right;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--secondary);
+            flex-shrink: 0;
         }
 
         /* --- Metas Mensais --- */
@@ -700,7 +703,7 @@
             transform: scale(0.95);
         }
 
-        /* --- Modals --- */
+        /* --- Modais --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -809,6 +812,11 @@
             font-size: 1rem;
             background: #f8fafc;
             -webkit-appearance: none;
+        }
+        
+        .form-control.money {
+            font-family: 'Inter', monospace;
+            letter-spacing: 0.5px;
         }
         
         .form-control:focus {
@@ -1111,6 +1119,10 @@
             .stage-name-input {
                 max-width: 100px;
             }
+            
+            .funnel-stage-item {
+                gap: 6px;
+            }
         }
 
         /* --- Loading Spinner --- */
@@ -1342,11 +1354,11 @@
             font-size: 0.9rem;
             color: var(--dark);
         }
-
-        /* --- Painel de Links --- */
+        
+        /* --- Links Úteis --- */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 12px;
             margin-bottom: 20px;
         }
@@ -1357,12 +1369,11 @@
             padding: 16px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border);
-            cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
         .link-card:active {
@@ -1370,40 +1381,65 @@
         }
         
         .link-icon {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background: var(--light);
-            border-radius: 50%;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--primary);
-            margin: 0 auto 12px;
+        }
+        
+        .link-info {
+            flex: 1;
         }
         
         .link-title {
             font-weight: 700;
             font-size: 0.9rem;
             color: var(--dark);
-            margin-bottom: 4px;
-            word-break: break-word;
+            margin-bottom: 2px;
         }
         
         .link-url {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--secondary);
-            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
-        /* --- Formatação monetária --- */
-        .currency-input {
-            text-align: right;
+        .link-actions {
+            display: flex;
+            gap: 4px;
         }
         
-        /* --- Campos de configuração --- */
-        .settings-form .form-group {
-            margin-bottom: 16px;
+        .link-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .link-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .link-btn-edit {
+            background: #e0f2fe;
+            color: var(--primary);
+        }
+        
+        .link-btn-delete {
+            background: #fee2e2;
+            color: var(--danger);
         }
     </style>
 </head>
@@ -1452,6 +1488,14 @@
                 <i class="fas fa-filter"></i> Funil - Visão Geral
             </div>
             <div id="funnel-overview"></div>
+            
+            <div class="section-title">
+                <i class="fas fa-link"></i> Links Úteis
+                <button class="btn-sm btn-primary" onclick="UI.showModal('link', 'new')" style="padding: 6px 12px;">
+                    <i class="fas fa-plus"></i> Novo
+                </button>
+            </div>
+            <div id="links-list"></div>
         </div>
 
         <!-- Clientes View -->
@@ -1547,20 +1591,6 @@
                 <canvas id="performance-chart"></canvas>
             </div>
         </div>
-
-        <!-- Links View -->
-        <div id="links-view" class="view">
-            <div class="section-title">
-                <i class="fas fa-link"></i> Links Importantes
-                <button class="btn-sm btn-primary" onclick="UI.showModal('links')">
-                    <i class="fas fa-plus"></i> Novo Link
-                </button>
-            </div>
-            
-            <div class="links-grid" id="links-grid">
-                <!-- Links dinâmicos -->
-            </div>
-        </div>
     </main>
 
     <!-- FAB Container -->
@@ -1595,9 +1625,9 @@
             <i class="fas fa-calendar-alt"></i>
             <span>Agenda</span>
         </a>
-        <a href="#" class="nav-item" data-target="links-view" onclick="UI.switchTab(this)">
-            <i class="fas fa-link"></i>
-            <span>Links</span>
+        <a href="#" class="nav-item" data-target="relatorios-view" onclick="UI.switchTab(this)">
+            <i class="fas fa-chart-bar"></i>
+            <span>Relatórios</span>
         </a>
     </nav>
 
@@ -1743,8 +1773,8 @@
                             <div class="form-group">
                                 <label class="form-label">Faixa de Valor (R$)</label>
                                 <div style="display: flex; gap: 12px;">
-                                    <input type="text" id="c-valor-min" class="form-control currency-input" placeholder="Mínimo" oninput="App.formatCurrency(this)">
-                                    <input type="text" id="c-valor-max" class="form-control currency-input" placeholder="Máximo" oninput="App.formatCurrency(this)">
+                                    <input type="text" id="c-valor-min" class="form-control money" placeholder="Mínimo" oninput="formatCurrency(this)">
+                                    <input type="text" id="c-valor-max" class="form-control money" placeholder="Máximo" oninput="formatCurrency(this)">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1826,7 +1856,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Valor (R$)</label>
-                                <input type="text" id="i-valor" class="form-control currency-input" required oninput="App.formatCurrency(this)">
+                                <input type="text" id="i-valor" class="form-control money" required oninput="formatCurrency(this)">
                             </div>
                             <div class="form-group">
                                 <label class="form-label required">Data de Entrega/Disponibilidade</label>
@@ -1865,11 +1895,11 @@
                         <div class="accordion-content">
                             <div class="form-group">
                                 <label class="form-label">Valor do Condomínio (R$)</label>
-                                <input type="text" id="i-condominio" class="form-control currency-input" oninput="App.formatCurrency(this)">
+                                <input type="text" id="i-condominio" class="form-control money" oninput="formatCurrency(this)">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">IPTU (R$)</label>
-                                <input type="text" id="i-iptu" class="form-control currency-input" oninput="App.formatCurrency(this)">
+                                <input type="text" id="i-iptu" class="form-control money" oninput="formatCurrency(this)">
                             </div>
                         </div>
                     </div>
@@ -2047,58 +2077,7 @@
         </div>
     </div>
 
-    <!-- Modal de Links -->
-    <div class="modal-overlay" id="modal-links">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-links-title">
-                    <i class="fas fa-link"></i> Novo Link
-                </h3>
-                <button class="modal-close" onclick="UI.closeModal('links')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="form-links" onsubmit="App.links.save(event)">
-                    <input type="hidden" id="l-id">
-                    <div class="form-group">
-                        <label class="form-label required">Título do Link</label>
-                        <input type="text" id="l-titulo" class="form-control" required placeholder="Ex: Portal do Corretor">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label required">URL</label>
-                        <input type="url" id="l-url" class="form-control" required placeholder="https://exemplo.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Categoria</label>
-                        <select id="l-categoria" class="form-control">
-                            <option value="">Geral</option>
-                            <option value="portal">Portal do Corretor</option>
-                            <option value="financeiro">Financeiro</option>
-                            <option value="documentos">Documentos</option>
-                            <option value="ferramentas">Ferramentas</option>
-                            <option value="sites">Sites de Imóveis</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Descrição (Opcional)</label>
-                        <textarea id="l-descricao" class="form-control" rows="3" placeholder="Descrição do link..."></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('links')">
-                    Cancelar
-                </button>
-                <button type="submit" form="form-links" class="btn-block">
-                    Salvar Link
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Agendamento Genérico -->
+    <!-- Modal de Agendamento Genérico (ATUALIZADO para Plantão) -->
     <div class="modal-overlay" id="modal-agenda-generico">
         <div class="modal">
             <div class="modal-header">
@@ -2138,7 +2117,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Meta de Receita (R$)</label>
-                        <input type="text" id="meta-receita" class="form-control currency-input" required oninput="App.formatCurrency(this)">
+                        <input type="text" id="meta-receita" class="form-control money" required oninput="formatCurrency(this)">
                     </div>
                 </form>
             </div>
@@ -2185,61 +2164,64 @@
             <div class="modal-body">
                 <form id="form-settings" onsubmit="App.settings.save(event)">
                     <div class="form-group">
-                        <label class="form-label required">Nome do Corretor</label>
+                        <label class="form-label">Nome do Corretor</label>
                         <input type="text" id="s-nome" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label required">CRECI</label>
+                        <label class="form-label">CRECI</label>
                         <input type="text" id="s-creci" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label required">Telefone para Contato</label>
+                        <label class="form-label">Telefone para Contato</label>
                         <input type="text" id="s-telefone" class="form-control" placeholder="(11) 99999-9999" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label required">E-mail</label>
+                        <label class="form-label">E-mail</label>
                         <input type="email" id="s-email" class="form-control" placeholder="seu@email.com" required>
                     </div>
                     
-                    <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
-                        <i class="fas fa-database"></i> Backup e Restauração
-                    </div>
-                    
-                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportData()">
-                            <i class="fas fa-download"></i> Exportar Backup
+                    <div class="modal-footer" style="padding: 0; border: none; margin-top: 20px;">
+                        <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('settings')">
+                            Cancelar
                         </button>
-                        <button type="button" class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
-                            <i class="fas fa-home"></i> Backup Imóveis
-                        </button>
-                    </div>
-                    
-                    <div class="file-input-container">
-                        <label for="backup-file" class="file-input-label">
-                            <i class="fas fa-upload"></i> Importar Backup
-                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON</span>
-                        </label>
-                        <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importData(this)">
-                    </div>
-                    
-                    <div class="file-input-container" style="margin-top: 12px;">
-                        <label for="backup-imoveis-file" class="file-input-label">
-                            <i class="fas fa-home"></i> Importar Imóveis
-                            <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
-                        </label>
-                        <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
-                    </div>
-                    
-                    <div style="margin-top: 24px;">
                         <button type="submit" class="btn-block">
-                            <i class="fas fa-save"></i> Salvar Configurações
+                            Salvar Configurações
                         </button>
                     </div>
-                    
-                    <button type="button" class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 12px;">
-                        <i class="fas fa-trash"></i> Limpar Todos os Dados
-                    </button>
                 </form>
+                
+                <div class="section-title" style="font-size: 1rem; margin: 24px 0 12px;">
+                    <i class="fas fa-database"></i> Backup e Restauração
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                    <button class="btn-block btn-secondary" onclick="App.backup.exportData()">
+                        <i class="fas fa-download"></i> Exportar Backup
+                    </button>
+                    <button class="btn-block btn-secondary" onclick="App.backup.exportImoveis()">
+                        <i class="fas fa-home"></i> Backup Imóveis
+                    </button>
+                </div>
+                
+                <div class="file-input-container">
+                    <label for="backup-file" class="file-input-label">
+                        <i class="fas fa-upload"></i> Importar Backup Completo
+                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de qualquer estrutura</span>
+                    </label>
+                    <input type="file" id="backup-file" class="file-input" accept=".json" onchange="App.backup.importData(this)">
+                </div>
+                
+                <div class="file-input-container" style="margin-top: 12px;">
+                    <label for="backup-imoveis-file" class="file-input-label">
+                        <i class="fas fa-home"></i> Importar Imóveis
+                        <span style="display: block; font-size: 0.8rem; margin-top: 4px;">Arquivo JSON de Imóveis</span>
+                    </label>
+                    <input type="file" id="backup-imoveis-file" class="file-input" accept=".json" onchange="App.backup.importImoveis(this)">
+                </div>
+                
+                <button class="btn-block btn-danger" onclick="App.backup.clearData()" style="margin-top: 24px;">
+                    <i class="fas fa-trash"></i> Limpar Todos os Dados
+                </button>
             </div>
         </div>
     </div>
@@ -2274,6 +2256,58 @@
             </div>
             <div class="modal-body" id="plantao-detalhado-body">
                 <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Links Úteis -->
+    <div class="modal-overlay" id="modal-link">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-link-title">
+                    <i class="fas fa-link"></i> Novo Link Útil
+                </h3>
+                <button class="modal-close" onclick="UI.closeModal('link')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-link" onsubmit="App.link.save(event)">
+                    <input type="hidden" id="l-id">
+                    <div class="form-group">
+                        <label class="form-label required">Título do Link</label>
+                        <input type="text" id="l-titulo" class="form-control" required placeholder="Ex: Portal do CRECI">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">URL</label>
+                        <input type="url" id="l-url" class="form-control" required placeholder="https://exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categoria</label>
+                        <select id="l-categoria" class="form-control">
+                            <option value="geral">Geral</option>
+                            <option value="creci">CRECI</option>
+                            <option value="ferramentas">Ferramentas</option>
+                            <option value="imobiliarias">Imobiliárias</option>
+                            <option value="financiamento">Financiamento</option>
+                            <option value="documentos">Documentos</option>
+                            <option value="sites">Sites</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ícone (Font Awesome)</label>
+                        <input type="text" id="l-icone" class="form-control" placeholder="fas fa-link">
+                        <small style="color: var(--secondary); font-size: 0.8rem;">Use classes do Font Awesome, ex: fas fa-link, fas fa-globe, fas fa-file-pdf</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-block btn-block-secondary" onclick="UI.closeModal('link')">
+                    Cancelar
+                </button>
+                <button type="submit" form="form-link" class="btn-block">
+                    Salvar Link
+                </button>
             </div>
         </div>
     </div>
@@ -2316,6 +2350,7 @@
                 UI.init();
                 this.checkBirthdays();
                 this.updateDashboard();
+                this.renderLinks();
             },
             
             // Carregar dados do localStorage
@@ -2378,8 +2413,74 @@
                 };
                 
                 return stats;
+            },
+            
+            // Renderizar links
+            renderLinks: function() {
+                const linksList = document.getElementById('links-list');
+                if (!linksList) return;
+                
+                if (this.data.links.length === 0) {
+                    linksList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-link"></i>
+                            <p>Nenhum link útil cadastrado</p>
+                            <button class="btn-block" onclick="UI.showModal('link', 'new')" style="margin-top: 20px;">
+                                <i class="fas fa-plus"></i> Adicionar Primeiro Link
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    linksList.innerHTML = this.data.links.map(link => `
+                        <div class="link-card">
+                            <div class="link-icon">
+                                <i class="${link.icone || 'fas fa-link'}"></i>
+                            </div>
+                            <div class="link-info" onclick="window.open('${link.url}', '_blank')">
+                                <div class="link-title">${link.titulo}</div>
+                                <div class="link-url">${link.url}</div>
+                            </div>
+                            <div class="link-actions">
+                                <button class="link-btn link-btn-edit" onclick="event.stopPropagation(); App.link.edit('${link.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="link-btn link-btn-delete" onclick="event.stopPropagation(); App.link.delete('${link.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
             }
         };
+
+        // --- FUNÇÕES AUXILIARES ---
+        function formatCurrency(input) {
+            // Remove tudo que não é número
+            let value = input.value.replace(/\D/g, '');
+            
+            // Converte para número
+            let number = parseFloat(value) / 100;
+            
+            // Formata como moeda brasileira
+            if (!isNaN(number)) {
+                input.value = number.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).replace('R$', '').trim();
+            } else {
+                input.value = '';
+            }
+        }
+
+        function parseCurrency(value) {
+            if (!value) return 0;
+            // Remove R$, pontos e vírgulas, mantém apenas números
+            const numberStr = value.replace(/[^\d,]/g, '').replace(',', '.');
+            return parseFloat(numberStr) || 0;
+        }
 
         // --- INTERFACE DO USUÁRIO ---
         const UI = {
@@ -2544,9 +2645,6 @@
                     case 'relatorios-view':
                         Relatorios.render();
                         break;
-                    case 'links-view':
-                        this.renderLinks();
-                        break;
                 }
             },
             
@@ -2593,13 +2691,6 @@
                         html = `
                             <button class="fab-sub-btn" onclick="UI.showAgendaModalForDate(null)" title="Novo Agendamento">
                                 <i class="fas fa-calendar-plus"></i>
-                            </button>
-                        `;
-                        break;
-                    case 'links-view':
-                        html = `
-                            <button class="fab-sub-btn" onclick="UI.showModal('links', 'new')" title="Novo Link">
-                                <i class="fas fa-link"></i>
                             </button>
                         `;
                         break;
@@ -2710,6 +2801,9 @@
                 
                 // Visão geral do funil
                 Funnel.renderOverview();
+                
+                // Links Úteis
+                Sistema.renderLinks();
             },
             
             renderClientes: function(filter = '') {
@@ -2801,7 +2895,7 @@
                         <div class="list-card" onclick="App.imovel.showDetails('${imovel.id}')">
                             <div class="card-header">
                                 <div class="card-title">${imovel.nome}</div>
-                                <span class="tag tag-success">${App.formatCurrencyDisplay(imovel.valor)}</span>
+                                <span class="tag tag-success">${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                             </div>
                             ${imovel.fotos && imovel.fotos.length > 0 ? `
                                 <div class="imovel-photos">
@@ -2822,33 +2916,6 @@
                                 </button>
                             </div>
                         </div>
-                    `).join('');
-                }
-            },
-            
-            renderLinks: function() {
-                const links = Sistema.data.links;
-                const linksGrid = document.getElementById('links-grid');
-                
-                if (links.length === 0) {
-                    linksGrid.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-link"></i>
-                            <p>Nenhum link cadastrado</p>
-                            <button class="btn-block" onclick="UI.showModal('links', 'new')" style="margin-top: 20px;">
-                                <i class="fas fa-plus"></i> Adicionar Primeiro Link
-                            </button>
-                        </div>
-                    `;
-                } else {
-                    linksGrid.innerHTML = links.map(link => `
-                        <a href="${link.url}" target="_blank" class="link-card">
-                            <div class="link-icon">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <div class="link-title">${link.titulo}</div>
-                            ${link.categoria ? `<div class="link-url">${link.categoria}</div>` : ''}
-                        </a>
                     `).join('');
                 }
             },
@@ -3088,25 +3155,24 @@
                         }
                         break;
                         
-                    case 'links':
-                        if (action === 'new') {
-                            document.getElementById('modal-links-title').innerHTML = '<i class="fas fa-link"></i> Novo Link';
-                            this.resetLinkForm();
-                        } else if (action === 'edit' && id) {
-                            App.links.edit(id);
-                        }
-                        break;
-                        
                     case 'agenda-generico':
                         this.showAgendaModal();
                         break;
                         
+                    case 'link':
+                        if (action === 'new') {
+                            document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-link"></i> Novo Link Útil';
+                            this.resetLinkForm();
+                        } else if (action === 'edit' && id) {
+                            App.link.edit(id);
+                        }
+                        break;
+                        
                     case 'settings':
-                        // Preencher campos de configurações
                         document.getElementById('s-nome').value = Sistema.data.settings.nome;
                         document.getElementById('s-creci').value = Sistema.data.settings.creci;
-                        document.getElementById('s-telefone').value = Sistema.data.settings.telefone;
-                        document.getElementById('s-email').value = Sistema.data.settings.email;
+                        document.getElementById('s-telefone').value = Sistema.data.settings.telefone || '';
+                        document.getElementById('s-email').value = Sistema.data.settings.email || '';
                         break;
                 }
                 
@@ -3269,8 +3335,8 @@
                 document.getElementById('l-id').value = '';
                 document.getElementById('l-titulo').value = '';
                 document.getElementById('l-url').value = '';
-                document.getElementById('l-categoria').value = '';
-                document.getElementById('l-descricao').value = '';
+                document.getElementById('l-categoria').value = 'geral';
+                document.getElementById('l-icone').value = 'fas fa-link';
             },
             
             // NOVO: Modal de agendamento com multi-seleção para plantão
@@ -3762,7 +3828,7 @@
                         <input type="color" class="stage-color-picker" value="${stage.color}" 
                                onchange="Funnel.updateStageColor('${stage.id}', this.value)">
                         <input type="text" class="stage-name-input" value="${stage.name}"
-                               onchange="Funnel.updateStageName('${stage.id}', this.value)" maxlength="15">
+                               onchange="Funnel.updateStageName('${stage.id}', this.value)">
                         <div class="stage-actions">
                             <button class="stage-btn stage-btn-move" onclick="Funnel.moveStageUp('${stage.id}')" ${stage.order === 1 ? 'disabled' : ''}>
                                 <i class="fas fa-arrow-up"></i>
@@ -3911,7 +3977,7 @@
                             <i class="fas fa-money-bill-wave" style="color: #8b5cf6;"></i> Receita
                         </div>
                         <div class="meta-value">
-                            <span>${App.formatCurrencyDisplay(progressoReceita)} / ${App.formatCurrencyDisplay(metas.receita)}</span>
+                            <span>${progressoReceita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} / ${metas.receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         </div>
                     </div>
                     <div class="meta-progress">
@@ -4052,7 +4118,7 @@
                 Sistema.data.funnel.metas = {
                     leads: parseInt(document.getElementById('meta-leads').value) || 0,
                     vendas: parseInt(document.getElementById('meta-vendas').value) || 0,
-                    receita: App.parseCurrency(document.getElementById('meta-receita').value) || 0
+                    receita: parseCurrency(document.getElementById('meta-receita').value) || 0
                 };
                 
                 Sistema.saveData();
@@ -4064,40 +4130,6 @@
 
         // --- APLICAÇÃO PRINCIPAL ---
         const App = {
-            // Formatação monetária
-            formatCurrency: function(input) {
-                // Remove tudo que não é número
-                let value = input.value.replace(/\D/g, '');
-                
-                // Converte para número
-                let number = parseFloat(value) / 100;
-                
-                // Formata como moeda brasileira
-                if (!isNaN(number)) {
-                    input.value = number.toLocaleString('pt-BR', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    });
-                } else {
-                    input.value = '';
-                }
-            },
-            
-            parseCurrency: function(value) {
-                // Remove pontos e substitui vírgula por ponto
-                let cleaned = value.replace(/\./g, '').replace(',', '.');
-                return parseFloat(cleaned) || 0;
-            },
-            
-            formatCurrencyDisplay: function(value) {
-                return value.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-            },
-            
             cliente: {
                 save: function(event) {
                     event.preventDefault();
@@ -4117,8 +4149,8 @@
                     const estado = document.getElementById('c-estado').value;
                     const cep = document.getElementById('c-cep').value;
                     const tipoInteresse = document.getElementById('c-tipo-interesse').value;
-                    const valorMin = App.parseCurrency(document.getElementById('c-valor-min').value) || null;
-                    const valorMax = App.parseCurrency(document.getElementById('c-valor-max').value) || null;
+                    const valorMin = parseCurrency(document.getElementById('c-valor-min').value);
+                    const valorMax = parseCurrency(document.getElementById('c-valor-max').value);
                     const bairrosInteresse = document.getElementById('c-bairros-interesse').value;
                     const fonte = document.getElementById('c-fonte').value;
                     const status = document.getElementById('c-status').value;
@@ -4135,8 +4167,8 @@
                         endereco: { logradouro, numero, complemento, bairro, cidade, estado, cep },
                         interesses: {
                             tipo: tipoInteresse,
-                            valorMin,
-                            valorMax,
+                            valorMin: valorMin,
+                            valorMax: valorMax,
                             bairros: bairrosInteresse ? bairrosInteresse.split(',').map(b => b.trim()) : []
                         },
                         fonte,
@@ -4185,8 +4217,8 @@
                     
                     if (cliente.interesses) {
                         document.getElementById('c-tipo-interesse').value = cliente.interesses.tipo || '';
-                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : '';
-                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : '';
+                        document.getElementById('c-valor-min').value = cliente.interesses.valorMin ? cliente.interesses.valorMin.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                        document.getElementById('c-valor-max').value = cliente.interesses.valorMax ? cliente.interesses.valorMax.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
                         document.getElementById('c-bairros-interesse').value = cliente.interesses.bairros ? cliente.interesses.bairros.join(', ') : '';
                     }
                     
@@ -4300,9 +4332,9 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Faixa de Valor</div>
                                             <div style="font-weight: 600;">
-                                                ${cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : ''} 
+                                                ${cliente.interesses.valorMin ? 'R$ ' + cliente.interesses.valorMin.toLocaleString('pt-BR') : ''} 
                                                 ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''}
-                                                ${cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : ''}
+                                                ${cliente.interesses.valorMax ? 'R$ ' + cliente.interesses.valorMax.toLocaleString('pt-BR') : ''}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4519,7 +4551,7 @@
                         }
                         
                         if (cliente.interesses.valorMin || cliente.interesses.valorMax) {
-                            const valorStr = `${cliente.interesses.valorMin ? App.formatCurrencyDisplay(cliente.interesses.valorMin) : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? App.formatCurrencyDisplay(cliente.interesses.valorMax) : ''}`;
+                            const valorStr = `${cliente.interesses.valorMin ? 'R$ ' + cliente.interesses.valorMin.toLocaleString('pt-BR') : ''} ${cliente.interesses.valorMin && cliente.interesses.valorMax ? ' - ' : ''} ${cliente.interesses.valorMax ? 'R$ ' + cliente.interesses.valorMax.toLocaleString('pt-BR') : ''}`;
                             doc.text(`Faixa de Valor: ${valorStr}`, 20, y);
                             y += 7;
                         }
@@ -4583,10 +4615,10 @@
                     const nome = document.getElementById('i-nome').value;
                     const tipo = document.getElementById('i-tipo').value;
                     const finalidade = document.getElementById('i-finalidade').value;
-                    const valor = App.parseCurrency(document.getElementById('i-valor').value) || 0;
+                    const valor = parseCurrency(document.getElementById('i-valor').value);
                     const dataEntrega = document.getElementById('i-data-entrega').value;
-                    const condominio = App.parseCurrency(document.getElementById('i-condominio').value) || null;
-                    const iptu = App.parseCurrency(document.getElementById('i-iptu').value) || null;
+                    const condominio = parseCurrency(document.getElementById('i-condominio').value);
+                    const iptu = parseCurrency(document.getElementById('i-iptu').value);
                     const logradouro = document.getElementById('i-logradouro').value;
                     const numero = document.getElementById('i-numero').value;
                     const complemento = document.getElementById('i-complemento').value;
@@ -4656,10 +4688,10 @@
                     document.getElementById('i-nome').value = imovel.nome;
                     document.getElementById('i-tipo').value = imovel.tipo;
                     document.getElementById('i-finalidade').value = imovel.finalidade;
-                    document.getElementById('i-valor').value = App.formatCurrencyDisplay(imovel.valor);
+                    document.getElementById('i-valor').value = imovel.valor ? imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
                     document.getElementById('i-data-entrega').value = imovel.dataEntrega || new Date().toISOString().split('T')[0];
-                    document.getElementById('i-condominio').value = imovel.condominio ? App.formatCurrencyDisplay(imovel.condominio) : '';
-                    document.getElementById('i-iptu').value = imovel.iptu ? App.formatCurrencyDisplay(imovel.iptu) : '';
+                    document.getElementById('i-condominio').value = imovel.condominio ? imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
+                    document.getElementById('i-iptu').value = imovel.iptu ? imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
                     
                     if (imovel.endereco) {
                         document.getElementById('i-logradouro').value = imovel.endereco.logradouro;
@@ -4754,14 +4786,14 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Valor</div>
                                             <div style="font-weight: 600; font-size: 1.2rem; color: var(--primary);">
-                                                ${App.formatCurrencyDisplay(imovel.valor)}
+                                                ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                             </div>
                                         </div>
                                         ${imovel.condominio ? `
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">Condomínio</div>
                                             <div style="font-weight: 600;">
-                                                ${App.formatCurrencyDisplay(imovel.condominio)}
+                                                ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4769,7 +4801,7 @@
                                         <div>
                                             <div style="font-size: 0.8rem; color: var(--secondary);">IPTU</div>
                                             <div style="font-weight: 600;">
-                                                ${App.formatCurrencyDisplay(imovel.iptu)}
+                                                ${imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                             </div>
                                         </div>
                                         ` : ''}
@@ -4969,14 +5001,14 @@
                     if (!imovel) return;
                     
                     const { jsPDF } = window.jspdf;
-                    const doc = new jsPDF();
+                    const doc = new jsPDF('p', 'mm', 'a4');
                     
                     // Configurações
                     const settings = Sistema.data.settings;
                     const hoje = new Date().toLocaleDateString('pt-BR');
                     
                     // Cabeçalho
-                    doc.setFontSize(16);
+                    doc.setFontSize(18);
                     doc.text('FICHA DO IMÓVEL', 105, 20, { align: 'center' });
                     
                     doc.setFontSize(10);
@@ -5001,7 +5033,7 @@
                     y += 7;
                     doc.text(`Status: ${imovel.status}`, 20, y);
                     y += 7;
-                    doc.text(`Valor: ${App.formatCurrencyDisplay(imovel.valor)}`, 20, y);
+                    doc.text(`Valor: ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                     y += 7;
                     
                     if (imovel.dataEntrega) {
@@ -5010,12 +5042,12 @@
                     }
                     
                     if (imovel.condominio) {
-                        doc.text(`Condomínio: ${App.formatCurrencyDisplay(imovel.condominio)}`, 20, y);
+                        doc.text(`Condomínio: ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                         y += 7;
                     }
                     
                     if (imovel.iptu) {
-                        doc.text(`IPTU: ${App.formatCurrencyDisplay(imovel.iptu)}`, 20, y);
+                        doc.text(`IPTU: ${imovel.iptu.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                         y += 7;
                     }
                     
@@ -5095,60 +5127,8 @@
                         }
                     }
                     
-                    // FOTOS - ORGANIZADAS DE 2 EM 2 LADO A LADO
-                    if (imovel.fotos && imovel.fotos.length > 0) {
-                        y += 10;
-                        doc.setFontSize(12);
-                        doc.setFont(undefined, 'bold');
-                        doc.text('FOTOS DO IMÓVEL', 20, y);
-                        y += 10;
-                        
-                        doc.setFontSize(8);
-                        doc.setFont(undefined, 'normal');
-                        doc.text(`Total: ${imovel.fotos.length} fotos`, 20, y);
-                        y += 7;
-                        
-                        // Calcular dimensões para as fotos
-                        const pageWidth = 170; // Largura útil da página
-                        const photoWidth = (pageWidth - 10) / 2; // 2 fotos por linha com 10px de espaço
-                        const photoHeight = 40; // Altura fixa para as fotos
-                        
-                        // Adicionar fotos de 2 em 2
-                        for (let i = 0; i < imovel.fotos.length; i += 2) {
-                            if (y > 250) {
-                                doc.addPage();
-                                y = 20;
-                            }
-                            
-                            // Primeira foto da linha
-                            try {
-                                doc.addImage(imovel.fotos[i], 'JPEG', 20, y, photoWidth, photoHeight);
-                                doc.text(`Foto ${i + 1}`, 20, y + photoHeight + 5);
-                            } catch (e) {
-                                doc.text(`Foto ${i + 1} (erro ao carregar)`, 20, y + photoHeight/2);
-                            }
-                            
-                            // Segunda foto da linha (se existir)
-                            if (i + 1 < imovel.fotos.length) {
-                                try {
-                                    doc.addImage(imovel.fotos[i + 1], 'JPEG', 20 + photoWidth + 10, y, photoWidth, photoHeight);
-                                    doc.text(`Foto ${i + 2}`, 20 + photoWidth + 10, y + photoHeight + 5);
-                                } catch (e) {
-                                    doc.text(`Foto ${i + 2} (erro ao carregar)`, 20 + photoWidth + 10, y + photoHeight/2);
-                                }
-                            }
-                            
-                            y += photoHeight + 15; // Espaço entre linhas de fotos
-                        }
-                    }
-                    
                     // Observações
                     if (imovel.observacoes) {
-                        if (y > 250) {
-                            doc.addPage();
-                            y = 20;
-                        }
-                        
                         y += 5;
                         doc.setFontSize(12);
                         doc.setFont(undefined, 'bold');
@@ -5166,66 +5146,55 @@
                         });
                     }
                     
+                    // FOTOS - NOVA IMPLEMENTAÇÃO (2 fotos por linha)
+                    if (imovel.fotos && imovel.fotos.length > 0) {
+                        y += 10;
+                        doc.setFontSize(12);
+                        doc.setFont(undefined, 'bold');
+                        doc.text('FOTOS DO IMÓVEL', 20, y);
+                        y += 15;
+                        
+                        // Calcular tamanho das fotos (2 por linha)
+                        const photoWidth = 85; // 85mm cada (2 por linha = 170mm)
+                        const photoHeight = 60; // Altura padrão
+                        const startX = 20;
+                        
+                        for (let i = 0; i < imovel.fotos.length; i++) {
+                            const col = i % 2;
+                            const row = Math.floor(i / 2);
+                            
+                            const x = startX + (col * (photoWidth + 10)); // 10mm de espaçamento
+                            const currentY = y + (row * (photoHeight + 10));
+                            
+                            // Verificar se precisa de nova página
+                            if (currentY + photoHeight > 280) {
+                                doc.addPage();
+                                y = 20;
+                                const newRow = Math.floor((i) / 2);
+                                const newX = startX + (col * (photoWidth + 10));
+                                const newY = y + (newRow * (photoHeight + 10));
+                                
+                                try {
+                                    doc.addImage(imovel.fotos[i], 'JPEG', newX, newY, photoWidth, photoHeight);
+                                } catch(e) {
+                                    console.log('Erro ao adicionar foto:', e);
+                                }
+                            } else {
+                                try {
+                                    doc.addImage(imovel.fotos[i], 'JPEG', x, currentY, photoWidth, photoHeight);
+                                } catch(e) {
+                                    console.log('Erro ao adicionar foto:', e);
+                                }
+                            }
+                        }
+                        
+                        // Atualizar y após as fotos
+                        y += (Math.ceil(imovel.fotos.length / 2) * (photoHeight + 10)) + 10;
+                    }
+                    
                     // Salvar PDF
                     doc.save(`Ficha_Imovel_${imovel.nome.replace(/\s/g, '_')}_${hoje.replace(/\//g, '-')}.pdf`);
                     UI.showToast('Ficha do imóvel gerada em PDF');
-                }
-            },
-            
-            links: {
-                save: function(event) {
-                    event.preventDefault();
-                    
-                    const id = document.getElementById('l-id').value || 'link_' + Date.now();
-                    const titulo = document.getElementById('l-titulo').value;
-                    const url = document.getElementById('l-url').value;
-                    const categoria = document.getElementById('l-categoria').value;
-                    const descricao = document.getElementById('l-descricao').value;
-                    
-                    const link = {
-                        id,
-                        titulo,
-                        url,
-                        categoria,
-                        descricao,
-                        dataCadastro: new Date().toISOString().split('T')[0]
-                    };
-                    
-                    // Verificar se é edição ou novo
-                    const index = Sistema.data.links.findIndex(l => l.id === id);
-                    if (index >= 0) {
-                        Sistema.data.links[index] = link;
-                    } else {
-                        Sistema.data.links.push(link);
-                    }
-                    
-                    Sistema.saveData();
-                    UI.closeModal('links');
-                    UI.showToast('Link salvo com sucesso');
-                    UI.renderLinks();
-                },
-                
-                edit: function(linkId) {
-                    const link = Sistema.data.links.find(l => l.id === linkId);
-                    if (!link) return;
-                    
-                    document.getElementById('l-id').value = link.id;
-                    document.getElementById('l-titulo').value = link.titulo;
-                    document.getElementById('l-url').value = link.url;
-                    document.getElementById('l-categoria').value = link.categoria || '';
-                    document.getElementById('l-descricao').value = link.descricao || '';
-                    
-                    document.getElementById('modal-links-title').innerHTML = '<i class="fas fa-edit"></i> Editar Link';
-                    UI.showModal('links', 'edit');
-                },
-                
-                delete: function(linkId) {
-                    if (confirm('Tem certeza que deseja excluir este link?')) {
-                        Sistema.data.links = Sistema.data.links.filter(l => l.id !== linkId);
-                        Sistema.saveData();
-                        UI.showToast('Link excluído com sucesso');
-                        UI.renderLinks();
-                    }
                 }
             },
             
@@ -5692,10 +5661,10 @@
                     
                     // Construir mensagem com detalhes do imóvel
                     let mensagem = `🏠 *${imovel.nome}*\n\n`;
-                    mensagem += `💰 *Valor:* ${App.formatCurrencyDisplay(imovel.valor)}\n`;
+                    mensagem += `💰 *Valor:* ${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
                     
                     if (imovel.condominio) {
-                        mensagem += `🏢 *Condomínio:* ${App.formatCurrencyDisplay(imovel.condominio)}\n`;
+                        mensagem += `🏢 *Condomínio:* ${imovel.condominio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
                     }
                     
                     if (imovel.endereco) {
@@ -5752,6 +5721,63 @@
                     
                     const url = `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
                     window.open(url, '_blank');
+                }
+            },
+            
+            link: {
+                save: function(event) {
+                    event.preventDefault();
+                    
+                    const id = document.getElementById('l-id').value || 'link_' + Date.now();
+                    const titulo = document.getElementById('l-titulo').value;
+                    const url = document.getElementById('l-url').value;
+                    const categoria = document.getElementById('l-categoria').value;
+                    const icone = document.getElementById('l-icone').value || 'fas fa-link';
+                    
+                    const link = {
+                        id,
+                        titulo,
+                        url,
+                        categoria,
+                        icone,
+                        dataCadastro: new Date().toISOString().split('T')[0]
+                    };
+                    
+                    // Verificar se é edição ou novo
+                    const index = Sistema.data.links.findIndex(l => l.id === id);
+                    if (index >= 0) {
+                        Sistema.data.links[index] = link;
+                    } else {
+                        Sistema.data.links.push(link);
+                    }
+                    
+                    Sistema.saveData();
+                    UI.closeModal('link');
+                    UI.showToast('Link salvo com sucesso');
+                    Sistema.renderLinks();
+                },
+                
+                edit: function(linkId) {
+                    const link = Sistema.data.links.find(l => l.id === linkId);
+                    if (!link) return;
+                    
+                    document.getElementById('l-id').value = link.id;
+                    document.getElementById('l-titulo').value = link.titulo;
+                    document.getElementById('l-url').value = link.url;
+                    document.getElementById('l-categoria').value = link.categoria;
+                    document.getElementById('l-icone').value = link.icone;
+                    
+                    document.getElementById('modal-link-title').innerHTML = '<i class="fas fa-edit"></i> Editar Link';
+                    UI.showModal('link', 'edit');
+                },
+                
+                delete: function(linkId) {
+                    if (confirm('Excluir este link?')) {
+                        Sistema.data.links = Sistema.data.links.filter(l => l.id !== linkId);
+                        Sistema.saveData();
+                        UI.showToast('Link excluído');
+                        Sistema.renderLinks();
+                    }
                 }
             },
             
@@ -5821,39 +5847,80 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         try {
-                            const data = JSON.parse(e.target.result);
+                            const importedData = JSON.parse(e.target.result);
                             
-                            // Processar qualquer estrutura JSON
-                            const processedData = this.processImportData(data);
-                            
-                            if (confirm('Importar backup substituirá todos os dados atuais. Continuar?')) {
-                                // Mesclar dados mantendo configurações existentes se não forem fornecidas
-                                if (processedData.settings) {
-                                    Sistema.data.settings = {
-                                        ...Sistema.data.settings,
-                                        ...processedData.settings
-                                    };
-                                }
+                            // Função para extrair dados de qualquer estrutura JSON
+                            const extractData = (data) => {
+                                const extracted = {
+                                    clientes: [],
+                                    imoveis: [],
+                                    agenda: [],
+                                    plantoes: [],
+                                    links: [],
+                                    funnel: Sistema.data.funnel, // Manter configuração atual
+                                    settings: Sistema.data.settings // Manter configuração atual
+                                };
                                 
-                                // Substituir arrays apenas se existirem no backup
-                                if (processedData.clientes) {
-                                    Sistema.data.clientes = processedData.clientes;
-                                }
-                                if (processedData.imoveis) {
-                                    Sistema.data.imoveis = processedData.imoveis;
-                                }
-                                if (processedData.agenda) {
-                                    Sistema.data.agenda = processedData.agenda;
-                                }
-                                if (processedData.plantoes) {
-                                    Sistema.data.plantoes = processedData.plantoes;
-                                }
-                                if (processedData.links) {
-                                    Sistema.data.links = processedData.links;
-                                }
-                                if (processedData.funnel) {
-                                    Sistema.data.funnel = processedData.funnel;
-                                }
+                                // Função recursiva para buscar arrays
+                                const findArrays = (obj, path = '') => {
+                                    if (Array.isArray(obj)) {
+                                        // Verificar tipo de array pelo conteúdo
+                                        if (obj.length > 0) {
+                                            const firstItem = obj[0];
+                                            if (firstItem.nome && firstItem.telefone) {
+                                                // Provavelmente clientes
+                                                if (!extracted.clientes.length) {
+                                                    extracted.clientes = obj;
+                                                }
+                                            } else if (firstItem.nome && firstItem.valor !== undefined) {
+                                                // Provavelmente imóveis
+                                                if (!extracted.imoveis.length) {
+                                                    extracted.imoveis = obj;
+                                                }
+                                            } else if (firstItem.tipo && firstItem.data) {
+                                                // Provavelmente agenda
+                                                if (!extracted.agenda.length) {
+                                                    extracted.agenda = obj;
+                                                }
+                                            } else if (firstItem.titulo && firstItem.url) {
+                                                // Provavelmente links
+                                                if (!extracted.links.length) {
+                                                    extracted.links = obj;
+                                                }
+                                            }
+                                        }
+                                    } else if (typeof obj === 'object' && obj !== null) {
+                                        for (const key in obj) {
+                                            findArrays(obj[key], path ? `${path}.${key}` : key);
+                                        }
+                                    }
+                                };
+                                
+                                findArrays(data);
+                                
+                                // Tentar extrair pelo nome das propriedades
+                                if (data.clientes && Array.isArray(data.clientes)) extracted.clientes = data.clientes;
+                                if (data.imoveis && Array.isArray(data.imoveis)) extracted.imoveis = data.imoveis;
+                                if (data.agenda && Array.isArray(data.agenda)) extracted.agenda = data.agenda;
+                                if (data.plantoes && Array.isArray(data.plantoes)) extracted.plantoes = data.plantoes;
+                                if (data.links && Array.isArray(data.links)) extracted.links = data.links;
+                                if (data.funnel && typeof data.funnel === 'object') extracted.funnel = data.funnel;
+                                if (data.settings && typeof data.settings === 'object') extracted.settings = data.settings;
+                                
+                                return extracted;
+                            };
+                            
+                            const extractedData = extractData(importedData);
+                            
+                            if (confirm(`Importar backup?\n\nEncontrado:\n• ${extractedData.clientes.length} clientes\n• ${extractedData.imoveis.length} imóveis\n• ${extractedData.agenda.length} agendamentos\n• ${extractedData.links.length} links\n\nEsta ação substituirá os dados atuais.`)) {
+                                Sistema.data = {
+                                    ...Sistema.data,
+                                    clientes: extractedData.clientes,
+                                    imoveis: extractedData.imoveis,
+                                    agenda: extractedData.agenda,
+                                    plantoes: extractedData.plantoes,
+                                    links: extractedData.links
+                                };
                                 
                                 Sistema.saveData();
                                 location.reload();
@@ -5861,66 +5928,11 @@
                         } catch (error) {
                             UI.showToast('Erro ao importar backup: ' + error.message, 'error');
                         }
-                    }.bind(this);
+                    };
                     reader.readAsText(file);
                     
                     // Limpar input
                     input.value = '';
-                },
-                
-                processImportData: function(data) {
-                    // Esta função processa qualquer estrutura JSON e extrai os dados
-                    const processed = {};
-                    
-                    // Verificar diferentes estruturas possíveis
-                    if (Array.isArray(data)) {
-                        // Se for um array, assumir que são imóveis
-                        processed.imoveis = data;
-                    } else if (typeof data === 'object') {
-                        // Verificar por propriedades comuns
-                        if (data.imoveis && Array.isArray(data.imoveis)) {
-                            processed.imoveis = data.imoveis;
-                        }
-                        if (data.clientes && Array.isArray(data.clientes)) {
-                            processed.clientes = data.clientes;
-                        }
-                        if (data.agenda && Array.isArray(data.agenda)) {
-                            processed.agenda = data.agenda;
-                        }
-                        if (data.plantoes && Array.isArray(data.plantoes)) {
-                            processed.plantoes = data.plantoes;
-                        }
-                        if (data.links && Array.isArray(data.links)) {
-                            processed.links = data.links;
-                        }
-                        if (data.funnel && typeof data.funnel === 'object') {
-                            processed.funnel = data.funnel;
-                        }
-                        if (data.settings && typeof data.settings === 'object') {
-                            processed.settings = data.settings;
-                        }
-                        
-                        // Se não encontrou estruturas conhecidas, tentar encontrar arrays com nomes diferentes
-                        if (!processed.imoveis && !processed.clientes) {
-                            for (const key in data) {
-                                if (Array.isArray(data[key])) {
-                                    // Tentar identificar pelo conteúdo
-                                    const firstItem = data[key][0];
-                                    if (firstItem) {
-                                        if (firstItem.nome && firstItem.valor !== undefined) {
-                                            processed.imoveis = data[key];
-                                        } else if (firstItem.nome && firstItem.telefone) {
-                                            processed.clientes = data[key];
-                                        } else if (firstItem.titulo && firstItem.url) {
-                                            processed.links = data[key];
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    return processed;
                 },
                 
                 importImoveis: function(input) {
@@ -5932,24 +5944,48 @@
                         try {
                             const data = JSON.parse(e.target.result);
                             
-                            // Processar dados
-                            const processedData = this.processImportData(data);
+                            // Extrair imóveis de qualquer estrutura
+                            let imoveis = [];
                             
-                            if (processedData.imoveis) {
-                                if (confirm('Importar backup de imóveis substituirá os imóveis atuais. Continuar?')) {
-                                    Sistema.data.imoveis = processedData.imoveis;
-                                    Sistema.saveData();
-                                    UI.showToast('Imóveis importados com sucesso');
-                                    UI.renderImoveis();
-                                    UI.renderDashboard();
-                                }
+                            if (data.imoveis && Array.isArray(data.imoveis)) {
+                                imoveis = data.imoveis;
+                            } else if (Array.isArray(data)) {
+                                // Se o arquivo for um array direto
+                                imoveis = data.filter(item => item.nome && item.valor !== undefined);
                             } else {
-                                UI.showToast('Nenhum dado de imóveis encontrado no arquivo', 'error');
+                                // Buscar recursivamente
+                                const findImoveis = (obj) => {
+                                    if (Array.isArray(obj)) {
+                                        return obj.filter(item => item.nome && item.valor !== undefined);
+                                    } else if (typeof obj === 'object' && obj !== null) {
+                                        for (const key in obj) {
+                                            if (Array.isArray(obj[key]) && obj[key].length > 0 && obj[key][0].nome) {
+                                                return obj[key];
+                                            }
+                                            const found = findImoveis(obj[key]);
+                                            if (found.length > 0) return found;
+                                        }
+                                    }
+                                    return [];
+                                };
+                                imoveis = findImoveis(data);
+                            }
+                            
+                            if (imoveis.length === 0) {
+                                throw new Error('Nenhum imóvel encontrado no arquivo');
+                            }
+                            
+                            if (confirm(`Importar ${imoveis.length} imóveis?\n\nEsta ação substituirá os imóveis atuais.`)) {
+                                Sistema.data.imoveis = imoveis;
+                                Sistema.saveData();
+                                UI.showToast(`${imoveis.length} imóveis importados com sucesso`);
+                                UI.renderImoveis();
+                                UI.renderDashboard();
                             }
                         } catch (error) {
                             UI.showToast('Erro ao importar backup de imóveis: ' + error.message, 'error');
                         }
-                    }.bind(this);
+                    };
                     reader.readAsText(file);
                     
                     // Limpar input
@@ -6029,6 +6065,14 @@
                         </div>
                         <div class="report-title">Relatório de Plantão</div>
                         <div class="report-desc">Detalhado com clientes atendidos</div>
+                    </div>
+                    
+                    <div class="report-card" onclick="Relatorios.gerarRelatorioLinks()">
+                        <div class="report-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="report-title">Relatório de Links</div>
+                        <div class="report-desc">Links úteis cadastrados</div>
                     </div>
                 `;
             },
@@ -6120,7 +6164,7 @@
                         index + 1,
                         venda.nome,
                         venda.telefone,
-                        venda.valorVenda ? App.formatCurrencyDisplay(venda.valorVenda) : '-',
+                        venda.valorVenda ? venda.valorVenda.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '-',
                         venda.dataFechamento || '-'
                     ]);
                     
@@ -6141,7 +6185,7 @@
                     doc.setFont(undefined, 'bold');
                     doc.text(`Total de Vendas: ${totalVendas}`, 20, y);
                     y += 7;
-                    doc.text(`Receita Total: ${App.formatCurrencyDisplay(totalReceita)}`, 20, y);
+                    doc.text(`Receita Total: ${totalReceita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, 20, y);
                 }
                 
                 // Salvar PDF
@@ -6207,7 +6251,7 @@
                 const tableData = Sistema.data.imoveis.map((imovel, index) => [
                     index + 1,
                     imovel.nome,
-                    App.formatCurrencyDisplay(imovel.valor),
+                    imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
                     imovel.status,
                     imovel.dataCadastro || '-'
                 ]);
@@ -6390,8 +6434,8 @@
                 const tableData = [
                     ['Leads', metas.leads, stats.leadsAtivos, ((stats.leadsAtivos / metas.leads) * 100).toFixed(1) + '%'],
                     ['Vendas', metas.vendas, stats.vendasMes, ((stats.vendasMes / metas.vendas) * 100).toFixed(1) + '%'],
-                    ['Receita', App.formatCurrencyDisplay(metas.receita), 
-                     App.formatCurrencyDisplay(stats.receitaMes), 
+                    ['Receita', metas.receita.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), 
+                     stats.receitaMes.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), 
                      ((stats.receitaMes / metas.receita) * 100).toFixed(1) + '%']
                 ];
                 
@@ -6597,6 +6641,47 @@
                 UI.showToast('Relatório de plantão detalhado gerado em PDF');
             },
             
+            gerarRelatorioLinks: function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                const settings = Sistema.data.settings;
+                const hoje = new Date().toLocaleDateString('pt-BR');
+                
+                // Cabeçalho
+                doc.setFontSize(18);
+                doc.text('RELATÓRIO DE LINKS ÚTEIS', 105, 20, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.text(`Emitido por: ${settings.nome} - CRECI: ${settings.creci}`, 20, 30);
+                doc.text(`Data: ${hoje}`, 20, 36);
+                doc.text(`Total de Links: ${Sistema.data.links.length}`, 20, 42);
+                
+                // Tabela de links
+                const tableData = Sistema.data.links.map((link, index) => [
+                    index + 1,
+                    link.titulo,
+                    link.url,
+                    link.categoria,
+                    link.dataCadastro
+                ]);
+                
+                doc.autoTable({
+                    head: [['#', 'Título', 'URL', 'Categoria', 'Cadastro']],
+                    body: tableData,
+                    startY: 50,
+                    theme: 'grid',
+                    headStyles: { fillColor: [59, 130, 246] },
+                    columnStyles: {
+                        2: { cellWidth: 80 } // URL mais larga
+                    }
+                });
+                
+                // Salvar PDF
+                doc.save(`Relatorio_Links_${hoje.replace(/\//g, '-')}.pdf`);
+                UI.showToast('Relatório de links gerado em PDF');
+            },
+            
             gerarFichaClientePrompt: function() {
                 // Mostrar modal para selecionar cliente
                 const modal = document.getElementById('modal-select-pdf');
@@ -6634,7 +6719,7 @@
                     list.innerHTML = Sistema.data.imoveis.map(imovel => `
                         <div class="list-card" style="margin-bottom: 8px;" onclick="App.imovel.generatePDF('${imovel.id}'); UI.closeModal('select-pdf')">
                             <div class="card-title">${imovel.nome}</div>
-                            <div class="card-subtitle">${App.formatCurrencyDisplay(imovel.valor)}</div>
+                            <div class="card-subtitle">${imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
                         </div>
                     `).join('');
                 }
@@ -6664,22 +6749,6 @@
                     UI.closePhotoViewer();
                 }
             });
-            
-            // Adicionar navegação para Links
-            const nav = document.querySelector('.bottom-nav');
-            const linksTab = document.createElement('a');
-            linksTab.href = '#';
-            linksTab.className = 'nav-item';
-            linksTab.setAttribute('data-target', 'links-view');
-            linksTab.setAttribute('onclick', 'UI.switchTab(this)');
-            linksTab.innerHTML = `
-                <i class="fas fa-link"></i>
-                <span>Links</span>
-            `;
-            
-            // Adicionar antes do último item (Relatórios)
-            const lastItem = nav.querySelector('.nav-item:last-child');
-            nav.insertBefore(linksTab, lastItem);
         });
     </script>
 </body>
