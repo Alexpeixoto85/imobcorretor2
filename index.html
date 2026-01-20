@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6036,421 +6037,117 @@
                 },
                 
                 importUniversalData: function(input) {
-    const file = input.files[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const data = JSON.parse(e.target.result);
-            
-            // Verificar se é um backup completo do sistema
-            if (data.clientes !== undefined || data.imoveis !== undefined) {
-                // É um backup do próprio sistema
-                return this.importSistemaBackup(data);
-            }
-            
-            // Tentar extrair dados de diversas estruturas
-            const extractedData = this.extractDataFromStructure(data);
-            
-            // Verificar se há dados para importar
-            const totalItems = extractedData.clientes.length + extractedData.imoveis.length + 
-                              extractedData.agenda.length + extractedData.plantoes.length;
-            
-            if (totalItems === 0) {
-                UI.showToast('Arquivo não contém dados válidos para importação', 'error');
-                return;
-            }
-            
-            // Mostrar resumo e confirmar importação
-            this.confirmAndImport(extractedData);
-            
-        } catch (error) {
-            console.error('Erro ao importar:', error);
-            UI.showToast('Erro ao importar backup: ' + error.message, 'error');
-        }
-    }.bind(this);
-    reader.readAsText(file);
-    
-    input.value = '';
-},
-
-// Nova função auxiliar para extrair dados de qualquer estrutura
-extractDataFromStructure: function(data) {
-    // Tenta encontrar dados em diferentes estruturas comuns
-    const extracted = {
-        clientes: [],
-        imoveis: [],
-        agenda: [],
-        plantoes: [],
-        links: [],
-        funnel: null,
-        settings: null
-    };
-    
-    // 1. Procurar clientes em diferentes formatos
-    if (Array.isArray(data)) {
-        // Se o arquivo for diretamente um array
-        extracted.clientes = data.filter(item => 
-            item && (item.nome || item.name) && (item.telefone || item.phone)
-        );
-    } else if (typeof data === 'object') {
-        // Formatos estruturados
-        
-        // Clientes
-        extracted.clientes = this.extractArray(data, ['clientes', 'Clientes', 'clients', 'leads', 'contatos']);
-        
-        // Imóveis
-        extracted.imoveis = this.extractArray(data, ['imoveis', 'Imoveis', 'properties', 'imoveis_list', 'properties_list']);
-        
-        // Agenda
-        extracted.agenda = this.extractArray(data, ['agenda', 'Agenda', 'schedule', 'appointments']);
-        
-        // Plantões
-        extracted.plantoes = this.extractArray(data, ['plantoes', 'Plantoes', 'shifts', 'plantao']);
-        
-        // Links
-        extracted.links = this.extractArray(data, ['links', 'Links', 'bookmarks']);
-        
-        // Configurações do funil
-        if (data.funnel || data.Funnel || data.funil) {
-            extracted.funnel = data.funnel || data.Funnel || data.funil;
-        }
-        
-        // Configurações gerais
-        if (data.settings || data.Settings || data.config) {
-            extracted.settings = data.settings || data.Settings || data.config;
-        }
-        
-        // Tentativa adicional: procurar por padrões comuns
-        if (extracted.clientes.length === 0) {
-            // Procurar objetos que se parecem com clientes
-            for (const key in data) {
-                if (Array.isArray(data[key])) {
-                    const firstItem = data[key][0];
-                    if (firstItem && (firstItem.nome || firstItem.name) && (firstItem.telefone || firstItem.phone)) {
-                        extracted.clientes = data[key];
-                        break;
-                    }
-                }
-            }
-        }
-        
-        if (extracted.imoveis.length === 0) {
-            // Procurar objetos que se parecem com imóveis
-            for (const key in data) {
-                if (Array.isArray(data[key])) {
-                    const firstItem = data[key][0];
-                    if (firstItem && (firstItem.nome || firstItem.name) && (firstItem.valor || firstItem.value || firstItem.price)) {
-                        extracted.imoveis = data[key];
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    
-    // Normalizar os dados extraídos
-    extracted.clientes = this.normalizeClientes(extracted.clientes);
-    extracted.imoveis = this.normalizeImoveis(extracted.imoveis);
-    
-    return extracted;
-},
-
-// Função auxiliar para extrair arrays de diferentes chaves
-extractArray: function(data, possibleKeys) {
-    for (const key of possibleKeys) {
-        if (data[key] && Array.isArray(data[key])) {
-            return data[key];
-        }
-    }
-    return [];
-},
-
-// Normalizar estrutura de clientes
-normalizeClientes: function(clientes) {
-    return clientes.map(cliente => {
-        const normalized = {
-            id: cliente.id || cliente._id || Utils.generateId('cliente'),
-            nome: cliente.nome || cliente.name || cliente.fullName || 'Cliente sem nome',
-            telefone: cliente.telefone || cliente.phone || cliente.celular || cliente.mobile || '',
-            email: cliente.email || cliente.Email || '',
-            cpf: cliente.cpf || cliente.CPF || '',
-            nascimento: cliente.nascimento || cliente.birthdate || cliente.dataNascimento || '',
-            status: cliente.status || cliente.Status || 'lead',
-            fonte: cliente.fonte || cliente.source || cliente.origin || '',
-            observacoes: cliente.observacoes || cliente.observations || cliente.notes || '',
-            dataCadastro: cliente.dataCadastro || cliente.createdAt || new Date().toISOString().split('T')[0]
-        };
-        
-        // Endereço
-        if (cliente.endereco || cliente.address) {
-            const end = cliente.endereco || cliente.address;
-            normalized.endereco = {
-                logradouro: end.logradouro || end.street || end.rua || '',
-                numero: end.numero || end.number || '',
-                complemento: end.complemento || end.complement || '',
-                bairro: end.bairro || end.neighborhood || end.district || '',
-                cidade: end.cidade || end.city || '',
-                estado: end.estado || end.state || end.uf || '',
-                cep: end.cep || end.zipCode || ''
-            };
-        }
-        
-        // Interesses
-        if (cliente.interesses || cliente.interests) {
-            const int = cliente.interesses || cliente.interests;
-            normalized.interesses = {
-                tipo: int.tipo || int.type || int.tipoImovel || '',
-                valorMin: int.valorMin || int.minValue || int.minPrice || null,
-                valorMax: int.valorMax || int.maxValue || int.maxPrice || null,
-                bairros: Array.isArray(int.bairros) ? int.bairros : 
-                        (int.bairros ? int.bairros.split(',').map(b => b.trim()) : [])
-            };
-        }
-        
-        // Telefone secundário
-        if (cliente.telefone2 || cliente.phone2 || cliente.secondaryPhone) {
-            normalized.telefone2 = cliente.telefone2 || cliente.phone2 || cliente.secondaryPhone;
-        }
-        
-        return normalized;
-    });
-},
-
-// Normalizar estrutura de imóveis
-normalizeImoveis: function(imoveis) {
-    return imoveis.map(imovel => {
-        const normalized = {
-            id: imovel.id || imovel._id || Utils.generateId('imovel'),
-            nome: imovel.nome || imovel.name || imovel.description || imovel.titulo || 'Imóvel sem nome',
-            tipo: imovel.tipo || imovel.type || imovel.propertyType || 'casa',
-            finalidade: imovel.finalidade || imovel.purpose || imovel.finality || 'venda',
-            valor: imovel.valor || imovel.value || imovel.price || imovel.valorVenda || 0,
-            status: imovel.status || imovel.Status || 'disponivel',
-            dataCadastro: imovel.dataCadastro || imovel.createdAt || new Date().toISOString().split('T')[0],
-            dataEntrega: imovel.dataEntrega || imovel.deliveryDate || '',
-            condominio: imovel.condominio || imovel.condoFee || null,
-            iptu: imovel.iptu || imovel.propertyTax || null,
-            observacoes: imovel.observacoes || imovel.observations || imovel.notes || '',
-            fotos: imovel.fotos || imovel.photos || imovel.images || []
-        };
-        
-        // Endereço
-        if (imovel.endereco || imovel.address || imovel.location) {
-            const end = imovel.endereco || imovel.address || imovel.location;
-            normalized.endereco = {
-                logradouro: end.logradouro || end.street || end.rua || '',
-                numero: end.numero || end.number || '',
-                complemento: end.complemento || end.complement || '',
-                bairro: end.bairro || end.neighborhood || end.district || '',
-                cidade: end.cidade || end.city || '',
-                estado: end.estado || end.state || end.uf || '',
-                cep: end.cep || end.zipCode || ''
-            };
-        }
-        
-        // Características
-        if (imovel.caracteristicas || imovel.features || imovel.characteristics) {
-            const car = imovel.caracteristicas || imovel.features || imovel.characteristics;
-            normalized.caracteristicas = {
-                areaTotal: car.areaTotal || car.totalArea || car.area || null,
-                areaConstruida: car.areaConstruida || car.builtArea || car.constructedArea || null,
-                quartos: car.quartos || car.bedrooms || car.rooms || null,
-                suites: car.suites || car.suites || null,
-                banheiros: car.banheiros || car.bathrooms || car.toilets || null,
-                vagas: car.vagas || car.parkingSpaces || car.garage || null,
-                mobiliado: car.mobiliado || car.furnished || ''
-            };
-        }
-        
-        return normalized;
-    });
-},
-
-// Importar backup do próprio sistema
-importSistemaBackup: function(data) {
-    const summary = `Backup do sistema encontrado:\n\n` +
-                    `${data.clientes?.length || 0} clientes\n` +
-                    `${data.imoveis?.length || 0} imóveis\n` +
-                    `${data.agenda?.length || 0} agendamentos\n` +
-                    `${data.plantoes?.length || 0} plantões\n\n` +
-                    `Deseja restaurar este backup?\n` +
-                    `(Os dados atuais serão substituídos)`;
-    
-    if (confirm(summary)) {
-        // Limpar dados atuais
-        Sistema.data = data;
-        
-        // Garantir que todas as propriedades existam
-        if (!Sistema.data.plantoes) Sistema.data.plantoes = [];
-        if (!Sistema.data.links) Sistema.data.links = [];
-        if (!Sistema.data.settings) {
-            Sistema.data.settings = {
-                nome: 'Corretor',
-                creci: '00000',
-                telefone: '',
-                email: '',
-                logo: ''
-            };
-        }
-        if (!Sistema.data.funnel) {
-            Sistema.data.funnel = {
-                stages: [
-                    { id: 'lead', name: 'Lead', color: '#3b82f6', order: 1, icon: 'fas fa-user' },
-                    { id: 'prospect', name: 'Prospect', color: '#60a5fa', order: 2, icon: 'fas fa-user-check' },
-                    { id: 'visita', name: 'Visita', color: '#93c5fd', order: 3, icon: 'fas fa-eye' },
-                    { id: 'proposta', name: 'Proposta', color: '#bfdbfe', order: 4, icon: 'fas fa-file-contract' },
-                    { id: 'fechado', name: 'Fechado', color: '#10b981', order: 5, icon: 'fas fa-handshake' }
-                ],
-                metas: {
-                    leads: 50,
-                    vendas: 5,
-                    receita: 500000
-                }
-            };
-        }
-        
-        Sistema.saveData();
-        UI.showToast('Backup restaurado com sucesso!');
-        setTimeout(() => {
-            location.reload();
-        }, 1500);
-    }
-},
-
-// Confirmar e importar dados extraídos
-confirmAndImport: function(extractedData) {
-    const summary = `Dados encontrados para importação:\n\n` +
-                    `${extractedData.clientes.length} clientes\n` +
-                    `${extractedData.imoveis.length} imóveis\n` +
-                    `${extractedData.agenda.length} agendamentos\n` +
-                    `${extractedData.plantoes.length} plantões\n\n` +
-                    `Deseja importar estes dados?\n` +
-                    `(Os dados serão adicionados aos existentes)`;
-    
-    if (confirm(summary)) {
-        // Adicionar dados aos existentes
-        Sistema.data.clientes = [...Sistema.data.clientes, ...extractedData.clientes];
-        Sistema.data.imoveis = [...Sistema.data.imoveis, ...extractedData.imoveis];
-        Sistema.data.agenda = [...Sistema.data.agenda, ...extractedData.agenda];
-        Sistema.data.plantoes = [...Sistema.data.plantoes, ...extractedData.plantoes];
-        Sistema.data.links = [...Sistema.data.links, ...extractedData.links];
-        
-        // Atualizar funnel se fornecido
-        if (extractedData.funnel) {
-            if (extractedData.funnel.stages && extractedData.funnel.stages.length > 0) {
-                Sistema.data.funnel.stages = extractedData.funnel.stages;
-            }
-            if (extractedData.funnel.metas) {
-                Sistema.data.funnel.metas = extractedData.funnel.metas;
-            }
-        }
-        
-        // Atualizar settings se fornecido
-        if (extractedData.settings) {
-            Sistema.data.settings = {
-                ...Sistema.data.settings,
-                ...extractedData.settings
-            };
-        }
-        
-        Sistema.saveData();
-        UI.showToast(`${extractedData.clientes.length} clientes e ${extractedData.imoveis.length} imóveis importados com sucesso!`);
-        
-        // Recarregar a interface
-        setTimeout(() => {
-            UI.renderDashboard();
-            UI.renderClientes();
-            UI.renderImoveis();
-        }, 500);
-    }
-}
-    // Adicione estas funções dentro do objeto App.backup:
-
-// Função para detectar o tipo de arquivo
-detectFileType: function(data) {
-    if (data.clientes && data.imoveis && data.agenda) {
-        return 'sistema_completo';
-    }
-    if (data.imoveis && Array.isArray(data.imoveis)) {
-        return 'imoveis_only';
-    }
-    if (data.clientes && Array.isArray(data.clientes)) {
-        return 'clientes_only';
-    }
-    return 'desconhecido';
-},
-
-// Função para mostrar preview dos dados
-showImportPreview: function(extractedData) {
-    const modalContent = `
-        <div style="padding: 20px; max-height: 70vh; overflow-y: auto;">
-            <h3 style="margin-bottom: 20px; color: var(--dark);">Prévia da Importação</h3>
-            
-            <div style="display: grid; gap: 16px;">
-                <div class="stat-card">
-                    <div class="stat-value">${extractedData.clientes.length}</div>
-                    <div class="stat-label">Clientes</div>
-                </div>
+                    const file = input.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            
+                            // Extrair dados de qualquer estrutura JSON
+                            const extractedData = {
+                                clientes: data.clientes || data.Clientes || data.clients || [],
+                                imoveis: data.imoveis || data.Imoveis || data.properties || data.imoveis_list || [],
+                                agenda: data.agenda || data.Agenda || data.schedule || [],
+                                plantoes: data.plantoes || data.Plantoes || data.shifts || [],
+                                links: data.links || data.Links || [],
+                                funnel: data.funnel || data.Funnel || {
+                                    stages: [
+                                        { id: 'lead', name: 'Lead', color: '#3b82f6', order: 1, icon: 'fas fa-user' },
+                                        { id: 'prospect', name: 'Prospect', color: '#60a5fa', order: 2, icon: 'fas fa-user-check' },
+                                        { id: 'visita', name: 'Visita', color: '#93c5fd', order: 3, icon: 'fas fa-eye' },
+                                        { id: 'proposta', name: 'Proposta', color: '#bfdbfe', order: 4, icon: 'fas fa-file-contract' },
+                                        { id: 'fechado', name: 'Fechado', color: '#10b981', order: 5, icon: 'fas fa-handshake' }
+                                    ],
+                                    metas: data.funnel?.metas || data.metas || {
+                                        leads: 50,
+                                        vendas: 5,
+                                        receita: 500000
+                                    }
+                                },
+                                settings: data.settings || data.Settings || {
+                                    nome: 'Corretor',
+                                    creci: '00000',
+                                    telefone: '',
+                                    email: '',
+                                    logo: ''
+                                }
+                            };
+                            
+                            // Verificar se há dados para importar
+                            const totalItems = extractedData.clientes.length + extractedData.imoveis.length + 
+                                              extractedData.agenda.length + extractedData.plantoes.length;
+                            
+                            if (totalItems === 0) {
+                                UI.showToast('Arquivo não contém dados válidos para importação', 'error');
+                                return;
+                            }
+                            
+                            if (confirm(`Encontrados:\n${extractedData.clientes.length} clientes\n${extractedData.imoveis.length} imóveis\n${extractedData.agenda.length} agendamentos\n\nDeseja importar estes dados?`)) {
+                                Sistema.data.clientes = [...Sistema.data.clientes, ...extractedData.clientes];
+                                Sistema.data.imoveis = [...Sistema.data.imoveis, ...extractedData.imoveis];
+                                Sistema.data.agenda = [...Sistema.data.agenda, ...extractedData.agenda];
+                                Sistema.data.plantoes = [...Sistema.data.plantoes, ...extractedData.plantoes];
+                                Sistema.data.links = [...Sistema.data.links, ...extractedData.links];
+                                
+                                // Atualizar funnel apenas se tiver dados
+                                if (extractedData.funnel.stages && extractedData.funnel.stages.length > 0) {
+                                    Sistema.data.funnel.stages = extractedData.funnel.stages;
+                                }
+                                if (extractedData.funnel.metas) {
+                                    Sistema.data.funnel.metas = extractedData.funnel.metas;
+                                }
+                                
+                                // Atualizar settings apenas se tiver dados
+                                if (extractedData.settings.nome !== 'Corretor') {
+                                    Sistema.data.settings = extractedData.settings;
+                                }
+                                
+                                Sistema.saveData();
+                                UI.showToast('Dados importados com sucesso!');
+                                location.reload();
+                            }
+                        } catch (error) {
+                            console.error('Erro ao importar:', error);
+                            UI.showToast('Erro ao importar backup: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                    
+                    input.value = '';
+                },
                 
-                <div class="stat-card">
-                    <div class="stat-value">${extractedData.imoveis.length}</div>
-                    <div class="stat-label">Imóveis</div>
-                </div>
-                
-                ${extractedData.clientes.length > 0 ? `
-                <div>
-                    <h4 style="margin-bottom: 12px;">Primeiros Clientes:</h4>
-                    ${extractedData.clientes.slice(0, 3).map(cliente => `
-                        <div class="list-card" style="margin-bottom: 8px;">
-                            <div class="card-title">${cliente.nome}</div>
-                            <div class="card-subtitle">${cliente.telefone}</div>
-                        </div>
-                    `).join('')}
-                </div>
-                ` : ''}
-                
-                ${extractedData.imoveis.length > 0 ? `
-                <div>
-                    <h4 style="margin-bottom: 12px;">Primeiros Imóveis:</h4>
-                    ${extractedData.imoveis.slice(0, 3).map(imovel => `
-                        <div class="list-card" style="margin-bottom: 8px;">
-                            <div class="card-title">${imovel.nome}</div>
-                            <div class="card-subtitle">${Utils.formatCurrency(imovel.valor)}</div>
-                        </div>
-                    `).join('')}
-                </div>
-                ` : ''}
-            </div>
-            
-            <div style="margin-top: 24px; display: flex; gap: 12px;">
-                <button class="btn-block btn-block-secondary" onclick="document.getElementById('import-preview-modal').remove()">
-                    Cancelar
-                </button>
-                <button class="btn-block" onclick="App.backup.confirmImport()">
-                    Confirmar Importação
-                </button>
-            </div>
-        </div>
-    `;
-    
-    // Criar modal de preview
-    const modal = document.createElement('div');
-    modal.id = 'import-preview-modal';
-    modal.className = 'modal-overlay active';
-    modal.innerHTML = `
-        <div class="modal" style="max-width: 500px;">
-            ${modalContent}
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-    
-    // Salvar dados temporariamente para confirmação
-    window.tempImportData = extractedData;
-},
+                importImoveis: function(input) {
+                    const file = input.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            
+                            const imoveis = data.imoveis || data.Imoveis || data.properties || data.imoveis_list || [];
+                            
+                            if (imoveis.length === 0) {
+                                throw new Error('Arquivo não contém imóveis válidos');
+                            }
+                            
+                            if (confirm(`Importar ${imoveis.length} imóveis?`)) {
+                                Sistema.data.imoveis = [...Sistema.data.imoveis, ...imoveis];
+                                Sistema.saveData();
+                                UI.showToast('Imóveis importados com sucesso');
+                                UI.renderImoveis();
+                                UI.renderDashboard();
+                            }
+                        } catch (error) {
+                            UI.showToast('Erro ao importar backup de imóveis: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                    
+                    input.value = '';
+                },
                 
                 clearData: function() {
                     if (confirm('⚠️ ATENÇÃO!\n\nTem certeza que deseja limpar TODOS os dados?\n\nEsta ação não pode ser desfeita e todos os clientes, imóveis, agenda e configurações serão perdidos.')) {
