@@ -3762,6 +3762,90 @@ document.getElementById('dash-total-negociacoes').innerText = Utils.formatCurren
                 }
             },
 
+            renderNegociacoesDetalhadas: () => {
+    const container = document.getElementById('negociacoes-detalhadas-list');
+    if (!container) return;
+    
+    // Filtrar clientes em negociação
+    const clientesNegociacao = UI.data.clientes.filter(cliente => {
+        // Ajuste estas etapas conforme necessário
+        const etapasNegociacao = ['documentacao', 'negociacao', 'aprovado'];
+        return etapasNegociacao.includes(cliente.etapaFunil) && cliente.imovelInteresseId;
+    });
+    
+    if (clientesNegociacao.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-handshake"></i>
+                <p>Nenhuma negociação em andamento</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    let valorTotal = 0;
+    
+    clientesNegociacao.forEach(cliente => {
+        const imovel = UI.data.imoveis.find(i => i.id === cliente.imovelInteresseId);
+        if (!imovel) return;
+        
+        const etapa = UI.data.funilEtapas.find(e => e.id === cliente.etapaFunil);
+        valorTotal += imovel.precoVenda || imovel.precoAluguel || 0;
+        
+        html += `
+            <div class="client-card" onclick="App.cliente.edit('${cliente.id}')">
+                <div class="client-header">
+                    <div class="client-name">${cliente.nome}</div>
+                    <span class="client-type" style="background: ${etapa?.cor || '#f59e0b'}; color: white;">
+                        ${etapa?.nome || 'Negociação'}
+                    </span>
+                </div>
+                <div class="client-info">
+                    <div class="client-row">
+                        <i class="fas fa-home"></i> 
+                        ${imovel.titulo.substring(0, 40)}...
+                    </div>
+                    <div class="client-row">
+                        <i class="fas fa-dollar-sign"></i> 
+                        Valor: ${Utils.formatCurrency(imovel.precoVenda || imovel.precoAluguel || 0)}
+                    </div>
+                    <div class="client-row">
+                        <i class="fas fa-calendar"></i> 
+                        Entrou na etapa: ${cliente.dataEntradaFunil ? Utils.formatDate(cliente.dataEntradaFunil) : 'Não informado'}
+                    </div>
+                </div>
+                <div class="client-actions">
+                    <button class="btn-whatsapp-client" onclick="event.stopPropagation(); App.cliente.whatsappPersonalizado('${cliente.id}')">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button class="btn-sm btn-light" onclick="event.stopPropagation(); UI.avancarNegociacao('${cliente.id}')">
+                        <i class="fas fa-arrow-right"></i> Avançar
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    // Adicionar resumo no topo
+    const resumo = `
+        <div class="stat-card" style="margin-bottom: 16px;">
+            <div class="stat-icon bg-warning">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-value">${Utils.formatCurrency(valorTotal)}</div>
+            <div class="stat-label">Valor Total em Negociação</div>
+            <div style="font-size: 0.8rem; color: var(--secondary); margin-top: 4px;">
+                ${clientesNegociacao.length} ${clientesNegociacao.length === 1 ? 'negociação' : 'negociações'} ativas
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = resumo + html;
+    document.getElementById('negociacoes-badge').style.display = clientesNegociacao.length > 0 ? 'inline-block' : 'none';
+    document.getElementById('negociacoes-badge').innerText = clientesNegociacao.length.toString();
+},
+
             renderFunil: async () => {
                 const etapas = UI.data.funilEtapas.sort((a, b) => a.ordem - b.ordem);
                 
