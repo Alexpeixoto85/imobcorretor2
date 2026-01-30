@@ -3827,25 +3827,8 @@ document.getElementById('dash-total-negociacoes').innerText = Utils.formatCurren
         `;
     });
     
-    // Adicionar resumo no topo
-    const resumo = `
-        <div class="stat-card" style="margin-bottom: 16px;">
-            <div class="stat-icon bg-warning">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="stat-value">${Utils.formatCurrency(valorTotal)}</div>
-            <div class="stat-label">Valor Total em Negociação</div>
-            <div style="font-size: 0.8rem; color: var(--secondary); margin-top: 4px;">
-                ${clientesNegociacao.length} ${clientesNegociacao.length === 1 ? 'negociação' : 'negociações'} ativas
-            </div>
-        </div>
-    `;
-    
-    container.innerHTML = resumo + html;
-    document.getElementById('negociacoes-badge').style.display = clientesNegociacao.length > 0 ? 'inline-block' : 'none';
-    document.getElementById('negociacoes-badge').innerText = clientesNegociacao.length.toString();
 },
-
+            
             renderFunil: async () => {
                 const etapas = UI.data.funilEtapas.sort((a, b) => a.ordem - b.ordem);
                 
